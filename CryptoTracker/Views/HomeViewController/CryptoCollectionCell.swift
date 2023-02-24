@@ -15,9 +15,16 @@ class CryptoCollectionCell: UICollectionViewCell {
   var nameLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textColor = .white
+    newLabel.textAlignment = .center
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
+  
+  var cellViewModel: CryptoCellViewModel? {
+    didSet {
+      nameLabel.text = cellViewModel?.name
+    }
+  }
   
   
   // MARK: - Init Methods
@@ -25,6 +32,7 @@ class CryptoCollectionCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
+    backgroundColor = .blue
     addViews()
   }
   
@@ -38,8 +46,8 @@ class CryptoCollectionCell: UICollectionViewCell {
     addSubview(nameLabel)
     
     nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-    nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: 8).isActive = true
-    nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 8).isActive = true
+    nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+    nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
   }
   
   

@@ -95,7 +95,8 @@ extension CryptoCollectionView: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID,
                                                   for: indexPath) as! CryptoCollectionCell
-    cell.backgroundColor = .blue
+    let cellViewModel = viewModel.getCellViewModel(at: indexPath)
+    cell.cellViewModel = cellViewModel
     return cell
   }
   

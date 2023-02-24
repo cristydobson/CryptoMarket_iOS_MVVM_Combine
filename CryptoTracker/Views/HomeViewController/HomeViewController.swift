@@ -20,7 +20,8 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = "Crypto Tracker"
+    title = NSLocalizedString("Crypto Tracker",
+                              comment: "")
     
     view.backgroundColor = .red
     
