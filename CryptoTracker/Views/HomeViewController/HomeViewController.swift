@@ -32,9 +32,12 @@ class HomeViewController: UIViewController {
   // MARK: - Startup Methods
   
   func setupCollectionView() {
-    let collectionView = CryptoCollectionView(frame: view.frame)
+    let collectionView = CryptoCollectionView(frame: view.frame, controller: self)
     view.addSubview(collectionView)
   }
+  
+  
+  
 
 
 }

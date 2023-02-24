@@ -14,6 +14,8 @@ class CryptoCollectionView: UIView {
   var collectionView: UICollectionView!
   var cellID = "CollectionCell"
   
+  private var controller: UIViewController!
+  
   lazy var viewModel = {
     CryptoCollectionViewModel()
   }()
@@ -22,15 +24,19 @@ class CryptoCollectionView: UIView {
   // MARK: - Init methods
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
-    backgroundColor = .systemBackground
-    
-    setupCollectionView()
-    initViewModel()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
+  }
+  
+  convenience init(frame: CGRect, controller: UIViewController) {
+    self.init(frame: frame)
+    self.controller = controller
+    backgroundColor = .systemBackground
+    
+    setupCollectionView()
+    initViewModel()
   }
   
   
@@ -77,6 +83,14 @@ class CryptoCollectionView: UIView {
     }
   }
   
+  
+  // MARK: - Segue to Details View
+  
+  func createSegueToDetailViewController() {
+    let detailViewController = CryptoDetailViewController()
+    controller.navigationController?.pushViewController(detailViewController, animated: true)
+  }
+  
 }
 
 
@@ -109,6 +123,7 @@ extension CryptoCollectionView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print("DID TAP CELL!!!!")
+    createSegueToDetailViewController()
   }
   
 }

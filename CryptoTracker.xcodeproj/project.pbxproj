@@ -21,6 +21,7 @@
 		5EAF9AE429A9021F00E19C71 /* CryptoCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE329A9021F00E19C71 /* CryptoCollectionViewModel.swift */; };
 		5EAF9AE629A90FF000E19C71 /* CryptoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE529A90FF000E19C71 /* CryptoCollectionCell.swift */; };
 		5EAF9AEE29A9181C00E19C71 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EAF9AF029A9181C00E19C71 /* Localizable.strings */; };
+		5EAF9AF529A91E9300E19C71 /* CryptoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AF429A91E9300E19C71 /* CryptoDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		5EAF9AEF29A9181C00E19C71 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EAF9AF129A9182300E19C71 /* nl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = nl; path = nl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5EAF9AF229A9182400E19C71 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5EAF9AF429A91E9300E19C71 /* CryptoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				5EAF9AAF29A8E50800E19C71 /* LaunchScreen.storyboard */,
 				5EAF9AF329A918D000E19C71 /* HomeViewController */,
+				5EAF9AF629A91EA400E19C71 /* CryptoDetailViewController */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +203,14 @@
 				5EAF9AE529A90FF000E19C71 /* CryptoCollectionCell.swift */,
 			);
 			path = HomeViewController;
+			sourceTree = "<group>";
+		};
+		5EAF9AF629A91EA400E19C71 /* CryptoDetailViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5EAF9AF429A91E9300E19C71 /* CryptoDetailViewController.swift */,
+			);
+			path = CryptoDetailViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -335,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EAF9AF529A91E9300E19C71 /* CryptoDetailViewController.swift in Sources */,
 				5EAF9ADE29A8FB2D00E19C71 /* CryptoDataModel.swift in Sources */,
 				5EAF9AE029A8FBEE00E19C71 /* CryptoCollectionView.swift in Sources */,
 				5EAF9AE629A90FF000E19C71 /* CryptoCollectionCell.swift in Sources */,
