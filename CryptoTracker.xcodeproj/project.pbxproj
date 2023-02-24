@@ -19,6 +19,7 @@
 		5EAF9AE029A8FBEE00E19C71 /* CryptoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9ADF29A8FBEE00E19C71 /* CryptoCollectionView.swift */; };
 		5EAF9AE229A901A900E19C71 /* CryptoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */; };
 		5EAF9AE429A9021F00E19C71 /* CryptoCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE329A9021F00E19C71 /* CryptoCollectionViewModel.swift */; };
+		5EAF9AE629A90FF000E19C71 /* CryptoCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE529A90FF000E19C71 /* CryptoCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		5EAF9ADF29A8FBEE00E19C71 /* CryptoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCollectionView.swift; sourceTree = "<group>"; };
 		5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCellViewModel.swift; sourceTree = "<group>"; };
 		5EAF9AE329A9021F00E19C71 /* CryptoCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCollectionViewModel.swift; sourceTree = "<group>"; };
+		5EAF9AE529A90FF000E19C71 /* CryptoCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCollectionCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				5EAF9AAF29A8E50800E19C71 /* LaunchScreen.storyboard */,
 				5EAF9AA829A8E50600E19C71 /* HomeViewController.swift */,
 				5EAF9ADF29A8FBEE00E19C71 /* CryptoCollectionView.swift */,
+				5EAF9AE529A90FF000E19C71 /* CryptoCollectionCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -308,6 +311,7 @@
 			files = (
 				5EAF9ADE29A8FB2D00E19C71 /* CryptoDataModel.swift in Sources */,
 				5EAF9AE029A8FBEE00E19C71 /* CryptoCollectionView.swift in Sources */,
+				5EAF9AE629A90FF000E19C71 /* CryptoCollectionCell.swift in Sources */,
 				5EAF9AA929A8E50600E19C71 /* HomeViewController.swift in Sources */,
 				5EAF9AE229A901A900E19C71 /* CryptoCellViewModel.swift in Sources */,
 				5EAF9AE429A9021F00E19C71 /* CryptoCollectionViewModel.swift in Sources */,

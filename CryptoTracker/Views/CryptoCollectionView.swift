@@ -37,10 +37,14 @@ class CryptoCollectionView: UIView {
   // MARK: - Startup Methods
   func setupCollectionView() {
     
+    let cellWidth = frame.width/2 - 22
+    
     // CollectionView Layout
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
-    layout.itemSize = CGSize(width: 60, height: 60)
+    layout.minimumInteritemSpacing = 0
+    layout.minimumLineSpacing = 2
+    layout.itemSize = CGSize(width: cellWidth, height: cellWidth*1.3)
     
     // Instantiate CollectionView
     collectionView = UICollectionView(frame: frame,
@@ -49,8 +53,11 @@ class CryptoCollectionView: UIView {
     collectionView.delegate = self
     
     // Register the CollectionView's cell
-    collectionView.register(UICollectionViewCell.self,
+    collectionView.register(CryptoCollectionCell.self,
                             forCellWithReuseIdentifier: cellID)
+    
+    // CollectionView style
+    collectionView.showsVerticalScrollIndicator = false
     
     // Add CollectionView to current View
     addSubview(collectionView)
@@ -87,7 +94,7 @@ extension CryptoCollectionView: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID,
-                                                  for: indexPath)
+                                                  for: indexPath) as! CryptoCollectionCell
     cell.backgroundColor = .blue
     return cell
   }
