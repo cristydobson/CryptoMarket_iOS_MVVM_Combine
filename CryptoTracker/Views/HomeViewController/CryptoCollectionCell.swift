@@ -28,6 +28,15 @@ class CryptoCollectionCell: UICollectionViewCell {
     return newLabel
   }()
   
+  var timeSpanLabelContainerView: UIView = {
+    let newView = UIView()
+    newView.frame.size.height = 300
+    newView.backgroundColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+//    newView.layer.cornerRadius = 15
+//    newView.layer.masksToBounds = true
+    return newView
+  }()
+  
   var timeSpanLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textColor = .white
@@ -101,19 +110,27 @@ class CryptoCollectionCell: UICollectionViewCell {
     
     // Stack View
     addSubview(nameLabel)
-    addSubview(timeSpanLabel)
+//    timeSpanLabelContainerView.addSubview(timeSpanLabel)
+    addSubview(timeSpanLabelContainerView)
     addSubview(priceLabel)
     addSubview(changeLabel)
     addSubview(labelStack)
     
+//    timeSpanLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+//    timeSpanLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+//    timeSpanLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4).isActive = true
+//    timeSpanLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4).isActive = true
+
     labelStack.addArrangedSubview(nameLabel)
-    labelStack.addArrangedSubview(timeSpanLabel)
+    labelStack.addArrangedSubview(timeSpanLabelContainerView)
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(changeLabel)
     
     labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8).isActive = true
     labelStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
     labelStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
+    
+    
 
   }
   
