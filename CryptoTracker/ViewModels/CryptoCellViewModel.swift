@@ -7,5 +7,8 @@
 
 
 struct CryptoCellViewModel {
-  var name: String
+  let symbol: String
+  let price24h: Double
+  let volume24h: Double
+  let lastTradePrice: Double
 }

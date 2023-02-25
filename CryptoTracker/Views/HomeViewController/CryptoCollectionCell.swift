@@ -22,7 +22,7 @@ class CryptoCollectionCell: UICollectionViewCell {
   
   var cellViewModel: CryptoCellViewModel? {
     didSet {
-      nameLabel.text = cellViewModel?.name
+      nameLabel.text = cellViewModel?.symbol
     }
   }
   
@@ -44,10 +44,11 @@ class CryptoCollectionCell: UICollectionViewCell {
   // MARK: - Startup Methods
   func addViews() {
     addSubview(nameLabel)
-    
     nameLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
     nameLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
     nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+    
+    
   }
   
   

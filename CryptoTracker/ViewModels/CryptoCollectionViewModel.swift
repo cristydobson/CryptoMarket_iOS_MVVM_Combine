@@ -6,13 +6,15 @@
 //
 
 import Foundation
+import Combine
 
 class CryptoCollectionViewModel {
   
   
- 
-  
   // MARK: - Load Data
+  
+  private var subscriptions = Set<AnyCancellable>()
+  var cryptoDataAPI = CryptoDataLoader.shared
  
   func getCryptoData() {
     fetchData()
@@ -31,21 +33,39 @@ class CryptoCollectionViewModel {
     }
   }
   
-  // Create the CellViewModels
+  // Fetch data from API
   func fetchData() {
+    
+    cryptoDataAPI.fetchCryptoMarkets()
+      .sink { [unowned self] completion in
+        if case let .failure(error) = completion {
+          self.handleError(error)
+        }
+      }
+      receiveValue: { [unowned self] in
+        self.createCellViewModels(from: $0)
+      }
+      .store(in: &self.subscriptions)
+  }
+  
+  // Get CryptoCellViewModels from the data response
+  func createCellViewModels(from resultsArray: [CryptoMarket]) {
     
     var viewModels: [CryptoCellViewModel] = []
     
-    for name in tempNames {
-      viewModels.append(buildCellModel(with: name))
+    for result in resultsArray {
+      let cellViewModel = buildCellModel(from: result)
+      viewModels.append(cellViewModel)
     }
-    
     cryptoCellViewModels = viewModels
   }
   
-  // Build the CellViewModels
-  func buildCellModel(with name: String) -> CryptoCellViewModel {
-    return CryptoCellViewModel(name: name)
+  // Build a CellViewModel
+  func buildCellModel(from market: CryptoMarket) -> CryptoCellViewModel {
+      return CryptoCellViewModel(symbol: market.symbol,
+                                 price24h: market.price_24h,
+                                 volume24h: market.volume_24h,
+                                 lastTradePrice: market.last_trade_price)
   }
   
   /*
@@ -54,6 +74,12 @@ class CryptoCollectionViewModel {
    */
   func getCellViewModel(at indexPath: IndexPath) -> CryptoCellViewModel {
     return cryptoCellViewModels[indexPath.row]
+  }
+  
+  
+  // MARK: - Handle errors
+  func handleError(_ apiError: CryptoDataAPIError) {
+    print("ERROR: \(apiError.localizedDescription)!!!!!")
   }
   
   
