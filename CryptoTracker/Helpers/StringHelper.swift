@@ -7,6 +7,26 @@
 
 import Foundation
 
+
+extension String {
+  
+  var isCryptoCurrency: Bool {
+    return !Locale.commonISOCurrencyCodes.contains(self)
+  }
+  
+  func getCurrencyString() -> String {
+    return String(self[
+      (self.range(of: "-"))!.upperBound...
+    ])
+  }
+  
+  func getCryptoNameString() -> String {
+    return self.components(separatedBy: "-").first!
+  }
+  
+}
+
+
 struct StringHelper {
   
   // Get 24h Price percentage change

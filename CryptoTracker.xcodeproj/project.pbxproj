@@ -12,6 +12,7 @@
 		5E7B319329AA250B00797B5D /* CryptoDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319229AA250B00797B5D /* CryptoDataLoader.swift */; };
 		5E7B319629AA5C4A00797B5D /* DoubleHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319529AA5C4A00797B5D /* DoubleHelper.swift */; };
 		5E7B319829AA5DE000797B5D /* StringHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319729AA5DE000797B5D /* StringHelper.swift */; };
+		5E7B319A29AA921900797B5D /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319929AA921900797B5D /* ColorHelper.swift */; };
 		5EAF9AA529A8E50600E19C71 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AA429A8E50600E19C71 /* AppDelegate.swift */; };
 		5EAF9AA729A8E50600E19C71 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AA629A8E50600E19C71 /* SceneDelegate.swift */; };
 		5EAF9AA929A8E50600E19C71 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AA829A8E50600E19C71 /* HomeViewController.swift */; };
@@ -52,6 +53,7 @@
 		5E7B319229AA250B00797B5D /* CryptoDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataLoader.swift; sourceTree = "<group>"; };
 		5E7B319529AA5C4A00797B5D /* DoubleHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleHelper.swift; sourceTree = "<group>"; };
 		5E7B319729AA5DE000797B5D /* StringHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringHelper.swift; sourceTree = "<group>"; };
+		5E7B319929AA921900797B5D /* ColorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHelper.swift; sourceTree = "<group>"; };
 		5EAF9AA129A8E50600E19C71 /* CryptoTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EAF9AA429A8E50600E19C71 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EAF9AA629A8E50600E19C71 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				5E7B319529AA5C4A00797B5D /* DoubleHelper.swift */,
 				5E7B319729AA5DE000797B5D /* StringHelper.swift */,
+				5E7B319929AA921900797B5D /* ColorHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -378,6 +381,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5EAF9AF529A91E9300E19C71 /* CryptoDetailViewController.swift in Sources */,
+				5E7B319A29AA921900797B5D /* ColorHelper.swift in Sources */,
 				5EAF9ADE29A8FB2D00E19C71 /* CryptoDataModel.swift in Sources */,
 				5EAF9AE029A8FBEE00E19C71 /* CryptoCollectionView.swift in Sources */,
 				5E7B319329AA250B00797B5D /* CryptoDataLoader.swift in Sources */,

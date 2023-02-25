@@ -20,7 +20,7 @@ class CryptoDetailViewController: UIViewController {
     super.viewDidLoad()
     
     title = "Bitcoin"
-    view.backgroundColor = .systemPink
+    view.addGradientBackground()
     
   }
   

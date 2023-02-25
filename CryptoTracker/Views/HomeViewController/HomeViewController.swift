@@ -23,7 +23,7 @@ class HomeViewController: UIViewController {
     title = NSLocalizedString("Crypto Tracker",
                               comment: "")
     
-    view.backgroundColor = .red
+    view.addGradientBackground()
     
     setupCollectionView()
   }
@@ -37,8 +37,5 @@ class HomeViewController: UIViewController {
   }
   
   
-  
-
-
 }
 

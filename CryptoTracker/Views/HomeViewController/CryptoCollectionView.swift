@@ -33,7 +33,7 @@ class CryptoCollectionView: UIView {
   convenience init(frame: CGRect, controller: UIViewController) {
     self.init(frame: frame)
     self.controller = controller
-    backgroundColor = .systemBackground
+    backgroundColor = .clear
     
     setupCollectionView()
     initViewModel()
@@ -55,6 +55,7 @@ class CryptoCollectionView: UIView {
     // Instantiate CollectionView
     collectionView = UICollectionView(frame: frame,
                                       collectionViewLayout: layout)
+    collectionView.backgroundColor = .clear
     collectionView.dataSource = self
     collectionView.delegate = self
     

@@ -30,6 +30,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.windowScene = windowScene
     window?.makeKeyAndVisible()
     
+    navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+    navigationController.navigationBar.shadowImage = UIImage()
+    navigationController.navigationBar.isTranslucent = true
+    navigationController.navigationBar.titleTextAttributes = [
+      NSAttributedString.Key.foregroundColor : UIColor.white
+    ]
+    
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

@@ -15,7 +15,7 @@ class CryptoCollectionCell: UICollectionViewCell {
   var imageView: UIImageView = {
     let newImageView = UIImageView()
     newImageView.contentMode = .scaleAspectFit
-    newImageView.backgroundColor = .red
+    newImageView.backgroundColor = .clear
     newImageView.translatesAutoresizingMaskIntoConstraints = false
     return newImageView
   }()
@@ -46,7 +46,6 @@ class CryptoCollectionCell: UICollectionViewCell {
   
   var changeLabel: UILabel = {
     let newLabel = UILabel()
-    newLabel.textColor = .white
     newLabel.textAlignment = .center
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
@@ -65,11 +64,14 @@ class CryptoCollectionCell: UICollectionViewCell {
   var cellViewModel: CryptoCellViewModel? {
     didSet {
       imageView.image = UIImage(systemName: "star")
-      nameLabel.text = cellViewModel?.symbol
+      
+      nameLabel.text = cellViewModel?.getCryptoNameString()
       timeSpanLabel.text = NSLocalizedString("24h", comment: "")
-      priceLabel.text = "$9.00"
-      changeLabel.text = getPricePercentageChangeString(cellViewModel?.price24h,
-                                                        from: cellViewModel?.lastTradePrice)
+      priceLabel.text = cellViewModel?.getPriceString()
+      
+      let changePercentage = cellViewModel?.getPricePercentageChangeString()
+      changeLabel.text = changePercentage
+      setChangePercentageLabelColor(for: changePercentage!)
     }
   }
   
@@ -79,7 +81,7 @@ class CryptoCollectionCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    backgroundColor = .blue
+//    backgroundColor = .blue
     addViews()
   }
   
@@ -115,8 +117,8 @@ class CryptoCollectionCell: UICollectionViewCell {
 
   }
   
-  func getPricePercentageChangeString(_ price: Double?, from lastPrice: Double?) -> String {
-    return StringHelper.getPricePercentageChange(price ?? 0, from: lastPrice ?? 0)
+  func setChangePercentageLabelColor(for amount: String) {
+    changeLabel.textColor = amount.contains("-") ? .red : .green
   }
   
   
