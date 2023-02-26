@@ -17,6 +17,7 @@ class PricesTableCell: UITableViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.textAlignment = .center
+    newLabel.text = "$0.00"
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -25,6 +26,7 @@ class PricesTableCell: UITableViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.textAlignment = .center
+    newLabel.text = "0.00018"
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -32,7 +34,7 @@ class PricesTableCell: UITableViewCell {
   let labelStack: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
-    stackView.alignment = .center
+    stackView.distribution = .fillEqually
     stackView.spacing = 4
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
@@ -50,7 +52,7 @@ class PricesTableCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    backgroundColor = .blue
+    backgroundColor = .green
     addViews()
   }
   

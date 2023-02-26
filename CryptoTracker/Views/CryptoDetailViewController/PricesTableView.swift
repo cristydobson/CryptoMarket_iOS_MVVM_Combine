@@ -22,7 +22,8 @@ class PricesTableView: UIView {
   // MARK: - Init methods
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .clear
+    
+    setupTableView()
   }
   
   required init?(coder: NSCoder) {
@@ -32,10 +33,10 @@ class PricesTableView: UIView {
   
   // MARK: - Startup Methods
   func setupTableView() {
-    
+    print("TABLE VIEWS!!!!!!!")
     // Instantiate TableView
     tableView = UITableView(frame: frame)
-    tableView.backgroundColor = .clear
+    tableView.backgroundColor = .yellow
     
     tableView.delegate = self
     tableView.dataSource = self
@@ -48,7 +49,6 @@ class PricesTableView: UIView {
     
     // Add TableView to current view
     addSubview(tableView)
-    
   }
   
   
