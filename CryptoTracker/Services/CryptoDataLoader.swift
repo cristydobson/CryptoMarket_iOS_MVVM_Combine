@@ -34,6 +34,7 @@ class CryptoDataLoader: CryptoService {
   // MARK: - CryptoService protocol
   
   func fetchCryptoMarkets(from endpoint: String) -> Future<[CryptoMarket], CryptoDataAPIError> {
+
     // Initialize and return Future
     return Future<[CryptoMarket], CryptoDataAPIError> { [unowned self] promise in
       

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 
+
 class CryptoCollectionViewModel {
   
   
@@ -21,7 +22,7 @@ class CryptoCollectionViewModel {
   }
   
   
-  // MARK: - CollectionView
+  // MARK: - Fetch Data
     
   var reloadCollectionView: (() -> Void)?
   

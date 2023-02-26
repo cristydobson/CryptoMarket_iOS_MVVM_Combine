@@ -13,13 +13,14 @@ struct PriceCellViewModel {
   // MARK: - Properties
   
   let price: Double?
-  let isAsk: Bool
+  let amount: Double?
+  let priceType: PriceType
   
   
   // MARK: - Methods
   
   func getPriceLabelColor() -> UIColor {
-    return isAsk ? UIColor.red : UIColor.green
+    return priceType == .ask ? UIColor.red : UIColor.green
   }
   
 }

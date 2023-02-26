@@ -12,6 +12,15 @@ class CryptoDetailViewController: UIViewController {
   
   // MARK: - Properties
   
+  var cryptoSymbol = ""
+  
+  var asksTableView: PricesTableView!
+  var bidsTableView: PricesTableView!
+  
+  lazy var viewModel = {
+    CryptoDetailViewModel()
+  }()
+  
   let layoutStack: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .vertical
@@ -20,6 +29,7 @@ class CryptoDetailViewController: UIViewController {
     return stackView
   }()
   
+  
   // MARK: - View Controller Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,8 +37,8 @@ class CryptoDetailViewController: UIViewController {
     title = "Bitcoin"
     view.addGradientBackground()
     
-    
     addViews()
+    getViewModel()
   }
   
   
@@ -43,8 +53,8 @@ class CryptoDetailViewController: UIViewController {
     let tableViewStack = createTableViewsStack()
     let tableViewFrame = view.frame.getRectFractionSize(w: 2, h: 2)
     
-    let asksTableView = PricesTableView(frame: tableViewFrame)
-    let bidsTableView = PricesTableView(frame: tableViewFrame)
+    asksTableView = PricesTableView(frame: tableViewFrame)
+    bidsTableView = PricesTableView(frame: tableViewFrame)
     view.addSubview(asksTableView)
     view.addSubview(bidsTableView)
     view.addSubview(tableViewStack)
@@ -75,6 +85,21 @@ class CryptoDetailViewController: UIViewController {
   }
   
   
+  
+  // Get CryptoDetailViewModel
+  func getViewModel() {
+    
+    viewModel.fetchData(with: cryptoSymbol)
+    let asks = viewModel.cryptoMarkets.first?.asks
+    let bids = viewModel.cryptoMarkets.first?.bids
+    
+    viewModel.reloadTableViews = { [weak self] in
+      DispatchQueue.main.async {
+        self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
+        self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
+      }
+    }
+  }
   
   
   

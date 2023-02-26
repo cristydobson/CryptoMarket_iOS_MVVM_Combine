@@ -87,8 +87,9 @@ class CryptoCollectionView: UIView {
   
   // MARK: - Segue to Details View
   
-  func createSegueToDetailViewController() {
+  func createSegueToDetailViewController(for indexPath: IndexPath) {
     let detailViewController = CryptoDetailViewController()
+    detailViewController.cryptoSymbol = viewModel.cryptoCellViewModels[indexPath.row].symbol ?? ""
     controller.navigationController?.pushViewController(detailViewController, animated: true)
   }
   
@@ -123,8 +124,7 @@ extension CryptoCollectionView: UICollectionViewDataSource {
 extension CryptoCollectionView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print("DID TAP CELL!!!!")
-    createSegueToDetailViewController()
+    createSegueToDetailViewController(for: indexPath)
   }
   
 }

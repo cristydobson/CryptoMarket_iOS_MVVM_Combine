@@ -14,9 +14,9 @@ class PricesTableView: UIView {
   var tableView: UITableView!
   var cellID = "TableCell"
   
-//  lazy var viewModel = {
-//    CryptoCollectionViewModel()
-//  }()
+  lazy var viewModel = {
+    PriceTableViewModel()
+  }()
   
   
   // MARK: - Init methods
@@ -33,7 +33,7 @@ class PricesTableView: UIView {
   
   // MARK: - Startup Methods
   func setupTableView() {
-    print("TABLE VIEWS!!!!!!!")
+    
     // Instantiate TableView
     tableView = UITableView(frame: frame)
     tableView.backgroundColor = .yellow
@@ -52,6 +52,22 @@ class PricesTableView: UIView {
   }
   
   
+  // MARK: - Reload TableView
+  
+  // Reload TableView
+  func reloadViewModel(with array: [CryptoPrice], for pricesType: PriceType) {
+    
+    viewModel.setupViewModel(with: array, for: pricesType)
+    
+    viewModel.reloadTableView = { [weak self] in
+      // Update the UI on the main thread
+      DispatchQueue.main.async {
+        self?.tableView.reloadData()
+      }
+    }
+  }
+  
+  
 }
 
 
@@ -64,13 +80,14 @@ extension PricesTableView: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 10
+    return viewModel.priceCellViewModels.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PricesTableCell
     
-    // TODO: - Pass the cellViewModel
+    let cellViewModel = viewModel.getCellViewModel(at: indexPath)
+    cell.cellViewModel = cellViewModel
     return cell
   }
   
