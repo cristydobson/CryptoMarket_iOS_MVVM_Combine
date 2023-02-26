@@ -43,6 +43,7 @@ class PriceTableViewModel {
       let cellViewModel = buildCellModel(from: result)
       viewModels.append(cellViewModel)
     }
+    
     return viewModels
   }
   

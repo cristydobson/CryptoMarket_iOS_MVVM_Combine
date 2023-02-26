@@ -33,11 +33,11 @@ class CryptoDataLoader: CryptoService {
   
   // MARK: - CryptoService protocol
   
-  func fetchCryptoMarkets(from endpoint: String) -> Future<[CryptoMarket], CryptoDataAPIError> {
-
+  func fetchCryptoMarkets<T: Codable>(from endpoint: String) -> Future<T, CryptoDataAPIError> {//[CryptoMarket]
+    
     // Initialize and return Future
-    return Future<[CryptoMarket], CryptoDataAPIError> { [unowned self] promise in
-      
+    return Future<T, CryptoDataAPIError> { [unowned self] promise in
+      //Future<[CryptoMarket], CryptoDataAPIError> { [unowned self] promise in
       guard let url = self.createURL(with: endpoint)
       else {
         return promise(.failure(.urlError(URLError(.unsupportedURL))))
@@ -57,18 +57,20 @@ class CryptoDataLoader: CryptoService {
           }
           return data
         }
-        /*
-         Decode the published JSON data into CryptoDataModel
-         */
-        .decode(type: [CryptoMarket].self,
+      /*
+       Decode the published JSON data into CryptoDataModel
+       */
+        .decode(type: T.self,
                 decoder: self.jsonDecoder)
-        /*
-         Make sure completion runs on the main thread
-         */
+//        .decode(type: [CryptoMarket].self,
+//                decoder: self.jsonDecoder)
+      /*
+       Make sure completion runs on the main thread
+       */
         .receive(on: RunLoop.main)
-        /*
-         Subscribe to receive a value
-         */
+      /*
+       Subscribe to receive a value
+       */
         .sink { completion in
           if case let .failure(error) = completion {
             switch error {
@@ -83,14 +85,14 @@ class CryptoDataLoader: CryptoService {
             }
           }
         }
-        receiveValue: {
-          promise(.success($0))
-        }
-        /*
-         Make sure the subscription still works after
-         the execution is finished.
-         */
-        .store(in: &self.subscriptions)
+    receiveValue: {
+      promise(.success($0))
+    }
+      /*
+       Make sure the subscription still works after
+       the execution is finished.
+       */
+    .store(in: &self.subscriptions)
       
     }
   }

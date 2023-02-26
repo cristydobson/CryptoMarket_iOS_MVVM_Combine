@@ -22,7 +22,7 @@ class CryptoDetailViewModel {
   
   var reloadTableViews: (() -> Void)?
   
-  var cryptoMarkets: [CryptoMarket] = [] {
+  var cryptoMarket: CryptoMarket! {
     didSet {
       reloadTableViews?()
     }
@@ -41,7 +41,8 @@ class CryptoDetailViewModel {
         }
       }
     receiveValue: { [unowned self] in
-      self.cryptoMarkets = $0
+      let market: CryptoMarket = $0
+      self.cryptoMarket = market
     }
     .store(in: &self.subscriptions)
   }

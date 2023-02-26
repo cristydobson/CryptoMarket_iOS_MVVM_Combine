@@ -58,10 +58,12 @@ class PricesTableView: UIView {
   func reloadViewModel(with array: [CryptoPrice], for pricesType: PriceType) {
     
     viewModel.setupViewModel(with: array, for: pricesType)
-    
+
     viewModel.reloadTableView = { [weak self] in
+      
       // Update the UI on the main thread
       DispatchQueue.main.async {
+//        print("COUNT: \(self?.viewModel.priceCellViewModels.count)!!!!!!")
         self?.tableView.reloadData()
       }
     }

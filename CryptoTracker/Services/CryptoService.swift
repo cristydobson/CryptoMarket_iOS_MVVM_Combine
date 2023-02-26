@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 protocol CryptoService {
-  func fetchCryptoMarkets(from endpoint: String) -> Future<[CryptoMarket], CryptoDataAPIError>
+  func fetchCryptoMarkets<T: Codable>(from endpoint: String) -> Future<T, CryptoDataAPIError>
 }
-
+//Future<[CryptoMarket], CryptoDataAPIError>
 
 enum Endpoint: String {
   case tickers

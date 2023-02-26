@@ -90,13 +90,13 @@ class CryptoDetailViewController: UIViewController {
   func getViewModel() {
     
     viewModel.fetchData(with: cryptoSymbol)
-    let asks = viewModel.cryptoMarkets.first?.asks
-    let bids = viewModel.cryptoMarkets.first?.bids
     
     viewModel.reloadTableViews = { [weak self] in
       DispatchQueue.main.async {
-        self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
-        self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
+        let asks = self?.viewModel.cryptoMarket.asks ?? []
+        let bids = self?.viewModel.cryptoMarket.bids ?? []
+        self?.asksTableView.reloadViewModel(with: asks, for: .ask)
+        self?.bidsTableView.reloadViewModel(with: bids, for: .bid)
       }
     }
   }
