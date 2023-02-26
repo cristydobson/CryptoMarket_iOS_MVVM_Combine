@@ -90,12 +90,12 @@ class CryptoCollectionCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-//    backgroundColor = .blue
     addViews()
   }
   
   required init?(coder: NSCoder) {
-    fatalError("init(coder:) has not been implemented!!")
+    super.init(coder: coder)
+//    fatalError("init(coder:) has not been implemented!!")
   }
   
   
@@ -134,6 +134,7 @@ class CryptoCollectionCell: UICollectionViewCell {
 
   }
   
+  // TODO: - Change to ViewModel (return color)
   func setChangePercentageLabelColor(for amount: String) {
     changeLabel.textColor = amount.contains("-") ? .red : .green
   }

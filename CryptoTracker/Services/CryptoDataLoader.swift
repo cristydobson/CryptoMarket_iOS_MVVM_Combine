@@ -33,11 +33,11 @@ class CryptoDataLoader: CryptoService {
   
   // MARK: - CryptoService protocol
   
-  func fetchCryptoMarkets() -> Future<[CryptoMarket], CryptoDataAPIError> {
+  func fetchCryptoMarkets(from endpoint: String) -> Future<[CryptoMarket], CryptoDataAPIError> {
     // Initialize and return Future
     return Future<[CryptoMarket], CryptoDataAPIError> { [unowned self] promise in
       
-      guard let url = self.createURL(with: "tickers")
+      guard let url = self.createURL(with: endpoint)
       else {
         return promise(.failure(.urlError(URLError(.unsupportedURL))))
       }

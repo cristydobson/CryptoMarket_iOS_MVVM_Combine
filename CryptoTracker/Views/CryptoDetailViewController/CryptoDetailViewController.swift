@@ -25,4 +25,14 @@ class CryptoDetailViewController: UIViewController {
   }
   
   
+  // MARK: - Startup Methods
+  func addViews() {
+    
+  }
+  
+  
+  
+  
+  
+  
 }

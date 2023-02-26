@@ -34,7 +34,7 @@ class CryptoCollectionViewModel {
   // Fetch data from API
   func fetchData() {
     
-    cryptoDataAPI.fetchCryptoMarkets()
+    cryptoDataAPI.fetchCryptoMarkets(from: Endpoint.tickers.rawValue)
       .sink { [unowned self] completion in
         if case let .failure(error) = completion {
           self.handleError(error)
