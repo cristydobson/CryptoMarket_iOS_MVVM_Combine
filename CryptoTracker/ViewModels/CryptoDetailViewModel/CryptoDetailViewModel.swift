@@ -21,6 +21,7 @@ class CryptoDetailViewModel {
   // MARK: - Fetch Data
   
   var reloadTableViews: (() -> Void)?
+  var noStatsAlert: (() -> Void)?
   
   var cryptoMarket: CryptoMarket! {
     didSet {
@@ -28,7 +29,10 @@ class CryptoDetailViewModel {
     }
   }
   
-  // TODO: - Refactor this fetch data from all classes into a single class
+  var asks: [CryptoPrice]?
+  var bids: [CryptoPrice]?
+  
+  
   // Fetch data from API
   func fetchData(with symbol: String) {
     
@@ -42,7 +46,7 @@ class CryptoDetailViewModel {
       }
     receiveValue: { [unowned self] in
       let market: CryptoMarket = $0
-      self.cryptoMarket = market
+      self.checkForStats(for: market)
     }
     .store(in: &self.subscriptions)
   }
@@ -54,34 +58,21 @@ class CryptoDetailViewModel {
   }
   
   
+  func checkForStats(for market: CryptoMarket) {
+    if let asksArray = market.asks, asksArray.count > 0,
+       let bidsArray = market.bids, bidsArray.count > 0
+    {
+      asks = asksArray
+      bids = bidsArray
+      cryptoMarket = market
+    }
+    else {
+      noStatsAlert?()
+    }
+  }
   
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
   
 }
 

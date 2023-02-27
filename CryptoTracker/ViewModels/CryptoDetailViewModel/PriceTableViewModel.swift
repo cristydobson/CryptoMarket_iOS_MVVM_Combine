@@ -32,6 +32,8 @@ class PriceTableViewModel {
   func setupViewModel(with array: [CryptoPrice], for pricesType: PriceType) {
     priceType = pricesType
     priceCellViewModels = createCellViewModels(from: array)
+    reloadTableView?()
+    print("HERE: \(reloadTableView.debugDescription)!!!!!!!!!")
   }
   
   // Create PriceCellViewModels

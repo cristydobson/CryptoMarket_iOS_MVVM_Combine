@@ -74,7 +74,7 @@ class CryptoCollectionView: UIView {
   // Initialize CollectionViewModel
   func initViewModel() {
     
-    viewModel.getCryptoData()
+    viewModel.fetchData()
     
     viewModel.reloadCollectionView = { [weak self] in
       // Update the UI on the main thread

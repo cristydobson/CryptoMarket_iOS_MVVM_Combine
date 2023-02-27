@@ -16,10 +16,6 @@ class CryptoCollectionViewModel {
   
   private var subscriptions = Set<AnyCancellable>()
   var cryptoDataAPI = CryptoDataLoader.shared
- 
-  func getCryptoData() {
-    fetchData()
-  }
   
   
   // MARK: - Fetch Data

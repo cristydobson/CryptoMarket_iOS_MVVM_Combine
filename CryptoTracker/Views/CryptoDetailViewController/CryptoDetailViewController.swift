@@ -79,7 +79,6 @@ class CryptoDetailViewController: UIViewController {
     let tableViewStack = UIStackView()
     tableViewStack.axis = .horizontal
     tableViewStack.distribution = .fillEqually
-    tableViewStack.backgroundColor = .red
     tableViewStack.translatesAutoresizingMaskIntoConstraints = false
     return tableViewStack
   }
@@ -93,10 +92,28 @@ class CryptoDetailViewController: UIViewController {
     
     viewModel.reloadTableViews = { [weak self] in
       DispatchQueue.main.async {
-        let asks = self?.viewModel.cryptoMarket.asks ?? []
-        let bids = self?.viewModel.cryptoMarket.bids ?? []
-        self?.asksTableView.reloadViewModel(with: asks, for: .ask)
-        self?.bidsTableView.reloadViewModel(with: bids, for: .bid)
+        print("ITEMS: \(self?.viewModel.cryptoMarket.debugDescription)!!!!!")
+        
+        let asks = self?.viewModel.asks
+        let bids = self?.viewModel.bids
+        self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
+        self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
+      }
+    }
+    
+    viewModel.noStatsAlert = { [weak self] in
+      DispatchQueue.main.async {
+        let alert = UIAlertController(title: NSLocalizedString("No Stats Available", comment: ""),
+                                      message: "",
+                                      preferredStyle: .alert)
+        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""),
+                                     style: .default) { action in
+          DispatchQueue.main.async {
+            self?.navigationController?.popViewController(animated: true)
+          }
+        }
+        alert.addAction(okAction)
+        self?.present(alert, animated: true)
       }
     }
   }
