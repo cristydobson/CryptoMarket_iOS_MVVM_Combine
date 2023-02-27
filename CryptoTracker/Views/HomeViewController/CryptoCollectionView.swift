@@ -102,7 +102,7 @@ class CryptoCollectionView: UIView {
     detailViewController.cryptoSymbol = viewModel.cryptoCellViewModels[indexPath.row].symbol ?? ""
     controller.navigationController?.pushViewController(detailViewController, animated: true)
   }
-  var i = 0
+
 }
 
 
@@ -145,8 +145,6 @@ extension CryptoCollectionView: UICollectionViewDelegate {
 extension CryptoCollectionView: CryptoCollectionViewModelDelegate {
   
   func reloadCollectionData() {
-//    i += 1
-    print("DELEGATE!!!!!!")
     loadViewModel()
   }
   

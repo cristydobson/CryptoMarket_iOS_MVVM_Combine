@@ -23,4 +23,8 @@ struct PriceCellViewModel {
     return priceType == .ask ? UIColor.red : UIColor.green
   }
   
+  func getTextAlignment() -> NSTextAlignment {
+    return priceType == .ask ? .left : .right
+  }
+  
 }

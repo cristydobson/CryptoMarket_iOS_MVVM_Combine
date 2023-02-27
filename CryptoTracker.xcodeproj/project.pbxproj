@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E295F7929ACDF0C00CBAE0B /* PriceTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E295F7829ACDF0C00CBAE0B /* PriceTableViewHeader.swift */; };
+		5E295F7B29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E295F7A29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift */; };
 		5E7B318F29AA1E1900797B5D /* CryptoDataAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B318E29AA1E1900797B5D /* CryptoDataAPIError.swift */; };
 		5E7B319129AA236400797B5D /* CryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319029AA236400797B5D /* CryptoService.swift */; };
 		5E7B319329AA250B00797B5D /* CryptoDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319229AA250B00797B5D /* CryptoDataLoader.swift */; };
@@ -54,6 +56,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E295F7829ACDF0C00CBAE0B /* PriceTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewHeader.swift; sourceTree = "<group>"; };
+		5E295F7A29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewHeaderViewModel.swift; sourceTree = "<group>"; };
 		5E7B318E29AA1E1900797B5D /* CryptoDataAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataAPIError.swift; sourceTree = "<group>"; };
 		5E7B319029AA236400797B5D /* CryptoService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoService.swift; sourceTree = "<group>"; };
 		5E7B319229AA250B00797B5D /* CryptoDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataLoader.swift; sourceTree = "<group>"; };
@@ -258,6 +262,7 @@
 				5EAF9AF429A91E9300E19C71 /* CryptoDetailViewController.swift */,
 				5EB1684329AB86A1005E8FE2 /* PricesTableView.swift */,
 				5EB1684529AB8865005E8FE2 /* PricesTableCell.swift */,
+				5E295F7829ACDF0C00CBAE0B /* PriceTableViewHeader.swift */,
 			);
 			path = CryptoDetailViewController;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				5EB1684129AB7803005E8FE2 /* CryptoDetailViewModel.swift */,
 				5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */,
 				5EB1684829AB8AC9005E8FE2 /* PriceCellViewModel.swift */,
+				5E295F7A29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift */,
 			);
 			path = CryptoDetailViewModel;
 			sourceTree = "<group>";
@@ -422,12 +428,14 @@
 				5EAF9ADE29A8FB2D00E19C71 /* CryptoDataModel.swift in Sources */,
 				5EAF9AE029A8FBEE00E19C71 /* CryptoCollectionView.swift in Sources */,
 				5E7B319329AA250B00797B5D /* CryptoDataLoader.swift in Sources */,
+				5E295F7B29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift in Sources */,
 				5E7B319829AA5DE000797B5D /* StringHelper.swift in Sources */,
 				5EB1684229AB7803005E8FE2 /* CryptoDetailViewModel.swift in Sources */,
 				5EAF9AE629A90FF000E19C71 /* CryptoCollectionCell.swift in Sources */,
 				5E7B318F29AA1E1900797B5D /* CryptoDataAPIError.swift in Sources */,
 				5EAF9AA929A8E50600E19C71 /* HomeViewController.swift in Sources */,
 				5E7B319129AA236400797B5D /* CryptoService.swift in Sources */,
+				5E295F7929ACDF0C00CBAE0B /* PriceTableViewHeader.swift in Sources */,
 				5EAF9AE229A901A900E19C71 /* CryptoCellViewModel.swift in Sources */,
 				5EB1684D29ABB030005E8FE2 /* PriceTableViewModel.swift in Sources */,
 				5EB1684429AB86A1005E8FE2 /* PricesTableView.swift in Sources */,

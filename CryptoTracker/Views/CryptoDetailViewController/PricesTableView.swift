@@ -12,7 +12,8 @@ class PricesTableView: UIView {
   
   // MARK: - Properties
   var tableView: UITableView!
-  var cellID = "TableCell"
+  let cellID = "TableCell"
+  let headerID = "TableHeader"
   
   lazy var viewModel = {
     PriceTableViewModel()
@@ -35,17 +36,20 @@ class PricesTableView: UIView {
   func setupTableView() {
     
     // Instantiate TableView
-    tableView = UITableView(frame: frame)
-    tableView.backgroundColor = .clear
+    tableView = UITableView(frame: frame, style: .plain)
+    tableView.backgroundColor = .black
     
     tableView.delegate = self
     tableView.dataSource = self
     
-    // Register the TableView's cell
+    // Register the TableView's cell and header
     tableView.register(PricesTableCell.self, forCellReuseIdentifier: cellID)
     
     // TableView style
+    tableView.bounces = false
+    tableView.separatorStyle = .none
     tableView.showsVerticalScrollIndicator = false
+    tableView.contentInset.top = 8
     
     // Add TableView to current view
     addSubview(tableView)
@@ -94,10 +98,9 @@ extension PricesTableView: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
+    return 40
   }
   
-  // TODO: - HEADER with labels
   
 }
 
