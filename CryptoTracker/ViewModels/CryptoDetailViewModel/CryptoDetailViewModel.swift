@@ -25,6 +25,13 @@ class CryptoDetailViewModel {
   
   private var subscriptions = Set<AnyCancellable>()
   var cryptoDataAPI = CryptoDataLoader.shared
+  
+  
+  // MARK: - Init
+  
+  init() {
+    initTimer()
+  }
 
   
   // MARK: - Fetch Data
@@ -40,11 +47,6 @@ class CryptoDetailViewModel {
   
   var asks: [CryptoPrice]?
   var bids: [CryptoPrice]?
-  
-  
-  init() {
-    initTimer()
-  }
   
   
   // Fetch data from API
@@ -81,6 +83,7 @@ class CryptoDetailViewModel {
       cryptoMarket = market
     }
     else {
+      cancellable?.cancel()
       noStatsAlert?()
     }
   }

@@ -36,7 +36,9 @@ class CryptoCollectionView: UIView {
     backgroundColor = .clear
     
     setupCollectionView()
-    initViewModel()
+    
+    viewModel.delegate = self
+    loadViewModel()
   }
   
   
@@ -72,7 +74,7 @@ class CryptoCollectionView: UIView {
   }
   
   // Initialize CollectionViewModel
-  func initViewModel() {
+  func loadViewModel() {
     
     viewModel.fetchData()
     
@@ -84,6 +86,14 @@ class CryptoCollectionView: UIView {
     }
   }
   
+  func startTimer() {
+    viewModel.startTimer()
+  }
+  
+  func stopTimer() {
+    viewModel.cancelTimer()
+  }
+  
   
   // MARK: - Segue to Details View
   
@@ -92,7 +102,7 @@ class CryptoCollectionView: UIView {
     detailViewController.cryptoSymbol = viewModel.cryptoCellViewModels[indexPath.row].symbol ?? ""
     controller.navigationController?.pushViewController(detailViewController, animated: true)
   }
-  
+  var i = 0
 }
 
 
@@ -125,6 +135,19 @@ extension CryptoCollectionView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     createSegueToDetailViewController(for: indexPath)
+  }
+  
+}
+
+
+// MARK: - CryptoCollectionViewModelDelegate
+
+extension CryptoCollectionView: CryptoCollectionViewModelDelegate {
+  
+  func reloadCollectionData() {
+//    i += 1
+    print("DELEGATE!!!!!!")
+    loadViewModel()
   }
   
 }

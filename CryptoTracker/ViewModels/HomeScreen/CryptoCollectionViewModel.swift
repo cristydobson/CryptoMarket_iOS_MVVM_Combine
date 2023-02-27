@@ -9,12 +9,18 @@ import Foundation
 import Combine
 
 
+protocol CryptoCollectionViewModelDelegate: AnyObject {
+  func reloadCollectionData()
+}
+
+
 class CryptoCollectionViewModel {
   
   
-//  let timer = Timer.publish(every: 3, on: .main, in: .common)
-//    .autoconnect()
-//    .receive(on: Scheduler)
+  
+  // MARK: - Delegate
+  
+  weak var delegate: CryptoCollectionViewModelDelegate?
     
   
   // MARK: - Load Data
@@ -32,6 +38,7 @@ class CryptoCollectionViewModel {
       reloadCollectionView?()
     }
   }
+  
   
   // Fetch data from API
   func fetchData() {
@@ -58,6 +65,11 @@ class CryptoCollectionViewModel {
       let cellViewModel = buildCellModel(from: result)
       viewModels.append(cellViewModel)
     }
+    
+    viewModels.sort {
+      $0.symbol ?? "" < $1.symbol ?? ""
+    }
+    
     cryptoCellViewModels = viewModels
   }
   
@@ -81,6 +93,24 @@ class CryptoCollectionViewModel {
   // MARK: - Handle errors
   func handleError(_ apiError: CryptoDataAPIError) {
     print("ERROR: \(apiError.localizedDescription)!!!!!")
+  }
+  
+  
+  // MARK: - Timer
+  
+  private var cancellable: AnyCancellable?
+  
+  func startTimer() {
+    cancellable = Timer
+      .publish(every: 10, on: .main, in: .common)
+      .autoconnect()
+      .sink { _ in
+        self.delegate?.reloadCollectionData()
+      }
+  }
+  
+  func cancelTimer() {
+    cancellable?.cancel()
   }
   
   

@@ -12,7 +12,7 @@ class HomeViewController: UIViewController {
   
   // MARK: - Properties
   
-  
+  var collectionView: CryptoCollectionView!
   
 
   // MARK: - View Controller's Life Cycle
@@ -28,11 +28,20 @@ class HomeViewController: UIViewController {
     setupCollectionView()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    collectionView.startTimer()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    collectionView.stopTimer()
+  }
+  
   
   // MARK: - Startup Methods
   
   func setupCollectionView() {
-    let collectionView = CryptoCollectionView(frame: view.frame, controller: self)
+    collectionView = CryptoCollectionView(frame: view.frame, controller: self)
     view.addSubview(collectionView)
   }
   

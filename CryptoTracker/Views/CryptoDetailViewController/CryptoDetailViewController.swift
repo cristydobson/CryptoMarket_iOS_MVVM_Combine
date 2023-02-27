@@ -40,9 +40,9 @@ class CryptoDetailViewController: UIViewController {
     addViews()
     
     viewModel.delegate = self
-    reloadViewModelData()
+    loadViewModel()
   }
-//
+
   
   // MARK: - Add Views
   func addViews() {
@@ -87,7 +87,7 @@ class CryptoDetailViewController: UIViewController {
   
   
   // Get CryptoDetailViewModel
-  func reloadViewModelData() {
+  func loadViewModel() {
     
     viewModel.fetchData(with: cryptoSymbol)
     
@@ -116,7 +116,7 @@ class CryptoDetailViewController: UIViewController {
       }
     }
   }
-  
+ 
 }
 
 
@@ -124,7 +124,7 @@ class CryptoDetailViewController: UIViewController {
 extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
   
   func reloadTableViewData() {
-    reloadViewModelData()
+    loadViewModel()
   }
   
 }

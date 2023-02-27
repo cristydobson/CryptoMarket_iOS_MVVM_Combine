@@ -15,6 +15,8 @@ extension String {
   }
   
   func getCurrencyString() -> String {
+    guard self.count > 0 else { return "" }
+    guard self.contains("-") else { return self }
     return String(self[
       (self.range(of: "-"))!.upperBound...
     ])
