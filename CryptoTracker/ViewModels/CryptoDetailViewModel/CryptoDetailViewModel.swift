@@ -9,8 +9,17 @@ import Foundation
 import Combine
 
 
+protocol CryptoDetailViewModelDelegate: AnyObject {
+  func reloadTableViewData()
+}
+
+
 class CryptoDetailViewModel {
   
+  
+  // MARK: - Delegates
+  weak var delegate: CryptoDetailViewModelDelegate?
+
   
   // MARK: - Load Data
   
@@ -31,6 +40,11 @@ class CryptoDetailViewModel {
   
   var asks: [CryptoPrice]?
   var bids: [CryptoPrice]?
+  
+  
+  init() {
+    initTimer()
+  }
   
   
   // Fetch data from API
@@ -72,6 +86,18 @@ class CryptoDetailViewModel {
   }
   
   
+  // MARK: - Timer
+  
+  private var cancellable: AnyCancellable?
+  
+  func initTimer() {
+    cancellable = Timer
+      .publish(every: 10, on: .main, in: .common)
+      .autoconnect()
+      .sink { _ in
+        self.delegate?.reloadTableViewData()
+      }
+  }
   
   
 }

@@ -38,9 +38,11 @@ class CryptoDetailViewController: UIViewController {
     view.addGradientBackground()
     
     addViews()
-    getViewModel()
+    
+    viewModel.delegate = self
+    reloadViewModelData()
   }
-  
+//
   
   // MARK: - Add Views
   func addViews() {
@@ -84,16 +86,13 @@ class CryptoDetailViewController: UIViewController {
   }
   
   
-  
   // Get CryptoDetailViewModel
-  func getViewModel() {
+  func reloadViewModelData() {
     
     viewModel.fetchData(with: cryptoSymbol)
     
     viewModel.reloadTableViews = { [weak self] in
       DispatchQueue.main.async {
-        print("ITEMS: \(self?.viewModel.cryptoMarket.debugDescription)!!!!!")
-        
         let asks = self?.viewModel.asks
         let bids = self?.viewModel.bids
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
@@ -118,6 +117,14 @@ class CryptoDetailViewController: UIViewController {
     }
   }
   
+}
+
+
+// MARK: - CryptoDetailViewModelDelegate
+extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
   
+  func reloadTableViewData() {
+    reloadViewModelData()
+  }
   
 }

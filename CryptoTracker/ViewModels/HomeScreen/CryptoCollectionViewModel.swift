@@ -12,6 +12,11 @@ import Combine
 class CryptoCollectionViewModel {
   
   
+//  let timer = Timer.publish(every: 3, on: .main, in: .common)
+//    .autoconnect()
+//    .receive(on: Scheduler)
+    
+  
   // MARK: - Load Data
   
   private var subscriptions = Set<AnyCancellable>()
