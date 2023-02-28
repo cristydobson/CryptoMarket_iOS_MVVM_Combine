@@ -36,6 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     navigationController.navigationBar.titleTextAttributes = [
       .foregroundColor : UIColor.white
     ]
+    navigationController.navigationBar.tintColor = .white
     
   }
 

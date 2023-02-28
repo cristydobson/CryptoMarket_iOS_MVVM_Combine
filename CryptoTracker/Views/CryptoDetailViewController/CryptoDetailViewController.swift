@@ -36,6 +36,7 @@ class CryptoDetailViewController: UIViewController {
     super.viewDidLoad()
     
     title = cryptoSymbol.getCryptoNameString()
+    navigationController?.navigationBar.topItem?.backButtonTitle = NSLocalizedString("Back", comment: "")
     
     view.addGradientBackground()
     
@@ -44,7 +45,6 @@ class CryptoDetailViewController: UIViewController {
     viewModel.delegate = self
     loadViewModel()
   }
-
   
   // MARK: - Add Views
   func addViews() {
