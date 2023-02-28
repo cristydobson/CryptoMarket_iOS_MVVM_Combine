@@ -50,6 +50,7 @@ class PricesTableView: UIView {
     tableView.separatorStyle = .none
     tableView.showsVerticalScrollIndicator = false
     tableView.contentInset.top = 8
+    tableView.contentInset.bottom = 24
     
     // Add TableView to current view
     addSubview(tableView)

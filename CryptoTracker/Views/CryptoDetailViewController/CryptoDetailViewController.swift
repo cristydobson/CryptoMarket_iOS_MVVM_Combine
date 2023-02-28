@@ -21,7 +21,15 @@ class CryptoDetailViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
-//    stackView.spacing = 24
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }()
+  
+  let tableViewStack: UIStackView = {
+    let stackView = UIStackView()
+    stackView.axis = .horizontal
+    stackView.distribution = .fillEqually
+    stackView.backgroundColor = .black
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -48,73 +56,102 @@ class CryptoDetailViewController: UIViewController {
   
   // MARK: - Add Views
   func addViews() {
-   
-    let tempView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: (view.frame.height/2)*1.25))
-    tempView.backgroundColor = .blue
-    view.addSubview(tempView)
-    tempView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    tempView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    tempView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+
+    let safeArea = view.safeAreaLayoutGuide
+    
+    let viewWidth = view.frame.width
+    let viewHeight = view.frame.height
+    let viewHeightFraction = viewHeight/12
+    
+    // Price / Latest Price / Change % - Stack
+    let topStackHeight = viewHeightFraction
+    
+    let view1 = UIView()
+    view.addSubview(view1)
+    
+    let view2 = UIView()
+    view.addSubview(view2)
+    
+    let view3 = UIView()
+    view.addSubview(view3)
+    
+    let priceChangeStack = UIStackView()
+    priceChangeStack.axis = .horizontal
+    priceChangeStack.distribution = .fillEqually
+    priceChangeStack.backgroundColor = .red
+    priceChangeStack.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(priceChangeStack)
+    
+    priceChangeStack.addArrangedSubview(view1)
+    priceChangeStack.addArrangedSubview(view2)
+    priceChangeStack.addArrangedSubview(view3)
+    
+    let priceChangeStackConstraints = [
+      priceChangeStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      priceChangeStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      priceChangeStack.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 24),
+      priceChangeStack.setHeightContraint(by: topStackHeight)
+    ]
+    NSLayoutConstraint.activate(priceChangeStackConstraints)
     
     
+    // Graph Container View
+    let graphViewHeight = viewHeightFraction * 5
+    let graphContainerView = UIView()
+    graphContainerView.backgroundColor = .blue
+    graphContainerView.translatesAutoresizingMaskIntoConstraints = false
+    view.addSubview(graphContainerView)
+
+    let graphViewConstraints = [
+      graphContainerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      graphContainerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      graphContainerView.topAnchor.constraint(equalTo: priceChangeStack.bottomAnchor),
+      graphContainerView.setHeightContraint(by: graphViewHeight)
+    ]
+    NSLayoutConstraint.activate(graphViewConstraints)
+
+
     // TableView Header Stack
-    let headerHeight: CGFloat = 80
-    let headerFrame = CGRect(origin: .zero,
-                              size: CGSize(width: view.frame.width/2, height: headerHeight))
-    let asksHeader = PriceTableViewHeader(frame: headerFrame, for: .ask)
-    let bidsHeader = PriceTableViewHeader(frame: headerFrame, for: .bid)
-    
+    let asksHeader = PriceTableViewHeader(frame: CGRect.zero, for: .ask)
+    let bidsHeader = PriceTableViewHeader(frame: CGRect.zero, for: .bid)
+
     view.addSubview(asksHeader)
     view.addSubview(bidsHeader)
-    
-    let headerYOrigin = (view.frame.height/2)*1.25
-    headerStack.frame.origin.y = headerYOrigin
     view.addSubview(headerStack)
-    
+
     headerStack.addArrangedSubview(asksHeader)
     headerStack.addArrangedSubview(bidsHeader)
-    
-    headerStack.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    headerStack.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    headerStack.topAnchor.constraint(equalTo: tempView.bottomAnchor).isActive = true
-    
 
+    let tableViewHeaderConstraints = [
+      headerStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      headerStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      headerStack.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor)
+    ]
+    NSLayoutConstraint.activate(tableViewHeaderConstraints)
+
+    
     // Price TableViews
-    let stackHeight = ((view.frame.height/2)*0.75) - headerHeight
-    let tableViewStack = createTableViewsStack(from: headerYOrigin + headerHeight,
-                                               and: stackHeight)
+    let tableViewStackHeight = viewHeightFraction * 4.5
     let tableViewFrame = CGRect(x: 0, y: 0,
-                                width: view.frame.width/2,
-                                height: 500)
+                                width: viewWidth/2,
+                                height: tableViewStackHeight)
     asksTableView = PricesTableView(frame: tableViewFrame)
     bidsTableView = PricesTableView(frame: tableViewFrame)
     view.addSubview(asksTableView)
     view.addSubview(bidsTableView)
     view.addSubview(tableViewStack)
-    
+
     tableViewStack.addArrangedSubview(asksTableView)
     tableViewStack.addArrangedSubview(bidsTableView)
-    
 
-    tableViewStack.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    tableViewStack.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    tableViewStack.topAnchor.constraint(equalTo: headerStack.bottomAnchor).isActive = true
-    tableViewStack.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    
-  }
-  
-  func createTableViewsStack(from yOrigin: CGFloat, and height: CGFloat) -> UIStackView {
-    let stackFrame = CGRect(origin: CGPoint(x: 0, y: yOrigin),
-                           size: CGSize(width: view.frame.width, height: height))
-//    let tableViewStack = UIStackView(frame: stackFrame)
-    let tableViewStack = UIStackView()
-    tableViewStack.frame.origin.y = yOrigin
-    tableViewStack.axis = .horizontal
-    tableViewStack.distribution = .fillEqually
-//    tableViewStack.spacing = 4
-    tableViewStack.backgroundColor = .red
-    tableViewStack.translatesAutoresizingMaskIntoConstraints = false
-    return tableViewStack
+    let tableViewStackConstraints = [
+      tableViewStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      tableViewStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      tableViewStack.topAnchor.constraint(equalTo: headerStack.bottomAnchor),
+      tableViewStack.setHeightContraint(by: tableViewStackHeight)
+    ]
+    NSLayoutConstraint.activate(tableViewStackConstraints)
+
   }
   
   
