@@ -38,16 +38,9 @@ class CryptoDetailViewController: UIViewController {
   }()
   
   
-  // MARK: - Graph Path Animation Properties
+  // MARK: - Graph Properties
   
-  var graphPathView: GraphPathAnimation!
-  
-  let graphContainerView: UIView = {
-    let newView = UIView()
-    newView.backgroundColor = .blue
-    newView.translatesAutoresizingMaskIntoConstraints = false
-    return newView
-  }()
+  var graphContainerView: GraphView!
   
   
   // MARK: - View Model Property
@@ -65,14 +58,16 @@ class CryptoDetailViewController: UIViewController {
     navigationController?.navigationBar.topItem?.backButtonTitle = NSLocalizedString("Back", comment: "")
     
     view.addGradientBackground()
-    
+ 
     addViews()
     
     viewModel.delegate = self
     loadViewModel()
   }
   
+  
   // MARK: - Add Views
+  
   func addViews() {
 
     let safeArea = view.safeAreaLayoutGuide
@@ -114,6 +109,7 @@ class CryptoDetailViewController: UIViewController {
     
     
     // Graph Container View
+    setupGraphView()
     let graphViewHeight = viewHeightFraction * 5
     view.addSubview(graphContainerView)
 
@@ -144,7 +140,7 @@ class CryptoDetailViewController: UIViewController {
     ]
     NSLayoutConstraint.activate(tableViewHeaderConstraints)
 
-    
+
     // Price TableViews
     let tableViewStackHeight = viewHeightFraction * 4.5
     let tableViewFrame = CGRect(x: 0, y: 0,
@@ -167,9 +163,15 @@ class CryptoDetailViewController: UIViewController {
     ]
     NSLayoutConstraint.activate(tableViewStackConstraints)
 
-    setupGraphAnimation()
   }
   
+  func setupGraphView() {
+    graphContainerView = GraphView(frame: CGRect.zero)
+    graphContainerView.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  
+  // MARK: - Load View Model
   
   // Get CryptoDetailViewModel
   func loadViewModel() {
@@ -182,6 +184,8 @@ class CryptoDetailViewController: UIViewController {
         let bids = self?.viewModel.bids
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
+        
+        self?.graphContainerView.loadViewModel(with: bids!)
       }
     }
     
@@ -215,32 +219,4 @@ extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
 }
 
 
-extension CryptoDetailViewController {
-  
-  func setupGraphAnimation() {
 
-    graphPathView = GraphPathAnimation()
-    
-    graphPathView.setupAnimation(
-      frame: graphContainerView.frame,
-      animatedLayerColor: .green,
-      strokeWidth: 2,
-      animated: true)
-    
-    graphContainerView.addSubview(graphPathView)
-    animateGraphPath()
-  }
-  
-  func animateGraphPath() {
-  
-    graphPathView.animate(duration: 0.2) { finished in
-      
-      if finished {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-          print("FINISHED ANIMATION!!!!!")
-        }
-      }
-    }
-  }
-  
-}

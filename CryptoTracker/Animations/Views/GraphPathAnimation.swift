@@ -12,6 +12,8 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
   
   // MARK: - Properties
   
+  private var graphPoints: [CGPoint]?
+  
   private var animatedLayerColor: UIColor = UIColor.green {
     didSet {
       animatedLayer?.strokeColor = animatedLayerColor.cgColor
@@ -47,10 +49,11 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
     super.init(coder: coder)
   }
   
-  func setupAnimation(frame: CGRect, animatedLayerColor: UIColor, strokeWidth: CGFloat, animated: Bool) {
+  func setupAnimation(frame: CGRect, animatedLayerColor: UIColor, strokeWidth: CGFloat, graphPoints: [CGPoint]?, animated: Bool) {
     self.frame = frame
     self.animatedLayerColor = animatedLayerColor
     self.strokeWidth = strokeWidth
+    self.graphPoints = graphPoints
     self.animated = animated
   }
   
