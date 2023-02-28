@@ -14,6 +14,9 @@ class CryptoDetailViewController: UIViewController {
   
   var cryptoSymbol = ""
   
+  
+  // MARK: - TableViews Properties
+  
   var asksTableView: PricesTableView!
   var bidsTableView: PricesTableView!
   
@@ -33,6 +36,21 @@ class CryptoDetailViewController: UIViewController {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
+  
+  
+  // MARK: - Graph Path Animation Properties
+  
+  var graphPathView: GraphPathAnimation!
+  
+  let graphContainerView: UIView = {
+    let newView = UIView()
+    newView.backgroundColor = .blue
+    newView.translatesAutoresizingMaskIntoConstraints = false
+    return newView
+  }()
+  
+  
+  // MARK: - View Model Property
   
   lazy var viewModel = {
     CryptoDetailViewModel()
@@ -97,9 +115,6 @@ class CryptoDetailViewController: UIViewController {
     
     // Graph Container View
     let graphViewHeight = viewHeightFraction * 5
-    let graphContainerView = UIView()
-    graphContainerView.backgroundColor = .blue
-    graphContainerView.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(graphContainerView)
 
     let graphViewConstraints = [
@@ -152,6 +167,7 @@ class CryptoDetailViewController: UIViewController {
     ]
     NSLayoutConstraint.activate(tableViewStackConstraints)
 
+    setupGraphAnimation()
   }
   
   
@@ -194,6 +210,37 @@ extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
   
   func reloadTableViewData() {
     loadViewModel()
+  }
+  
+}
+
+
+extension CryptoDetailViewController {
+  
+  func setupGraphAnimation() {
+
+    graphPathView = GraphPathAnimation()
+    
+    graphPathView.setupAnimation(
+      frame: graphContainerView.frame,
+      animatedLayerColor: .green,
+      strokeWidth: 2,
+      animated: true)
+    
+    graphContainerView.addSubview(graphPathView)
+    animateGraphPath()
+  }
+  
+  func animateGraphPath() {
+  
+    graphPathView.animate(duration: 0.2) { finished in
+      
+      if finished {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+          print("FINISHED ANIMATION!!!!!")
+        }
+      }
+    }
   }
   
 }

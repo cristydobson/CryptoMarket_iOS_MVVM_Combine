@@ -17,7 +17,6 @@ protocol CryptoCollectionViewModelDelegate: AnyObject {
 class CryptoCollectionViewModel {
   
   
-  
   // MARK: - Delegate
   
   weak var delegate: CryptoCollectionViewModelDelegate?
