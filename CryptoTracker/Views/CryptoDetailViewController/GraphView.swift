@@ -63,7 +63,6 @@ extension GraphView {
   func setupGraphAnimation(with points: [CGPoint]) {
     
     graphPathView = GraphPathAnimation()
-//    graphPathView.translatesAutoresizingMaskIntoConstraints = false
     
     let graphViewFrame = CGRect(origin: CGPoint.zero, size: frame.size)
 

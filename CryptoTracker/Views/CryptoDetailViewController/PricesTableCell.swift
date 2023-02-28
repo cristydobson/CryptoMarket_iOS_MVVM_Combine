@@ -17,7 +17,9 @@ class PricesTableCell: UITableViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.text = "$0.00"
+    newLabel.textAlignment = .left
     newLabel.font = UIFont.systemFont(ofSize: 16)
+    newLabel.backgroundColor = .red
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -25,8 +27,10 @@ class PricesTableCell: UITableViewCell {
   var amountLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textColor = .white
-    newLabel.text = "0.00018"
+    newLabel.text = "0.00000"
+    newLabel.textAlignment = .left
     newLabel.font = UIFont.systemFont(ofSize: 16)
+    newLabel.backgroundColor = .red
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -35,17 +39,15 @@ class PricesTableCell: UITableViewCell {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
-    stackView.spacing = 24
+    stackView.spacing = 12
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
   
   var cellViewModel: PriceCellViewModel? {
     didSet {
-      priceLabel.text = "\(cellViewModel?.price ?? 0.00)"
+      priceLabel.text = cellViewModel?.getPriceString()
       priceLabel.textColor = cellViewModel?.getPriceLabelColor()
-      priceLabel.textAlignment = cellViewModel!.getTextAlignment()
-      amountLabel.textAlignment = cellViewModel!.getTextAlignment()
     }
   }
   
@@ -61,7 +63,6 @@ class PricesTableCell: UITableViewCell {
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-//    fatalError("init(coder:) has not been implemented!!")
   }
   
   
@@ -75,13 +76,14 @@ class PricesTableCell: UITableViewCell {
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(amountLabel)
     
-    labelStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
-    labelStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
-    labelStack.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    labelStack.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    let constraints = [
+      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
+      labelStack.topAnchor.constraint(equalTo: topAnchor),
+      labelStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+    ]
+    NSLayoutConstraint.activate(constraints)
     
   }
-  
-  
   
 }

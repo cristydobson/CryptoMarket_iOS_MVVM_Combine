@@ -19,12 +19,16 @@ struct PriceCellViewModel {
   
   // MARK: - Methods
   
-  func getPriceLabelColor() -> UIColor {
-    return priceType == .ask ? UIColor.red : UIColor.green
+  func getPriceString() -> String {
+    var string = "\(price ?? 0.000000)"
+    while string.count < 8 {
+      string.append("0")
+    }
+    return string
   }
   
-  func getTextAlignment() -> NSTextAlignment {
-    return priceType == .ask ? .left : .right
+  func getPriceLabelColor() -> UIColor {
+    return priceType == .ask ? UIColor.red : UIColor.green
   }
   
 }

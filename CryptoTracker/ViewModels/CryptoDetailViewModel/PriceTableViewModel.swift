@@ -17,14 +17,9 @@ class PriceTableViewModel {
 
   // MARK: - Properties
   
-  var reloadTableView: (() -> Void)?
   var priceType: PriceType = .ask
   
-  var priceCellViewModels: [PriceCellViewModel] = [] {
-    didSet {
-      reloadTableView?()
-    }
-  }
+  var priceCellViewModels: [PriceCellViewModel] = []
   
   
   // MARK: - Prepare Data To Reload TableView
@@ -32,8 +27,6 @@ class PriceTableViewModel {
   func setupViewModel(with array: [CryptoPrice], for pricesType: PriceType) {
     priceType = pricesType
     priceCellViewModels = createCellViewModels(from: array)
-    reloadTableView?()
-    print("HERE: \(reloadTableView.debugDescription)!!!!!!!!!")
   }
   
   // Create PriceCellViewModels

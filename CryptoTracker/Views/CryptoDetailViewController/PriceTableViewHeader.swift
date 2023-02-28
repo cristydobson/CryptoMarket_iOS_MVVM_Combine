@@ -16,7 +16,7 @@ class PriceTableViewHeader: UIView {
   var priceLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textColor = .white
-    newLabel.textAlignment = .right
+    newLabel.textAlignment = .left
     newLabel.text = NSLocalizedString("Price", comment: "")
     newLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -37,7 +37,7 @@ class PriceTableViewHeader: UIView {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
-    stackView.spacing = 24
+    stackView.spacing = 12
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -59,11 +59,6 @@ class PriceTableViewHeader: UIView {
   
   convenience init(frame: CGRect, for priceType: PriceType) {
     self.init(frame: frame)
-    
-    let textAlignment = viewModel.getTextAlignment(for: priceType)
-    priceLabel.textAlignment = textAlignment
-    amountLabel.textAlignment = textAlignment
-    
     addViews()
   }
   
@@ -80,11 +75,14 @@ class PriceTableViewHeader: UIView {
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(amountLabel)
     
-    labelStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 24).isActive = true
-    labelStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -24).isActive = true
-    labelStack.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    labelStack.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    labelStack.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    let constraints = [
+      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
+      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+      labelStack.topAnchor.constraint(equalTo: topAnchor),
+      labelStack.bottomAnchor.constraint(equalTo: bottomAnchor),
+      labelStack.setHeightContraint(by: 40)
+    ]
+    NSLayoutConstraint.activate(constraints)
 
   }
   

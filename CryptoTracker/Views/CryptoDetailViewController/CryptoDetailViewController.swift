@@ -57,7 +57,7 @@ class CryptoDetailViewController: UIViewController {
     title = cryptoSymbol.getCryptoNameString()
     navigationController?.navigationBar.topItem?.backButtonTitle = NSLocalizedString("Back", comment: "")
     
-    view.addGradientBackground()
+    view.backgroundColor = .black
  
     addViews()
     
@@ -156,8 +156,8 @@ class CryptoDetailViewController: UIViewController {
     tableViewStack.addArrangedSubview(bidsTableView)
 
     let tableViewStackConstraints = [
-      tableViewStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-      tableViewStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      tableViewStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 24),
+      tableViewStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 24),
       tableViewStack.topAnchor.constraint(equalTo: headerStack.bottomAnchor),
       tableViewStack.setHeightContraint(by: tableViewStackHeight)
     ]

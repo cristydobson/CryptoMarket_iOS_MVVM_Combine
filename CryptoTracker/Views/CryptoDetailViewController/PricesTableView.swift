@@ -23,7 +23,6 @@ class PricesTableView: UIView {
   // MARK: - Init methods
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
     setupTableView()
   }
   
@@ -61,19 +60,9 @@ class PricesTableView: UIView {
   
   // Reload TableView
   func reloadViewModel(with array: [CryptoPrice], for pricesType: PriceType) {
-    
     viewModel.setupViewModel(with: array, for: pricesType)
     tableView.reloadData()
-//    viewModel.reloadTableView = { [weak self] in
-//      print("Reload view!!!!!!!!!")
-//      // Update the UI on the main thread
-//      DispatchQueue.main.async {
-////        print("COUNT: \(self?.viewModel.priceCellViewModels.count)!!!!!!")
-//        self?.tableView.reloadData()
-//      }
-//    }
   }
-  
   
 }
 

@@ -88,10 +88,13 @@ class CryptoCollectionCell: UICollectionViewCell {
   func addViews() {
     
     addSubview(imageView)
-    imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-    imageView.widthAnchor.constraint(equalToConstant: frame.width/2).isActive = true
-    imageView.heightAnchor.constraint(equalToConstant: frame.width/2).isActive = true
-    imageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    let imageConstraints = [
+      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+      imageView.widthAnchor.constraint(equalToConstant: frame.width/2),
+      imageView.heightAnchor.constraint(equalToConstant: frame.width/2),
+      imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
+    ]
+    NSLayoutConstraint.activate(imageConstraints)
     
     // Stack View
     addSubview(nameLabel)
@@ -103,11 +106,12 @@ class CryptoCollectionCell: UICollectionViewCell {
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(changeLabel)
     
-    labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4).isActive = true
-    labelStack.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-    labelStack.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-    
-    
+    let labelStackConstraints = [
+      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
+      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
+      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+    ]
+    NSLayoutConstraint.activate(labelStackConstraints)
 
   }
   
