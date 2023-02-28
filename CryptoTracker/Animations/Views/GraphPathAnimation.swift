@@ -44,6 +44,7 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    backgroundColor = .darkGray
   }
   
   required init?(coder: NSCoder) {

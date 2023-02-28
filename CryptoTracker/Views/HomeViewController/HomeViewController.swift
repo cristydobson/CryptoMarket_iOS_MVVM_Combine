@@ -19,9 +19,8 @@ class HomeViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    title = NSLocalizedString("Crypto Tracker",
-                              comment: "")
+
+    setupScreenTitle()
     
     view.addGradientBackground()
     
@@ -43,6 +42,11 @@ class HomeViewController: UIViewController {
   func setupCollectionView() {
     collectionView = CryptoCollectionView(frame: view.frame, controller: self)
     view.addSubview(collectionView)
+  }
+  
+  func setupScreenTitle() {
+    title = NSLocalizedString("Crypto Market Tracker",
+                              comment: "")
   }
   
   

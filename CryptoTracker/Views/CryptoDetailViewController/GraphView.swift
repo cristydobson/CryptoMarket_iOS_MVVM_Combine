@@ -25,7 +25,7 @@ class GraphView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    backgroundColor = .blue
+    backgroundColor = .black
     addViews()
   }
   
@@ -63,13 +63,17 @@ extension GraphView {
   func setupGraphAnimation(with points: [CGPoint]) {
     
     graphPathView = GraphPathAnimation()
+//    graphPathView.translatesAutoresizingMaskIntoConstraints = false
+    
+    let graphViewFrame = CGRect(origin: CGPoint.zero, size: frame.size)
 
     graphPathView.setupAnimation(
-      frame: frame,
+      frame: graphViewFrame,
       animatedLayerColor: .green,
       strokeWidth: 2,
       graphPoints: points,
       animated: true)
+    
 
     addSubview(graphPathView)
   }

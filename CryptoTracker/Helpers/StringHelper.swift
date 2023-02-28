@@ -35,7 +35,8 @@ struct StringHelper {
   static func getPricePercentageChange(_ price: Double, from lastPrice: Double) -> String {
     guard price > 0 else { return "0.00%" }
     let priceChange = price.getPercentageChange(from: lastPrice)
-    return priceChange != 0 ? "\(priceChange.rounded(to: 2))%" : "0.00%"
+    let priceString = priceChange != 0 ? "\(priceChange.rounded(to: 2))%" : "0.00%"
+    return priceChange > 0 ? "+" + priceString : priceString
   }
   
   

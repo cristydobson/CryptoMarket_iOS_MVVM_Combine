@@ -30,20 +30,26 @@ class GraphViewModel {
   
   private func createGraphPoints(for prices: [CryptoPrice], for graphSize: CGSize) -> [CGPoint] {
     
-    var pointArray: [CGPoint] = [CGPoint.zero]
-    
     let graphHeight = graphSize.height
-    let pointSize = getPointSize(for: graphHeight, with: prices)
+    var pointArray: [CGPoint] = [CGPoint(x: xCoordinate, y: graphHeight/2)]
+    
+    
+//    let pointSize = getPointSize(for: graphHeight, with: prices)
     let stride = getStride(for: prices.count, withSize: graphSize.width)
     xCoordinate = stride
     
-    for price in prices.reversed() {
+    for i in (0..<prices.count-1).reversed() {
       
-      let yCoordinate = ((price.px ?? 0) * pointSize)/2
-      let point = CGPoint(x: xCoordinate, y: -yCoordinate)
+      let price1 = prices[i].px ?? 0
+      let price2 = prices[i+1].px ?? 0
+      let percentage = price2.getPercentageChange(from: price1)
+      let yCoordinate = (percentage * 4)
+      print("price1: \(price1), price2: \(price2), Y: \(yCoordinate)!!!!!!!")
+      let point = CGPoint(x: xCoordinate, y: yCoordinate)
       pointArray.append(point)
       xCoordinate += stride
     }
+    
     xCoordinate = 0
 
     return pointArray
@@ -55,14 +61,14 @@ class GraphViewModel {
     return distance / CGFloat(newCount)
   }
   
-  private func getPointSize(for height: CGFloat, with prices: [CryptoPrice]) -> CGFloat {
-    let maxPrice = prices.max {
-      $0.px! < $1.px!
-    }?.px
-    
-    let pointSize = height / CGFloat(maxPrice!)
-    return pointSize / 2
-  }
+//  private func getPointSize(for height: CGFloat, with prices: [CryptoPrice]) -> CGFloat {
+//    let maxPrice = prices.max {
+//      $0.px! < $1.px!
+//    }?.px
+//    
+//    let pointSize = height / CGFloat(maxPrice!)
+//    return pointSize / 2
+//  }
   
   
 }

@@ -34,7 +34,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     navigationController.navigationBar.shadowImage = UIImage()
     navigationController.navigationBar.isTranslucent = true
     navigationController.navigationBar.titleTextAttributes = [
-      .foregroundColor : UIColor.white
+      .foregroundColor : UIColor.white,
+      .font : UIFont.systemFont(ofSize: 20, weight: .bold)
     ]
     navigationController.navigationBar.tintColor = .white
     
