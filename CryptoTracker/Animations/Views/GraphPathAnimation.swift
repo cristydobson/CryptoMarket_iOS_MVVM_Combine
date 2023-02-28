@@ -12,7 +12,7 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
   
   // MARK: - Properties
   
-  private var graphPoints: [CGPoint]?
+  private var graphPoints: [CGPoint] = []
   
   private var animatedLayerColor: UIColor = UIColor.green {
     didSet {
@@ -30,7 +30,8 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
     didSet {
       if animated {
         animatedLayer = createPathLayer(strokeColor: animatedLayerColor,
-                                        strokeEnd: 0)
+                                        strokeEnd: 0,
+                                        with: graphPoints)
         layer.addSublayer(animatedLayer!)
       }
     }
@@ -49,7 +50,7 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
     super.init(coder: coder)
   }
   
-  func setupAnimation(frame: CGRect, animatedLayerColor: UIColor, strokeWidth: CGFloat, graphPoints: [CGPoint]?, animated: Bool) {
+  func setupAnimation(frame: CGRect, animatedLayerColor: UIColor, strokeWidth: CGFloat, graphPoints: [CGPoint], animated: Bool) {
     self.frame = frame
     self.animatedLayerColor = animatedLayerColor
     self.strokeWidth = strokeWidth
@@ -63,12 +64,15 @@ class GraphPathAnimation: UIView, CAAnimationDelegate {
 // MARK: - Create CAShapeLayer
 extension GraphPathAnimation {
   
-  private func createPathLayer(strokeColor: UIColor, strokeEnd: CGFloat) -> CAShapeLayer {
+  private func createPathLayer(strokeColor: UIColor, strokeEnd: CGFloat, with points: [CGPoint]) -> CAShapeLayer {
 
     // Draw graph path
     let graphPath = UIBezierPath()
-    graphPath.move(to: CGPoint.zero)
-    graphPath.addLine(to: CGPoint(x: 100, y: 200))
+    graphPath.move(to: points[0])
+  
+    for i in 1..<points.count {
+      graphPath.addLine(to: points[i])
+    }
     
     // Create the graph path layer
     let graphPathLayer = CAShapeLayer()
@@ -77,8 +81,8 @@ extension GraphPathAnimation {
     graphPathLayer.path = graphPath.cgPath
     graphPathLayer.strokeEnd = strokeEnd
     graphPathLayer.strokeColor = strokeColor.cgColor
-    graphPathLayer.lineCap = CAShapeLayerLineCap.round
-    graphPathLayer.lineJoin = CAShapeLayerLineJoin.round
+    graphPathLayer.lineCap = CAShapeLayerLineCap.square
+    graphPathLayer.lineJoin = CAShapeLayerLineJoin.bevel
     
     return graphPathLayer
   }

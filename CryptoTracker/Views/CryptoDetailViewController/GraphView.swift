@@ -39,7 +39,7 @@ class GraphView: UIView {
     
   }
   
-  func addGraphPathAnimation(with points: [CGPoint]?) {
+  func addGraphPathAnimation(with points: [CGPoint]) {
     setupGraphAnimation(with: points)
     animateGraphPath()
   }
@@ -47,7 +47,9 @@ class GraphView: UIView {
   
   // MARK: - Load View Model
   func loadViewModel(with prices: [CryptoPrice]) {
-    viewModel.startViewModel(with: prices)
+    if graphPathView != nil { resetGraph() }
+    
+    viewModel.startViewModel(with: prices, andGraph: frame.size)
     addGraphPathAnimation(with: viewModel.graphPoints)
   }
   
@@ -58,7 +60,7 @@ class GraphView: UIView {
 
 extension GraphView {
 
-  func setupGraphAnimation(with points: [CGPoint]?) {
+  func setupGraphAnimation(with points: [CGPoint]) {
     
     graphPathView = GraphPathAnimation()
 
@@ -82,6 +84,11 @@ extension GraphView {
         }
       }
     }
+  }
+  
+  func resetGraph() {
+    graphPathView.removeFromSuperview()
+    graphPathView = nil
   }
 
 }

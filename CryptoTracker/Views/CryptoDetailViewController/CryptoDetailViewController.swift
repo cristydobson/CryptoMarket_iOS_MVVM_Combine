@@ -185,7 +185,7 @@ class CryptoDetailViewController: UIViewController {
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
         
-        self?.graphContainerView.loadViewModel(with: bids!)
+        self?.graphContainerView.loadViewModel(with: asks!)
       }
     }
     

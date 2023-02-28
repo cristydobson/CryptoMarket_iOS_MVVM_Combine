@@ -17,8 +17,10 @@ class GraphViewModel {
   
   // MARK: - Start View Model
   
-  func startViewModel(with prices: [CryptoPrice]) {
-    graphPoints = createGraphPoints(for: prices)
+  func startViewModel(with prices: [CryptoPrice], andGraph size: CGSize) {
+    var newPrices = prices
+    newPrices.removeLast()
+    graphPoints = createGraphPoints(for: newPrices, for: size)
   }
   
   
@@ -26,22 +28,41 @@ class GraphViewModel {
   
   var xCoordinate: CGFloat = 0
   
-  func createGraphPoints(for prices: [CryptoPrice]) -> [CGPoint] {
+  private func createGraphPoints(for prices: [CryptoPrice], for graphSize: CGSize) -> [CGPoint] {
     
-    var pointArray: [CGPoint] = []
+    var pointArray: [CGPoint] = [CGPoint.zero]
     
-    for price in prices {
-      let yCoordinate: CGFloat = price.px ?? 0
-      let point = CGPoint(x: xCoordinate, y: yCoordinate)
+    let graphHeight = graphSize.height
+    let pointSize = getPointSize(for: graphHeight, with: prices)
+    let stride = getStride(for: prices.count, withSize: graphSize.width)
+    xCoordinate = stride
+    
+    for price in prices.reversed() {
+      
+      let yCoordinate = ((price.px ?? 0) * pointSize)/2
+      let point = CGPoint(x: xCoordinate, y: -yCoordinate)
       pointArray.append(point)
-      xCoordinate += 20
+      xCoordinate += stride
     }
-    print("POINTS: \(graphPoints.debugDescription)!!!!!!!")
+    xCoordinate = 0
+
     return pointArray
   }
   
+  private func getStride(for count: Int, withSize distance: CGFloat) -> CGFloat {
+    // Ignore the first point at x=0
+    let newCount = count - 1
+    return distance / CGFloat(newCount)
+  }
   
-  
+  private func getPointSize(for height: CGFloat, with prices: [CryptoPrice]) -> CGFloat {
+    let maxPrice = prices.max {
+      $0.px! < $1.px!
+    }?.px
+    
+    let pointSize = height / CGFloat(maxPrice!)
+    return pointSize / 2
+  }
   
   
 }
