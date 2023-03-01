@@ -49,7 +49,7 @@ class CryptoCollectionView: UIView {
     
     // CollectionView Layout
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    layout.sectionInset = UIEdgeInsets(top: 20, left: 20, bottom: 0, right: 20)
+    layout.sectionInset = UIEdgeInsets(top: 34, left: 20, bottom: 0, right: 20)
     layout.minimumInteritemSpacing = 0
     layout.minimumLineSpacing = 2
     layout.itemSize = CGSize(width: cellWidth, height: cellWidth*1.3)

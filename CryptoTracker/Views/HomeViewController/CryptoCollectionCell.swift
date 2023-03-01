@@ -16,7 +16,6 @@ class CryptoCollectionCell: UICollectionViewCell {
     let newImageView = UIImageView()
     newImageView.contentMode = .scaleAspectFit
     newImageView.backgroundColor = .clear
-    newImageView.image = UIImage(named: "Bitcoin")
     newImageView.translatesAutoresizingMaskIntoConstraints = false
     return newImageView
   }()
@@ -25,7 +24,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+    newLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -59,7 +58,11 @@ class CryptoCollectionCell: UICollectionViewCell {
   var cellViewModel: CryptoCellViewModel? {
     didSet {
       
-      nameLabel.text = cellViewModel?.getCryptoNameString()
+      let cryptoName = cellViewModel?.getCryptoNameString()
+      
+      imageView.image = cellViewModel?.getCrytoIcon(for: cryptoName)
+      
+      nameLabel.text = cryptoName
 
       priceLabel.text = cellViewModel?.getPriceString()
       
@@ -90,8 +93,8 @@ class CryptoCollectionCell: UICollectionViewCell {
     addSubview(imageView)
     let imageConstraints = [
       imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-      imageView.widthAnchor.constraint(equalToConstant: frame.width/2),
-      imageView.heightAnchor.constraint(equalToConstant: frame.width/2),
+      imageView.widthAnchor.constraint(equalToConstant: frame.width/2.7),
+      imageView.heightAnchor.constraint(equalToConstant: frame.width/2.7),
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
     ]
     NSLayoutConstraint.activate(imageConstraints)
@@ -107,7 +110,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     labelStack.addArrangedSubview(changeLabel)
     
     let labelStackConstraints = [
-      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 4),
+      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
       labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
       labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
     ]

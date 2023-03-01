@@ -75,9 +75,9 @@ class CryptoCollectionViewModel {
   // Build a CellViewModel
   func buildCellModel(from market: CryptoMarket) -> CryptoCellViewModel {
     return CryptoCellViewModel(symbol: market.symbol,
-                              price24h: market.price_24h,
-                              volume24h: market.volume_24h,
-                              lastTradePrice: market.last_trade_price)
+                               price24h: market.price_24h,
+                               volume24h: market.volume_24h,
+                               lastTradePrice: market.last_trade_price)
   }
   
   /*
