@@ -19,7 +19,7 @@ class PricesTableCell: UITableViewCell {
     newLabel.text = "$0.00"
     newLabel.textAlignment = .left
     newLabel.font = UIFont.systemFont(ofSize: 16)
-    newLabel.backgroundColor = .red
+//    newLabel.backgroundColor = .red
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -30,7 +30,7 @@ class PricesTableCell: UITableViewCell {
     newLabel.text = "0.00000"
     newLabel.textAlignment = .left
     newLabel.font = UIFont.systemFont(ofSize: 16)
-    newLabel.backgroundColor = .red
+//    newLabel.backgroundColor = .red
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()

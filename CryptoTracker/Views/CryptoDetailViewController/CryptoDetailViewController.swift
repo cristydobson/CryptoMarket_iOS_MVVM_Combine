@@ -78,6 +78,7 @@ class CryptoDetailViewController: UIViewController {
     
     // Price / Latest Price / Change % - Stack
     let topStackHeight = viewHeightFraction
+    let topAnchor = 24
     
     let view1 = UIView()
     view.addSubview(view1)
@@ -90,7 +91,7 @@ class CryptoDetailViewController: UIViewController {
     
     let priceChangeStack = UIStackView()
     priceChangeStack.axis = .horizontal
-    priceChangeStack.distribution = .fillEqually
+    priceChangeStack.distribution = .fill
     priceChangeStack.backgroundColor = .red
     priceChangeStack.translatesAutoresizingMaskIntoConstraints = false
     view.addSubview(priceChangeStack)
@@ -136,7 +137,7 @@ class CryptoDetailViewController: UIViewController {
     let tableViewHeaderConstraints = [
       headerStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
       headerStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      headerStack.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor)
+      headerStack.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 24)
     ]
     NSLayoutConstraint.activate(tableViewHeaderConstraints)
 

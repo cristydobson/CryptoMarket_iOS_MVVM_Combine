@@ -28,40 +28,36 @@ class GraphViewModel {
   
   // MARK: - Create Graph Points
   
-  var xCoordinate: CGFloat = 0
-  
   private func createGraphPoints(for prices: [CryptoPrice], for graphSize: CGSize) -> [CGPoint] {
     
     let graphHeight = graphSize.height
-    var pointArray: [CGPoint] = [CGPoint(x: xCoordinate, y: graphHeight/2)]
+    var pointArray: [CGPoint] = []
     
+//    let stride = getStride(for: prices.count, withSize: graphSize.width)
+    var xCoordinate = prices.count
     
-//    let pointSize = getPointSize(for: graphHeight, with: prices)
-    let stride = getStride(for: prices.count, withSize: graphSize.width)
-    xCoordinate = stride
-    
-    for i in (0..<prices.count-1).reversed() {
-      
-      let price1 = prices[i].px ?? 0
-      let price2 = prices[i+1].px ?? 0
-      let percentage = price2.getPercentageChange(from: price1)
-      let yCoordinate = (percentage * 4)
-      print("price1: \(price1), price2: \(price2), Y: \(yCoordinate)!!!!!!!")
-      let point = CGPoint(x: xCoordinate, y: yCoordinate)
-      pointArray.append(point)
-      xCoordinate += stride
-    }
-    
-    xCoordinate = 0
+    for i in 1..<prices.count-1 {
 
-    return pointArray
+      let price1 = prices[i-1].px ?? 0
+      let price2 = prices[i].px ?? 0
+      let percentage = price1.getPercentageChange(from: price2)
+      let yCoordinate = percentage
+      print("price1: \(price1), price2: \(price2), Y: \(yCoordinate)!!!!!!!")
+      let point = CGPoint(x: Double(xCoordinate), y: yCoordinate)
+      pointArray.append(point)
+      xCoordinate -= 1
+    }
+    pointArray.append(CGPoint(x: 0, y: 5))
+    
+   
+    return pointArray.reversed()
   }
   
-  private func getStride(for count: Int, withSize distance: CGFloat) -> CGFloat {
-    // Ignore the first point at x=0
-    let newCount = count - 1
-    return distance / CGFloat(newCount)
-  }
+//  private func getStride(for count: Int, withSize distance: CGFloat) -> CGFloat {
+//    // Ignore the first point at x=0
+//    let newCount = count - 1
+//    return distance / CGFloat(newCount)
+//  }
   
   func getChartData() -> LineChartData {
     
@@ -74,11 +70,77 @@ class GraphViewModel {
     }
     
     let line = LineChartDataSet(entries: chartEntries,
-                                label: "Asks Graph")
-    line.colors = [.red]
+                                label: "Asks % Change")
+    line.colors = [UIColor.red] // [UIColor(red: 121/255, green: 226/255, blue: 251/255, alpha: 1)]
+    line.drawCirclesEnabled = false
+    
+    line.drawValuesEnabled = false
+  
+//    line.drawIconsEnabled = false
+    
+    setup(line)
+//
+//    let gradientColors = [
+//      ChartColorTemplates.colorFromString("#00FF0000").cgColor,
+//      ChartColorTemplates.colorFromString("FFFF0000").cgColor
+//    ]
+//    let gradient = CGGradient(colorsSpace: nil,
+//                              colors: gradientColors as CFArray,
+//                              locations: nil)!
+//    line.fillAlpha = 1
+//    line.fill = LinearGradientFill(gradient: gradient, angle: 90)
+//    line.drawFilledEnabled = true
     
     return LineChartData(dataSet: line)
   }
   
+  private func setup(_ dataSet: LineChartDataSet) {
+//    dataSet.lineDashLengths = nil
+//    dataSet.highlightLineDashLengths = nil
+//    dataSet.setColors(.black, .red, .white)
+    dataSet.setCircleColor(.green)
+    dataSet.gradientPositions = [0, 40, 100]
+    dataSet.lineWidth = 4
+//    dataSet.circleRadius = 8
+//    dataSet.drawCircleHoleEnabled = false
+    
+    dataSet.valueFont = .systemFont(ofSize: 12)
+    
+    
+  
+//    dataSet.valueFont = .systemFont(ofSize: 9)
+//    dataSet.formLineDashLengths = nil
+//    dataSet.formLineWidth = 1
+//    dataSet.formSize = 15
+    
+//    if dataSet.isDrawLineWithGradientEnabled {
+//      dataSet.lineDashLengths = nil
+//      dataSet.highlightLineDashLengths = nil
+//      dataSet.setColors(.black, .red, .white)
+//      dataSet.setCircleColor(.black)
+//      dataSet.gradientPositions = [0, 40, 100]
+//      dataSet.lineWidth = 1
+//      dataSet.circleRadius = 3
+//      dataSet.drawCircleHoleEnabled = false
+//      dataSet.valueFont = .systemFont(ofSize: 9)
+//      dataSet.formLineDashLengths = nil
+//      dataSet.formLineWidth = 1
+//      dataSet.formSize = 15
+//    } else {
+//      dataSet.lineDashLengths = [5, 2.5]
+//      dataSet.highlightLineDashLengths = [5, 2.5]
+//      dataSet.setColor(.black)
+//      dataSet.setCircleColor(.black)
+//      dataSet.gradientPositions = nil
+//      dataSet.lineWidth = 1
+//      dataSet.circleRadius = 3
+//      dataSet.drawCircleHoleEnabled = false
+//      dataSet.valueFont = .systemFont(ofSize: 9)
+//      dataSet.formLineDashLengths = [5, 2.5]
+//      dataSet.formLineWidth = 1
+//      dataSet.formSize = 15
+//    }
+  }
+
   
 }
