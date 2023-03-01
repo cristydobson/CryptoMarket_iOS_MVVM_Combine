@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Charts
+
 
 class GraphViewModel {
   
@@ -61,14 +63,22 @@ class GraphViewModel {
     return distance / CGFloat(newCount)
   }
   
-//  private func getPointSize(for height: CGFloat, with prices: [CryptoPrice]) -> CGFloat {
-//    let maxPrice = prices.max {
-//      $0.px! < $1.px!
-//    }?.px
-//    
-//    let pointSize = height / CGFloat(maxPrice!)
-//    return pointSize / 2
-//  }
+  func getChartData() -> LineChartData {
+    
+    var chartEntries: [ChartDataEntry] = []
+    
+    for point in graphPoints {
+      let dataEntry = ChartDataEntry(x: Double(point.x),
+                                     y: Double(point.y))
+      chartEntries.append(dataEntry)
+    }
+    
+    let line = LineChartDataSet(entries: chartEntries,
+                                label: "Asks Graph")
+    line.colors = [.red]
+    
+    return LineChartData(dataSet: line)
+  }
   
   
 }

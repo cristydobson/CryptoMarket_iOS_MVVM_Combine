@@ -525,6 +525,8 @@
 		5EB1684929AB8AC9005E8FE2 /* PriceCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1684829AB8AC9005E8FE2 /* PriceCellViewModel.swift */; };
 		5EB1684B29ABAEB2005E8FE2 /* CGRectHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1684A29ABAEB2005E8FE2 /* CGRectHelper.swift */; };
 		5EB1684D29ABB030005E8FE2 /* PriceTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */; };
+		5ED6FD9E29AF6E800063D5E7 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED6FD9A29AF6E740063D5E7 /* Charts.framework */; };
+		5ED6FD9F29AF6E800063D5E7 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED6FD9A29AF6E740063D5E7 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -542,7 +544,35 @@
 			remoteGlobalIDString = 5EAF9AA029A8E50600E19C71;
 			remoteInfo = CryptoTracker;
 		};
+		5ED6FD9929AF6E740063D5E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5ED6FD9429AF6E740063D5E7 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 65AD9E95D9ED4DC0BD73A743;
+			remoteInfo = Charts;
+		};
+		5ED6FD9B29AF6E740063D5E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5ED6FD9429AF6E740063D5E7 /* Charts.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1CBBC58C6CE1EBEE9852CE41;
+			remoteInfo = ChartsTests;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		5ED6FDA029AF6E800063D5E7 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5ED6FD9F29AF6E800063D5E7 /* Charts.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		5E295F7829ACDF0C00CBAE0B /* PriceTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewHeader.swift; sourceTree = "<group>"; };
@@ -1071,6 +1101,7 @@
 		5EB1684829AB8AC9005E8FE2 /* PriceCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceCellViewModel.swift; sourceTree = "<group>"; };
 		5EB1684A29ABAEB2005E8FE2 /* CGRectHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectHelper.swift; sourceTree = "<group>"; };
 		5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewModel.swift; sourceTree = "<group>"; };
+		5ED6FD9429AF6E740063D5E7 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1078,6 +1109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5ED6FD9E29AF6E800063D5E7 /* Charts.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1643,6 +1675,7 @@
 				5EAF9ABA29A8E50800E19C71 /* CryptoTrackerTests */,
 				5EAF9AC429A8E50800E19C71 /* CryptoTrackerUITests */,
 				5EAF9AA229A8E50600E19C71 /* Products */,
+				5ED6FD9D29AF6E800063D5E7 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1668,6 +1701,7 @@
 				5EAF9AED29A917BA00E19C71 /* Localizations */,
 				5E7B319429AA5C1F00797B5D /* Helpers */,
 				5E295F8029AE1A0C00CBAE0B /* Animations */,
+				5ED6FD9429AF6E740063D5E7 /* Charts.xcodeproj */,
 			);
 			path = CryptoTracker;
 			sourceTree = "<group>";
@@ -1786,6 +1820,22 @@
 			path = CryptoDetailViewModel;
 			sourceTree = "<group>";
 		};
+		5ED6FD9529AF6E740063D5E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5ED6FD9A29AF6E740063D5E7 /* Charts.framework */,
+				5ED6FD9C29AF6E740063D5E7 /* ChartsTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5ED6FD9D29AF6E800063D5E7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1796,6 +1846,7 @@
 				5EAF9A9D29A8E50600E19C71 /* Sources */,
 				5EAF9A9E29A8E50600E19C71 /* Frameworks */,
 				5EAF9A9F29A8E50600E19C71 /* Resources */,
+				5ED6FDA029AF6E800063D5E7 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1878,6 +1929,12 @@
 			mainGroup = 5EAF9A9829A8E50600E19C71;
 			productRefGroup = 5EAF9AA229A8E50600E19C71 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 5ED6FD9529AF6E740063D5E7 /* Products */;
+					ProjectRef = 5ED6FD9429AF6E740063D5E7 /* Charts.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				5EAF9AA029A8E50600E19C71 /* CryptoTracker */,
@@ -1886,6 +1943,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		5ED6FD9A29AF6E740063D5E7 /* Charts.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Charts.framework;
+			remoteRef = 5ED6FD9929AF6E740063D5E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		5ED6FD9C29AF6E740063D5E7 /* ChartsTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = ChartsTests.xctest;
+			remoteRef = 5ED6FD9B29AF6E740063D5E7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		5EAF9A9F29A8E50600E19C71 /* Resources */ = {
