@@ -19,6 +19,12 @@ class CryptoDetailViewModel {
   
   // MARK: - Delegates
   weak var delegate: CryptoDetailViewModelDelegate?
+  
+  
+  // MARK: - Header View
+  
+  var headerViewModel: HeaderViewModel?
+  var cryptoSymbol = ""
 
   
   // MARK: - Load Data
@@ -80,7 +86,13 @@ class CryptoDetailViewModel {
     {
       asks = asksArray
       bids = bidsArray
+      
+      let name = cryptoSymbol.getCryptoNameString()
+      headerViewModel = HeaderViewModel(name: name,
+                                        price: asksArray.first?.px)
+      
       cryptoMarket = market
+      
     }
     else {
       cancellable?.cancel()

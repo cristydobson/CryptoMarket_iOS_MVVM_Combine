@@ -524,6 +524,9 @@
 		5EB1684D29ABB030005E8FE2 /* PriceTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */; };
 		5ED6FD9E29AF6E800063D5E7 /* Charts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED6FD9A29AF6E740063D5E7 /* Charts.framework */; };
 		5ED6FD9F29AF6E800063D5E7 /* Charts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5ED6FD9A29AF6E740063D5E7 /* Charts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5ED6FDA329AFC2D90063D5E7 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDA229AFC2D90063D5E7 /* HeaderView.swift */; };
+		5ED6FDA529AFC2F90063D5E7 /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDA429AFC2F90063D5E7 /* HeaderViewModel.swift */; };
+		5ED6FDA829AFC96B0063D5E7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDA729AFC96B0063D5E7 /* ImageHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1096,6 +1099,9 @@
 		5EB1684A29ABAEB2005E8FE2 /* CGRectHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGRectHelper.swift; sourceTree = "<group>"; };
 		5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewModel.swift; sourceTree = "<group>"; };
 		5ED6FD9429AF6E740063D5E7 /* Charts.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Charts.xcodeproj; path = "../../Charts-master/Charts.xcodeproj"; sourceTree = "<group>"; };
+		5ED6FDA229AFC2D90063D5E7 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		5ED6FDA429AFC2F90063D5E7 /* HeaderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewModel.swift; sourceTree = "<group>"; };
+		5ED6FDA729AFC96B0063D5E7 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1627,10 +1633,11 @@
 		5E7B319429AA5C1F00797B5D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				5E7B319529AA5C4A00797B5D /* DoubleHelper.swift */,
-				5E7B319729AA5DE000797B5D /* StringHelper.swift */,
-				5E7B319929AA921900797B5D /* ColorHelper.swift */,
 				5EB1684A29ABAEB2005E8FE2 /* CGRectHelper.swift */,
+				5E7B319929AA921900797B5D /* ColorHelper.swift */,
+				5E7B319529AA5C4A00797B5D /* DoubleHelper.swift */,
+				5ED6FDA729AFC96B0063D5E7 /* ImageHelper.swift */,
+				5E7B319729AA5DE000797B5D /* StringHelper.swift */,
 				5E295F7C29AE04B500CBAE0B /* ViewHelper.swift */,
 			);
 			path = Helpers;
@@ -1758,10 +1765,9 @@
 			isa = PBXGroup;
 			children = (
 				5EAF9AF429A91E9300E19C71 /* CryptoDetailViewController.swift */,
-				5EB1684329AB86A1005E8FE2 /* PricesTableView.swift */,
-				5EB1684529AB8865005E8FE2 /* PricesTableCell.swift */,
-				5E295F7829ACDF0C00CBAE0B /* PriceTableViewHeader.swift */,
+				5ED6FDA229AFC2D90063D5E7 /* HeaderView.swift */,
 				5E295F8729AE2DBE00CBAE0B /* GraphView.swift */,
+				5ED6FDAA29AFDCC60063D5E7 /* TableView */,
 			);
 			path = CryptoDetailViewController;
 			sourceTree = "<group>";
@@ -1779,10 +1785,9 @@
 			isa = PBXGroup;
 			children = (
 				5EB1684129AB7803005E8FE2 /* CryptoDetailViewModel.swift */,
-				5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */,
-				5EB1684829AB8AC9005E8FE2 /* PriceCellViewModel.swift */,
-				5E295F7A29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift */,
+				5ED6FDA429AFC2F90063D5E7 /* HeaderViewModel.swift */,
 				5E295F8929AE2DE200CBAE0B /* GraphViewModel.swift */,
+				5ED6FDA929AFDCBB0063D5E7 /* TableViewModels */,
 			);
 			path = CryptoDetailViewModel;
 			sourceTree = "<group>";
@@ -1801,6 +1806,26 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5ED6FDA929AFDCBB0063D5E7 /* TableViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				5EB1684C29ABB030005E8FE2 /* PriceTableViewModel.swift */,
+				5EB1684829AB8AC9005E8FE2 /* PriceCellViewModel.swift */,
+				5E295F7A29ACF83E00CBAE0B /* TableViewHeaderViewModel.swift */,
+			);
+			path = TableViewModels;
+			sourceTree = "<group>";
+		};
+		5ED6FDAA29AFDCC60063D5E7 /* TableView */ = {
+			isa = PBXGroup;
+			children = (
+				5EB1684329AB86A1005E8FE2 /* PricesTableView.swift */,
+				5EB1684529AB8865005E8FE2 /* PricesTableCell.swift */,
+				5E295F7829ACDF0C00CBAE0B /* PriceTableViewHeader.swift */,
+			);
+			path = TableView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2462,11 +2487,14 @@
 				5EAF9AE229A901A900E19C71 /* CryptoCellViewModel.swift in Sources */,
 				5EB1684D29ABB030005E8FE2 /* PriceTableViewModel.swift in Sources */,
 				5EB1684429AB86A1005E8FE2 /* PricesTableView.swift in Sources */,
+				5ED6FDA329AFC2D90063D5E7 /* HeaderView.swift in Sources */,
 				5E7B319629AA5C4A00797B5D /* DoubleHelper.swift in Sources */,
 				5EAF9AE429A9021F00E19C71 /* CryptoCollectionViewModel.swift in Sources */,
 				5E295F8A29AE2DE200CBAE0B /* GraphViewModel.swift in Sources */,
 				5EAF9AA529A8E50600E19C71 /* AppDelegate.swift in Sources */,
 				5E295F8829AE2DBE00CBAE0B /* GraphView.swift in Sources */,
+				5ED6FDA829AFC96B0063D5E7 /* ImageHelper.swift in Sources */,
+				5ED6FDA529AFC2F90063D5E7 /* HeaderViewModel.swift in Sources */,
 				5E295F7D29AE04B500CBAE0B /* ViewHelper.swift in Sources */,
 				5EAF9AA729A8E50600E19C71 /* SceneDelegate.swift in Sources */,
 			);

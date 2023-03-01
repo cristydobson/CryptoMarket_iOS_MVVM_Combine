@@ -39,14 +39,4 @@ struct CryptoCellViewModel {
     return "-"
   }
   
-  func getCrytoIcon(for coin: String?) -> UIImage? {
-  
-    if let coinName = coin,
-       let url = Bundle.main.url(forResource: coinName.lowercased(), withExtension: "png") {
-      
-      let imgData = try! Data(contentsOf: url)
-      return UIImage(data: imgData)
-    }
-    return UIImage(named: "crypto-placeholder")
-  }
 }

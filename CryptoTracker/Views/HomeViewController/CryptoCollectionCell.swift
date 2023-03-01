@@ -60,7 +60,7 @@ class CryptoCollectionCell: UICollectionViewCell {
       
       let cryptoName = cellViewModel?.getCryptoNameString()
       
-      imageView.image = cellViewModel?.getCrytoIcon(for: cryptoName)
+      imageView.image = ImageHelper.getCryptoIcon(for: cryptoName)
       
       nameLabel.text = cryptoName
 
@@ -91,6 +91,7 @@ class CryptoCollectionCell: UICollectionViewCell {
   func addViews() {
     
     addSubview(imageView)
+    
     let imageConstraints = [
       imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
       imageView.widthAnchor.constraint(equalToConstant: frame.width/2.7),

@@ -20,11 +20,7 @@ struct PriceCellViewModel {
   // MARK: - Methods
   
   func getPriceString() -> String {
-    var string = "\(price ?? 0.000000)"
-    while string.count < 8 {
-      string.append("0")
-    }
-    return string
+    return StringHelper.getPriceString(for: price!)
   }
   
   func getPriceLabelColor() -> UIColor {

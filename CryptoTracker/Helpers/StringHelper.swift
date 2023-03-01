@@ -39,5 +39,12 @@ struct StringHelper {
     return priceChange > 0 ? "+" + priceString : priceString
   }
   
+  static func getPriceString(for price: Double) -> String {
+    var string = "\(price)"
+    while string.count < 8 {
+      string.append("0")
+    }
+    return string
+  }
   
 }

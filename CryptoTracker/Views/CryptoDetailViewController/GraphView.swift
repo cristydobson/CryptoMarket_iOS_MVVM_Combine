@@ -51,13 +51,7 @@ class GraphView: UIView {
     xAxis.labelPosition = .bottom
     chartView.rightAxis.enabled = false
     
-    
-    
-    
     addSubview(chartView)
-    
-    
-    
     
   }
 

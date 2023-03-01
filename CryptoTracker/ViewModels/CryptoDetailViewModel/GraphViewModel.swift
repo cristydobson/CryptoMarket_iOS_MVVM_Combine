@@ -5,6 +5,7 @@
 //  Created by Cristina Dobson on 2/28/23.
 //
 
+
 import UIKit
 import Charts
 
@@ -30,10 +31,8 @@ class GraphViewModel {
   
   private func createGraphPoints(for prices: [CryptoPrice], for graphSize: CGSize) -> [CGPoint] {
     
-    let graphHeight = graphSize.height
     var pointArray: [CGPoint] = []
     
-//    let stride = getStride(for: prices.count, withSize: graphSize.width)
     var xCoordinate = prices.count
     
     for i in 1..<prices.count-1 {
@@ -53,12 +52,6 @@ class GraphViewModel {
     return pointArray.reversed()
   }
   
-//  private func getStride(for count: Int, withSize distance: CGFloat) -> CGFloat {
-//    // Ignore the first point at x=0
-//    let newCount = count - 1
-//    return distance / CGFloat(newCount)
-//  }
-  
   func getChartData() -> LineChartData {
     
     var chartEntries: [ChartDataEntry] = []
@@ -75,8 +68,6 @@ class GraphViewModel {
     line.drawCirclesEnabled = false
     
     line.drawValuesEnabled = false
-  
-//    line.drawIconsEnabled = false
     
     setup(line)
 //
@@ -100,7 +91,7 @@ class GraphViewModel {
 //    dataSet.setColors(.black, .red, .white)
     dataSet.setCircleColor(.green)
     dataSet.gradientPositions = [0, 40, 100]
-    dataSet.lineWidth = 4
+    dataSet.lineWidth = 3
 //    dataSet.circleRadius = 8
 //    dataSet.drawCircleHoleEnabled = false
     

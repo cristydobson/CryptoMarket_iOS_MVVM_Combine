@@ -15,6 +15,16 @@ class CryptoDetailViewController: UIViewController {
   var cryptoSymbol = ""
   
   
+  // MARK: - Header View
+  
+  var headerView: HeaderView!
+  
+  
+  // MARK: - Graph Properties
+  
+  var graphContainerView: GraphView!
+  
+  
   // MARK: - TableViews Properties
   
   var asksTableView: PricesTableView!
@@ -38,11 +48,6 @@ class CryptoDetailViewController: UIViewController {
   }()
   
   
-  // MARK: - Graph Properties
-  
-  var graphContainerView: GraphView!
-  
-  
   // MARK: - View Model Property
   
   lazy var viewModel = {
@@ -54,7 +59,6 @@ class CryptoDetailViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    title = cryptoSymbol.getCryptoNameString()
     navigationController?.navigationBar.topItem?.backButtonTitle = NSLocalizedString("Back", comment: "")
     
     view.backgroundColor = .black
@@ -62,6 +66,7 @@ class CryptoDetailViewController: UIViewController {
     addViews()
     
     viewModel.delegate = self
+    viewModel.cryptoSymbol = cryptoSymbol
     loadViewModel()
   }
   
@@ -76,37 +81,21 @@ class CryptoDetailViewController: UIViewController {
     let viewHeight = view.frame.height
     let viewHeightFraction = viewHeight/12
     
-    // Price / Latest Price / Change % - Stack
-    let topStackHeight = viewHeightFraction
-    let topAnchor = 24
     
-    let view1 = UIView()
-    view.addSubview(view1)
+    // Header View
+    setupHeaderView()
+    view.addSubview(headerView)
     
-    let view2 = UIView()
-    view.addSubview(view2)
+    let headerViewHeight = viewHeightFraction
+    let toTopAnchor: CGFloat = 24
     
-    let view3 = UIView()
-    view.addSubview(view3)
-    
-    let priceChangeStack = UIStackView()
-    priceChangeStack.axis = .horizontal
-    priceChangeStack.distribution = .fill
-    priceChangeStack.backgroundColor = .red
-    priceChangeStack.translatesAutoresizingMaskIntoConstraints = false
-    view.addSubview(priceChangeStack)
-    
-    priceChangeStack.addArrangedSubview(view1)
-    priceChangeStack.addArrangedSubview(view2)
-    priceChangeStack.addArrangedSubview(view3)
-    
-    let priceChangeStackConstraints = [
-      priceChangeStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-      priceChangeStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      priceChangeStack.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 24),
-      priceChangeStack.setHeightContraint(by: topStackHeight)
+    let headerContainerConstraints = [
+      headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      headerView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: toTopAnchor),
+      headerView.setHeightContraint(by: headerViewHeight)
     ]
-    NSLayoutConstraint.activate(priceChangeStackConstraints)
+    NSLayoutConstraint.activate(headerContainerConstraints)
     
     
     // Graph Container View
@@ -117,7 +106,7 @@ class CryptoDetailViewController: UIViewController {
     let graphViewConstraints = [
       graphContainerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
       graphContainerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      graphContainerView.topAnchor.constraint(equalTo: priceChangeStack.bottomAnchor),
+      graphContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
       graphContainerView.setHeightContraint(by: graphViewHeight)
     ]
     NSLayoutConstraint.activate(graphViewConstraints)
@@ -166,6 +155,11 @@ class CryptoDetailViewController: UIViewController {
 
   }
   
+  func setupHeaderView() {
+    headerView = HeaderView()
+    headerView.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
   func setupGraphView() {
     graphContainerView = GraphView(frame: CGRect.zero)
     graphContainerView.translatesAutoresizingMaskIntoConstraints = false
@@ -185,6 +179,8 @@ class CryptoDetailViewController: UIViewController {
         let bids = self?.viewModel.bids
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
+        
+        self?.headerView.viewModel = self?.viewModel.headerViewModel
         
         self?.graphContainerView.loadViewModel(with: asks!)
       }
