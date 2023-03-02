@@ -39,4 +39,8 @@ struct CryptoCellViewModel {
     return "-"
   }
   
+  func getPercentageLabelColor(for amount: String) -> UIColor {
+    return amount.contains("-") ? .red : .green
+  }
+  
 }

@@ -76,11 +76,10 @@ class PriceTableViewHeader: UIView {
     labelStack.addArrangedSubview(amountLabel)
     
     let constraints = [
-      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
+      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
+      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
       labelStack.topAnchor.constraint(equalTo: topAnchor),
-      labelStack.bottomAnchor.constraint(equalTo: bottomAnchor),
-      labelStack.setHeightContraint(by: 40)
+      labelStack.bottomAnchor.constraint(equalTo: bottomAnchor)
     ]
     NSLayoutConstraint.activate(constraints)
 

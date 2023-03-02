@@ -45,13 +45,16 @@ class CryptoCollectionView: UIView {
   // MARK: - Startup Methods
   func setupCollectionView() {
     
-    let cellWidth = frame.width/2 - 22
+    let sideInsets: CGFloat = 40
+    let cellsPerRow: CGFloat = 3
+    let viewWidth = frame.width
+    let cellWidth = (viewWidth - (sideInsets + cellsPerRow)) / cellsPerRow
     
     // CollectionView Layout
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    layout.sectionInset = UIEdgeInsets(top: 34, left: 20, bottom: 0, right: 20)
-    layout.minimumInteritemSpacing = 0
-    layout.minimumLineSpacing = 2
+    layout.sectionInset = UIEdgeInsets(top: 34, left: sideInsets/2, bottom: 0, right: sideInsets/2)
+    layout.minimumInteritemSpacing = 1
+    layout.minimumLineSpacing = 1
     layout.itemSize = CGSize(width: cellWidth, height: cellWidth*1.3)
     
     // Instantiate CollectionView
@@ -66,7 +69,7 @@ class CryptoCollectionView: UIView {
                             forCellWithReuseIdentifier: cellID)
     
     // CollectionView style
-    collectionView.showsVerticalScrollIndicator = false
+//    collectionView.showsVerticalScrollIndicator = false
     
     // Add CollectionView to current View
     addSubview(collectionView)

@@ -30,7 +30,7 @@ class CryptoDetailViewController: UIViewController {
   var asksTableView: PricesTableView!
   var bidsTableView: PricesTableView!
   
-  let headerStack: UIStackView = {
+  let tableViewHeaderStack: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
@@ -43,6 +43,7 @@ class CryptoDetailViewController: UIViewController {
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
     stackView.backgroundColor = .black
+    stackView.spacing = 24
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -76,83 +77,115 @@ class CryptoDetailViewController: UIViewController {
   func addViews() {
 
     let safeArea = view.safeAreaLayoutGuide
+    let horizontalPadding: CGFloat = 48
     
     let viewWidth = view.frame.width
     let viewHeight = view.frame.height
     let viewHeightFraction = viewHeight/12
     
-    
-    // Header View
+    /*
+     Header View
+     */
     setupHeaderView()
     view.addSubview(headerView)
     
     let headerViewHeight = viewHeightFraction
-    let toTopAnchor: CGFloat = 24
-    
-    let headerContainerConstraints = [
+  
+    NSLayoutConstraint.activate([
       headerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
       headerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      headerView.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: toTopAnchor),
+      headerView.topAnchor.constraint(equalTo: safeArea.topAnchor),
       headerView.setHeightContraint(by: headerViewHeight)
-    ]
-    NSLayoutConstraint.activate(headerContainerConstraints)
+    ])
     
     
-    // Graph Container View
+    /*
+     Graph Container View
+     */
     setupGraphView()
     let graphViewHeight = viewHeightFraction * 5
     view.addSubview(graphContainerView)
-
-    let graphViewConstraints = [
+    
+    NSLayoutConstraint.activate([
       graphContainerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
       graphContainerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      graphContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
+      graphContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor,constant: 8),
       graphContainerView.setHeightContraint(by: graphViewHeight)
-    ]
-    NSLayoutConstraint.activate(graphViewConstraints)
+    ])
 
 
-    // TableView Header Stack
+    /*
+     TableView Header Stack
+     */
     let asksHeader = PriceTableViewHeader(frame: CGRect.zero, for: .ask)
     let bidsHeader = PriceTableViewHeader(frame: CGRect.zero, for: .bid)
 
     view.addSubview(asksHeader)
     view.addSubview(bidsHeader)
-    view.addSubview(headerStack)
+    view.addSubview(tableViewHeaderStack)
 
-    headerStack.addArrangedSubview(asksHeader)
-    headerStack.addArrangedSubview(bidsHeader)
+    tableViewHeaderStack.addArrangedSubview(asksHeader)
+    tableViewHeaderStack.addArrangedSubview(bidsHeader)
+    
+    NSLayoutConstraint.activate([
+      tableViewHeaderStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      tableViewHeaderStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      tableViewHeaderStack.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 24),
+      tableViewHeaderStack.setHeightContraint(by: 34)
+    ])
 
-    let tableViewHeaderConstraints = [
-      headerStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-      headerStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      headerStack.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 24)
-    ]
-    NSLayoutConstraint.activate(tableViewHeaderConstraints)
 
-
-    // Price TableViews
-    let tableViewStackHeight = viewHeightFraction * 4.5
-    let tableViewFrame = CGRect(x: 0, y: 0,
-                                width: viewWidth/2,
-                                height: tableViewStackHeight)
+    /*
+     Price TableViews
+     */
+    // Container View
+    let tableContainerView = UIView()
+    
+    // Table Views
+    let tableViewWidth = (viewWidth - horizontalPadding) / 2
+    let tableViewHeight = viewHeightFraction * 4.5
+    let tableViewFrame = CGRect(origin: CGPoint.zero,
+                                size: CGSize(width: tableViewWidth, height: tableViewHeight))
     asksTableView = PricesTableView(frame: tableViewFrame)
     bidsTableView = PricesTableView(frame: tableViewFrame)
-    view.addSubview(asksTableView)
-    view.addSubview(bidsTableView)
-    view.addSubview(tableViewStack)
-
+    
+    [tableContainerView, asksTableView, bidsTableView].forEach {
+      $0?.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    tableContainerView.addSubview(asksTableView)
+    tableContainerView.addSubview(bidsTableView)
+    tableContainerView.addSubview(tableViewStack)
+    
+    // Table View Container Stack
     tableViewStack.addArrangedSubview(asksTableView)
     tableViewStack.addArrangedSubview(bidsTableView)
-
-    let tableViewStackConstraints = [
-      tableViewStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor, constant: 24),
-      tableViewStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor, constant: 24),
-      tableViewStack.topAnchor.constraint(equalTo: headerStack.bottomAnchor),
-      tableViewStack.setHeightContraint(by: tableViewStackHeight)
-    ]
-    NSLayoutConstraint.activate(tableViewStackConstraints)
-
+    view.addSubview(tableContainerView)
+    
+    let tableViewStackBottomConstraint = tableViewStack.bottomAnchor.constraint(
+      equalTo: tableContainerView.bottomAnchor)
+    tableViewStackBottomConstraint.priority = UILayoutPriority(750)
+    
+    NSLayoutConstraint.activate([
+      // tableContainerView
+      tableContainerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      tableContainerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      tableContainerView.topAnchor.constraint(equalTo: tableViewHeaderStack.bottomAnchor),
+      tableContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+      
+      // tableViews
+      asksTableView.widthAnchor.constraint(equalToConstant: tableViewWidth),
+      asksTableView.heightAnchor.constraint(equalToConstant: tableViewHeight),
+      bidsTableView.widthAnchor.constraint(equalToConstant: tableViewWidth),
+      bidsTableView.heightAnchor.constraint(equalToConstant: tableViewHeight),
+      
+      // tableViewStack
+      tableViewStack.topAnchor.constraint(equalTo: tableContainerView.topAnchor),
+      tableViewStack.bottomAnchor.constraint(greaterThanOrEqualTo: tableContainerView.bottomAnchor, constant: 0),
+      tableViewStackBottomConstraint,
+      tableViewStack.centerXAnchor.constraint(equalTo: tableContainerView.centerXAnchor)
+    ])
+    
   }
   
   func setupHeaderView() {
@@ -179,9 +212,9 @@ class CryptoDetailViewController: UIViewController {
         let bids = self?.viewModel.bids
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
-        
+
         self?.headerView.viewModel = self?.viewModel.headerViewModel
-        
+
         self?.graphContainerView.loadViewModel(with: asks!)
       }
     }

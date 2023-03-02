@@ -24,7 +24,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 22, weight: .bold)
+    newLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -33,7 +33,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+    newLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -49,7 +49,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.alignment = .center
-    stackView.spacing = 8
+    stackView.spacing = 4
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -68,7 +68,8 @@ class CryptoCollectionCell: UICollectionViewCell {
       
       let changePercentage = cellViewModel?.getPricePercentageChangeString()
       changeLabel.text = changePercentage
-      setChangePercentageLabelColor(for: changePercentage!)
+      changeLabel.textColor = cellViewModel?.getPercentageLabelColor(for: changePercentage!)
+      
     }
   }
   
@@ -79,11 +80,11 @@ class CryptoCollectionCell: UICollectionViewCell {
     super.init(frame: frame)
     
     addViews()
+    backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.7)
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-//    fatalError("init(coder:) has not been implemented!!")
   }
   
   
@@ -93,7 +94,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     addSubview(imageView)
     
     let imageConstraints = [
-      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
+      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
       imageView.widthAnchor.constraint(equalToConstant: frame.width/2.7),
       imageView.heightAnchor.constraint(equalToConstant: frame.width/2.7),
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -105,23 +106,19 @@ class CryptoCollectionCell: UICollectionViewCell {
     addSubview(priceLabel)
     addSubview(changeLabel)
     addSubview(labelStack)
-
+//    labelStack.backgroundColor = .blue
     labelStack.addArrangedSubview(nameLabel)
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(changeLabel)
     
     let labelStackConstraints = [
-      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 20),
+      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12),
       labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
-      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8)
+      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
+      bottomAnchor.constraint(greaterThanOrEqualTo: labelStack.bottomAnchor, constant: 0)
     ]
     NSLayoutConstraint.activate(labelStackConstraints)
 
-  }
-  
-  // TODO: - Change to ViewModel (return color)
-  func setChangePercentageLabelColor(for amount: String) {
-    changeLabel.textColor = amount.contains("-") ? .red : .green
   }
   
   

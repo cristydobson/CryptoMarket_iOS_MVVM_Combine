@@ -41,7 +41,7 @@ class GraphViewModel {
       let price2 = prices[i].px ?? 0
       let percentage = price1.getPercentageChange(from: price2)
       let yCoordinate = percentage
-      print("price1: \(price1), price2: \(price2), Y: \(yCoordinate)!!!!!!!")
+//      print("price1: \(price1), price2: \(price2), Y: \(yCoordinate)!!!!!!!")
       let point = CGPoint(x: Double(xCoordinate), y: yCoordinate)
       pointArray.append(point)
       xCoordinate -= 1
