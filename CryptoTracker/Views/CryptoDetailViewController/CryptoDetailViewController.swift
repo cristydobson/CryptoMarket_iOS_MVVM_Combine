@@ -34,6 +34,7 @@ class CryptoDetailViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
+    stackView.spacing = 24
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -83,6 +84,7 @@ class CryptoDetailViewController: UIViewController {
     let viewHeight = view.frame.height
     let viewHeightFraction = viewHeight/12
     
+    
     /*
      Header View
      */
@@ -112,26 +114,53 @@ class CryptoDetailViewController: UIViewController {
       graphContainerView.topAnchor.constraint(equalTo: headerView.bottomAnchor,constant: 8),
       graphContainerView.setHeightContraint(by: graphViewHeight)
     ])
+    
+    
+    /*
+     Table View Sizes
+     */
+    let tableViewWidth = (viewWidth - horizontalPadding) / 2
+    let tableViewHeight = viewHeightFraction * 4.5
 
 
     /*
      TableView Header Stack
      */
-    let asksHeader = PriceTableViewHeader(frame: CGRect.zero, for: .ask)
-    let bidsHeader = PriceTableViewHeader(frame: CGRect.zero, for: .bid)
+    let tableHeaderHeight: CGFloat = 34
+    
+    let tableHeaderContainerView = UIView()
+    tableHeaderContainerView.translatesAutoresizingMaskIntoConstraints = false
+    tableHeaderContainerView.backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+    
+    let tableHeaderFrame = CGRect(origin: CGPoint.zero,
+                                  size: CGSize(width: tableViewWidth, height: tableHeaderHeight))
+    let asksHeader = PriceTableViewHeader(frame: tableHeaderFrame)
+    let bidsHeader = PriceTableViewHeader(frame: tableHeaderFrame)
 
-    view.addSubview(asksHeader)
-    view.addSubview(bidsHeader)
-    view.addSubview(tableViewHeaderStack)
+    tableHeaderContainerView.addSubview(asksHeader)
+    tableHeaderContainerView.addSubview(bidsHeader)
+    tableHeaderContainerView.addSubview(tableViewHeaderStack)
+    view.addSubview(tableHeaderContainerView)
 
     tableViewHeaderStack.addArrangedSubview(asksHeader)
     tableViewHeaderStack.addArrangedSubview(bidsHeader)
     
     NSLayoutConstraint.activate([
-      tableViewHeaderStack.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
-      tableViewHeaderStack.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      tableViewHeaderStack.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 24),
-      tableViewHeaderStack.setHeightContraint(by: 34)
+      // tableHeaderContainerView
+      tableHeaderContainerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
+      tableHeaderContainerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
+      tableHeaderContainerView.topAnchor.constraint(equalTo: graphContainerView.bottomAnchor, constant: 24),
+      tableHeaderContainerView.setHeightContraint(by: tableHeaderHeight),
+      
+      asksHeader.setWidthContraint(by: tableViewWidth),
+      asksHeader.setHeightContraint(by: tableHeaderHeight),
+      bidsHeader.setWidthContraint(by: tableViewWidth),
+      bidsHeader.setHeightContraint(by: tableHeaderHeight),
+      
+      // tableViewHeaderStack
+      tableViewHeaderStack.topAnchor.constraint(equalTo: tableHeaderContainerView.topAnchor),
+      tableViewHeaderStack.bottomAnchor.constraint(equalTo: tableHeaderContainerView.bottomAnchor),
+      tableViewHeaderStack.centerXAnchor.constraint(equalTo: tableHeaderContainerView.centerXAnchor),
     ])
 
 
@@ -142,8 +171,6 @@ class CryptoDetailViewController: UIViewController {
     let tableContainerView = UIView()
     
     // Table Views
-    let tableViewWidth = (viewWidth - horizontalPadding) / 2
-    let tableViewHeight = viewHeightFraction * 4.5
     let tableViewFrame = CGRect(origin: CGPoint.zero,
                                 size: CGSize(width: tableViewWidth, height: tableViewHeight))
     asksTableView = PricesTableView(frame: tableViewFrame)
@@ -156,11 +183,11 @@ class CryptoDetailViewController: UIViewController {
     tableContainerView.addSubview(asksTableView)
     tableContainerView.addSubview(bidsTableView)
     tableContainerView.addSubview(tableViewStack)
+    view.addSubview(tableContainerView)
     
     // Table View Container Stack
     tableViewStack.addArrangedSubview(asksTableView)
     tableViewStack.addArrangedSubview(bidsTableView)
-    view.addSubview(tableContainerView)
     
     let tableViewStackBottomConstraint = tableViewStack.bottomAnchor.constraint(
       equalTo: tableContainerView.bottomAnchor)
@@ -170,7 +197,7 @@ class CryptoDetailViewController: UIViewController {
       // tableContainerView
       tableContainerView.leadingAnchor.constraint(equalTo: safeArea.leadingAnchor),
       tableContainerView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
-      tableContainerView.topAnchor.constraint(equalTo: tableViewHeaderStack.bottomAnchor),
+      tableContainerView.topAnchor.constraint(equalTo: tableHeaderContainerView.bottomAnchor),
       tableContainerView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
       
       // tableViews

@@ -16,9 +16,10 @@ class PriceTableViewHeader: UIView {
   var priceLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textColor = .white
-    newLabel.textAlignment = .left
+    newLabel.textAlignment = .center
     newLabel.text = NSLocalizedString("Price", comment: "")
     newLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+//    newLabel.backgroundColor = .green
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -26,9 +27,10 @@ class PriceTableViewHeader: UIView {
   var amountLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textColor = .white
-    newLabel.textAlignment = .left
+    newLabel.textAlignment = .center
     newLabel.text = NSLocalizedString("Amount", comment: "")
     newLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+//    newLabel.backgroundColor = .yellow
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -37,7 +39,6 @@ class PriceTableViewHeader: UIView {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
-    stackView.spacing = 12
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -50,16 +51,11 @@ class PriceTableViewHeader: UIView {
   // MARK: - init Methods
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+    addViews()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-  }
-  
-  convenience init(frame: CGRect, for priceType: PriceType) {
-    self.init(frame: frame)
-    addViews()
   }
   
   
@@ -75,13 +71,13 @@ class PriceTableViewHeader: UIView {
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(amountLabel)
     
-    let constraints = [
+    NSLayoutConstraint.activate([
+      // Label stack
       labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
       labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
       labelStack.topAnchor.constraint(equalTo: topAnchor),
       labelStack.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ]
-    NSLayoutConstraint.activate(constraints)
+    ])
 
   }
   

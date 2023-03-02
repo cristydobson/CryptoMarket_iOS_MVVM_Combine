@@ -33,7 +33,8 @@ class CryptoCollectionCell: UICollectionViewCell {
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+    newLabel.font = UIFont.systemFont(ofSize: 16)
+    newLabel.adjustsFontSizeToFitWidth = true
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -41,6 +42,7 @@ class CryptoCollectionCell: UICollectionViewCell {
   var changeLabel: UILabel = {
     let newLabel = UILabel()
     newLabel.textAlignment = .center
+    newLabel.font = UIFont.systemFont(ofSize: 16)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -49,7 +51,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     let stackView = UIStackView()
     stackView.axis = .vertical
     stackView.alignment = .center
-    stackView.spacing = 4
+    stackView.spacing = 2
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
   }()
@@ -94,7 +96,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     addSubview(imageView)
     
     let imageConstraints = [
-      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 24),
       imageView.widthAnchor.constraint(equalToConstant: frame.width/2.7),
       imageView.heightAnchor.constraint(equalToConstant: frame.width/2.7),
       imageView.centerXAnchor.constraint(equalTo: centerXAnchor)
@@ -112,7 +114,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     labelStack.addArrangedSubview(changeLabel)
     
     let labelStackConstraints = [
-      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 12),
+      labelStack.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 8),
       labelStack.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 8),
       labelStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -8),
       bottomAnchor.constraint(greaterThanOrEqualTo: labelStack.bottomAnchor, constant: 0)

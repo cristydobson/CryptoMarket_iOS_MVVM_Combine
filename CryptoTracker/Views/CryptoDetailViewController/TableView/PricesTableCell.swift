@@ -19,7 +19,7 @@ class PricesTableCell: UITableViewCell {
     newLabel.text = "$0.00"
     newLabel.textAlignment = .center
     newLabel.font = UIFont.systemFont(ofSize: 16)
-//    newLabel.backgroundColor = .yellow
+//    newLabel.backgroundColor = .blue
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
@@ -38,7 +38,7 @@ class PricesTableCell: UITableViewCell {
   let labelStack: UIStackView = {
     let stackView = UIStackView()
     stackView.axis = .horizontal
-    stackView.distribution = .fill
+    stackView.distribution = .fillEqually
     stackView.alignment = .center
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
@@ -79,7 +79,7 @@ class PricesTableCell: UITableViewCell {
     labelStack.addArrangedSubview(amountLabel)
     
     let constraints = [
-      priceLabel.setWidthContraint(by: frame.width*0.3),
+//      priceLabel.setWidthContraint(by: frame.width*0.3),
       
       labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
       labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
