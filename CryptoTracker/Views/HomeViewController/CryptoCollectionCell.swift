@@ -108,7 +108,7 @@ class CryptoCollectionCell: UICollectionViewCell {
     addSubview(priceLabel)
     addSubview(changeLabel)
     addSubview(labelStack)
-//    labelStack.backgroundColor = .blue
+
     labelStack.addArrangedSubview(nameLabel)
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(changeLabel)

@@ -24,7 +24,7 @@ class HeaderView: UIView {
   
   var nameLabel: UILabel = {
     let newLabel = UILabel()
-    newLabel.text = "CRYPTO"
+    newLabel.text = ""
     newLabel.textColor = .white
     newLabel.textAlignment = .left
     newLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
@@ -34,7 +34,7 @@ class HeaderView: UIView {
   
   var priceLabel: UILabel = {
     let newLabel = UILabel()
-    newLabel.text = "0.000000"
+    newLabel.text = ""
     newLabel.textColor = .red
     newLabel.textAlignment = .right
     newLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
