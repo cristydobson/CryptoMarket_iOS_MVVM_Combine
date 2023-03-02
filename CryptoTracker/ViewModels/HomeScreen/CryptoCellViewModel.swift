@@ -19,7 +19,7 @@ struct CryptoCellViewModel {
   
   // MARK: - Helper Methods
   func getPricePercentageChangeString() -> String {
-    return StringHelper.getPricePercentageChange(price24h ?? 0, from: lastTradePrice ?? 0)
+    return StringHelper.getPercentageChange(for: price24h ?? 0, from: lastTradePrice ?? 0)
   }
   
   func getCryptoNameString() -> String {

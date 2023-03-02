@@ -32,19 +32,19 @@ extension String {
 struct StringHelper {
   
   // Get 24h Price percentage change
-  static func getPricePercentageChange(_ price: Double, from lastPrice: Double) -> String {
+  static func getPercentageChange(for price: Double, from lastPrice: Double) -> String {
     guard price > 0 else { return "0.00%" }
     let priceChange = price.getPercentageChange(from: lastPrice)
     let priceString = priceChange != 0 ? "\(priceChange.rounded(to: 2))%" : "0.00%"
     return priceChange > 0 ? "+" + priceString : priceString
   }
   
-  static func getPriceString(for price: Double) -> String {
-    var string = "\(price)"
-    while string.count < 8 {
+  static func getString(for double: Double, withCharacter count: Int) -> String {
+    var string = "\(double)"
+    while string.count < count {
       string.append("0")
     }
-    return string
+    return String(string.prefix(count))
   }
   
 }

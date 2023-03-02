@@ -20,11 +20,16 @@ struct PriceCellViewModel {
   // MARK: - Methods
   
   func getPriceString() -> String {
-    return StringHelper.getPriceString(for: price!)
+    return StringHelper.getString(for: price!,
+                                  withCharacter: 8)
   }
   
   func getPriceLabelColor() -> UIColor {
     return priceType == .ask ? UIColor.red : UIColor.green
+  }
+  
+  func getAmountString() -> String {
+    return StringHelper.getString(for: amount!, withCharacter: 7)
   }
   
 }

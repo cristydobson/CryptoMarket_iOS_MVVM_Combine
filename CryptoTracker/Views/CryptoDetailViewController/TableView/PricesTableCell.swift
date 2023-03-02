@@ -48,6 +48,8 @@ class PricesTableCell: UITableViewCell {
     didSet {
       priceLabel.text = cellViewModel?.getPriceString()
       priceLabel.textColor = cellViewModel?.getPriceLabelColor()
+      
+      amountLabel.text = cellViewModel?.getAmountString()
     }
   }
   

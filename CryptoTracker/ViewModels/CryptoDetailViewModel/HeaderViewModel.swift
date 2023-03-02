@@ -25,7 +25,8 @@ struct HeaderViewModel {
   }
   
   func getPriceString() -> String {
-    return "⚑  " + StringHelper.getPriceString(for: price!) 
+    return "⚑  " + StringHelper.getString(for: price!,
+                                          withCharacter: 8)
   }
   
 
