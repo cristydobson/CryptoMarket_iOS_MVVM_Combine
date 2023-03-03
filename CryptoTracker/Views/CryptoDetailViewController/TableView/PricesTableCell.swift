@@ -14,28 +14,35 @@ class PricesTableCell: UITableViewCell {
   // MARK: - Properties
   
   var priceLabel: UILabel = {
+//    let newLabel = ViewHelper.createLabel(with: .white, text: "$0.00",
+//                                          alignment: .center,
+//                                          font: UIFont.systemFont(ofSize: 16))
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.text = "$0.00"
     newLabel.textAlignment = .center
     newLabel.font = UIFont.systemFont(ofSize: 16)
-//    newLabel.backgroundColor = .blue
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
   
   var amountLabel: UILabel = {
+//    let newLabel = ViewHelper.createLabel(with: .white, text: "0.00000",
+//                                          alignment: .center,
+//                                          font: UIFont.systemFont(ofSize: 16))
     let newLabel = UILabel()
     newLabel.textColor = .white
     newLabel.text = "0.00000"
     newLabel.textAlignment = .center
     newLabel.font = UIFont.systemFont(ofSize: 16)
-//    newLabel.backgroundColor = .yellow
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
   
   let labelStack: UIStackView = {
+//    let stackView = ViewHelper.createStackView(.horizontal,
+//                                               distribution: .fillEqually,
+//                                               spacing: 0)
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
@@ -78,15 +85,12 @@ class PricesTableCell: UITableViewCell {
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(amountLabel)
     
-    let constraints = [
-//      priceLabel.setWidthContraint(by: frame.width*0.3),
-      
+    NSLayoutConstraint.activate([
       labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
       labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
       labelStack.topAnchor.constraint(equalTo: topAnchor),
       labelStack.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ]
-    NSLayoutConstraint.activate(constraints)
+    ])
     
   }
   

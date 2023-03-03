@@ -87,8 +87,7 @@ class CryptoDetailViewModel {
       asks = asksArray
       bids = bidsArray
       
-      let name = cryptoSymbol.getCryptoNameString()
-      headerViewModel = HeaderViewModel(name: name,
+      headerViewModel = HeaderViewModel(name: cryptoSymbol,
                                         price: asksArray.first?.px)
       
       cryptoMarket = market

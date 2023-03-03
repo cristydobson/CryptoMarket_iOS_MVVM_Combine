@@ -68,9 +68,6 @@ class CryptoCollectionView: UIView {
     collectionView.register(CryptoCollectionCell.self,
                             forCellWithReuseIdentifier: cellID)
     
-    // CollectionView style
-//    collectionView.showsVerticalScrollIndicator = false
-    
     // Add CollectionView to current View
     addSubview(collectionView)
     

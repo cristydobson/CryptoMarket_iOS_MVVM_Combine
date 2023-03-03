@@ -21,29 +21,26 @@ class CryptoCollectionCell: UICollectionViewCell {
   }()
   
   var nameLabel: UILabel = {
-    let newLabel = UILabel()
-    newLabel.textColor = .white
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
+    let newLabel = ViewHelper.createLabel(with: .white, text: "",
+                                          alignment: .center,
+                                          font: UIFont.systemFont(ofSize: 20,
+                                                                  weight: .bold))
+    
     return newLabel
   }()
   
   var priceLabel: UILabel = {
-    let newLabel = UILabel()
-    newLabel.textColor = .white
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16)
+    let newLabel = ViewHelper.createLabel(with: .white, text: "",
+                                          alignment: .center,
+                                          font: UIFont.systemFont(ofSize: 16))
     newLabel.adjustsFontSizeToFitWidth = true
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
   
   var changeLabel: UILabel = {
-    let newLabel = UILabel()
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16)
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
+    let newLabel = ViewHelper.createLabel(with: .white, text: "",
+                                          alignment: .center,
+                                          font: UIFont.systemFont(ofSize: 16))
     return newLabel
   }()
   

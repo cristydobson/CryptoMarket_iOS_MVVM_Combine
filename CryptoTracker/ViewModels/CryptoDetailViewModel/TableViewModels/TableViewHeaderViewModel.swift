@@ -9,8 +9,4 @@ import UIKit
 
 struct TableViewHeaderViewModel {
   
-//  func getTextAlignment(for priceType: PriceType) -> NSTextAlignment {
-//    return priceType == .ask ? .left : .right
-//  }
-  
 }

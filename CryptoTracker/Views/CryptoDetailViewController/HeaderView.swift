@@ -23,24 +23,32 @@ class HeaderView: UIView {
   }()
   
   var nameLabel: UILabel = {
+//    let newLabel = ViewHelper.createLabel(with: .white, text: "",
+//                                          alignment: .left,
+//                                          font: UIFont.systemFont(ofSize: 32, weight: .semibold))
+    
     let newLabel = UILabel()
-    newLabel.text = ""
     newLabel.textColor = .white
     newLabel.textAlignment = .left
-    newLabel.font = UIFont.systemFont(ofSize: 32, weight: .semibold)
+    newLabel.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
   
   var priceLabel: UILabel = {
+//    let newLabel = ViewHelper.createLabel(with: .red, text: "",
+//                                          alignment: .right,
+//                                          font: UIFont.systemFont(ofSize: 26, weight: .regular))
     let newLabel = UILabel()
-    newLabel.text = ""
     newLabel.textColor = .red
     newLabel.textAlignment = .right
     newLabel.font = UIFont.systemFont(ofSize: 26, weight: .regular)
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
   }()
+  
+  
+  // MARK: - View Model
   
   var viewModel: HeaderViewModel? {
     didSet {
@@ -88,7 +96,7 @@ class HeaderView: UIView {
     addSubview(nameLabel)
     
     let nameConstraints = [
-      nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 16),
+      nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 12),
       nameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 4),
       nameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -4)
     ]
@@ -113,7 +121,5 @@ class HeaderView: UIView {
     imageView.image = viewModel?.getImage()
     priceLabel.text = viewModel?.getPriceString()
   }
-  
-  
   
 }

@@ -49,6 +49,7 @@ class CryptoCollectionViewModel {
         }
       }
       receiveValue: { [unowned self] in
+        print("FETCH DATA!!!!!!!")
         let cryptoMarkets: [CryptoMarket] = $0
         self.createCellViewModels(from: cryptoMarkets)
       }

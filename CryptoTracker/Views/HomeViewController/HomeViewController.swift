@@ -44,8 +44,6 @@ class HomeViewController: UIViewController {
   }
   
   func setupScreenTitle() {
-//    title = NSLocalizedString("Crypto Market Tracker",
-//                              comment: "")
     
     let titleContainerHorizontalPadding: CGFloat = 18
     let titleContainerVerticalPadding: CGFloat = 6
@@ -55,12 +53,10 @@ class HomeViewController: UIViewController {
     titleContainerView.layer.cornerRadius = 15
     titleContainerView.layer.masksToBounds = true
     
-    let titleLabel = UILabel()
-    titleLabel.textColor = .white
-    titleLabel.text = NSLocalizedString("Crypto Market Tracker",
-                                        comment: "")
-    titleLabel.textAlignment = .center
-    titleLabel.font = UIFont.boldSystemFont(ofSize: 22)
+    let titleLabel = ViewHelper.createLabel(with: .white,
+                                            text: NSLocalizedString("Crypto Market Tracker", comment: ""),
+                                            alignment: .center,
+                                            font: UIFont.boldSystemFont(ofSize: 22))
     
     titleContainerView.addSubview(titleLabel)
     view.addSubview(titleContainerView)
@@ -71,9 +67,11 @@ class HomeViewController: UIViewController {
     }
     
     NSLayoutConstraint.activate([
+      // Title Container View
       titleContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
       titleContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       
+      // Screen Title Label
       titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor,
                                           constant: titleContainerHorizontalPadding),
       titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor,

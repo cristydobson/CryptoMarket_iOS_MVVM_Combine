@@ -33,11 +33,10 @@ class CryptoDataLoader: CryptoService {
   
   // MARK: - CryptoService protocol
   
-  func fetchCryptoMarkets<T: Codable>(from endpoint: String) -> Future<T, CryptoDataAPIError> {//[CryptoMarket]
+  func fetchCryptoMarkets<T: Codable>(from endpoint: String) -> Future<T, CryptoDataAPIError> {
     
     // Initialize and return Future
     return Future<T, CryptoDataAPIError> { [unowned self] promise in
-      //Future<[CryptoMarket], CryptoDataAPIError> { [unowned self] promise in
       guard let url = self.createURL(with: endpoint)
       else {
         return promise(.failure(.urlError(URLError(.unsupportedURL))))
@@ -62,8 +61,6 @@ class CryptoDataLoader: CryptoService {
        */
         .decode(type: T.self,
                 decoder: self.jsonDecoder)
-//        .decode(type: [CryptoMarket].self,
-//                decoder: self.jsonDecoder)
       /*
        Make sure completion runs on the main thread
        */

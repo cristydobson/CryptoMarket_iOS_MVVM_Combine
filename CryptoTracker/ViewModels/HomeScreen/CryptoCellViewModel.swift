@@ -28,7 +28,7 @@ struct CryptoCellViewModel {
   
   func getPriceString() -> String {
     
-    if let price = price24h,
+    if let price = lastTradePrice,
        let currency = symbol
     {
       let currencyString = currency.getCurrencyString()

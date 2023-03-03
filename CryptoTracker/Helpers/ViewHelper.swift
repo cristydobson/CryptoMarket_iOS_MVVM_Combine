@@ -29,6 +29,31 @@ extension UIView {
     return widthAnchor.constraint(equalToConstant: constant)
   }
   
+}
+
+
+struct ViewHelper {
   
+  static func createLabel(with color: UIColor, text: String, alignment: NSTextAlignment, font: UIFont) -> UILabel {
+    
+    let newLabel = UILabel()
+    newLabel.textColor = color
+    newLabel.text = text
+    newLabel.textAlignment = alignment
+    newLabel.font = font
+    newLabel.translatesAutoresizingMaskIntoConstraints = false
+    return newLabel
+  }
+  
+  static func createStackView(_ axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView {
+    
+    let stackView = UIStackView()
+    stackView.axis = .horizontal
+    stackView.distribution = distribution
+    stackView.spacing = spacing
+    stackView.translatesAutoresizingMaskIntoConstraints = true
+    return stackView
+  }
   
 }
+

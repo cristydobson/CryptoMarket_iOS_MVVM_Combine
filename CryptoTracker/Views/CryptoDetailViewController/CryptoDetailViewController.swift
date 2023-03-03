@@ -43,7 +43,6 @@ class CryptoDetailViewController: UIViewController {
     let stackView = UIStackView()
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
-    stackView.backgroundColor = .black
     stackView.spacing = 24
     stackView.translatesAutoresizingMaskIntoConstraints = false
     return stackView
