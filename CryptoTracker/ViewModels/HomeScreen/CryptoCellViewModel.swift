@@ -31,16 +31,9 @@ struct CryptoCellViewModel {
     if let price = lastTradePrice,
        let currency = symbol
     {
-      let currencyString = currency.getCurrencyString()
-      return currencyString.isCryptoCurrency ?
-      "\(price) " + currencyString :
-      price.toCurrencyFormat(with: currencyString)
+      return StringHelper.getPriceString(from: price, and: currency)
     }
     return "-"
-  }
-  
-  func getPercentageLabelColor(for amount: String) -> UIColor {
-    return amount.contains("-") ? .red : .green
   }
   
 }

@@ -16,6 +16,7 @@ struct HeaderViewModel {
   
   let name: String?
   let price: Double?
+  let lastTradePrice: Double?
   
   
   // MARK: - Methods
@@ -26,10 +27,16 @@ struct HeaderViewModel {
   }
   
   func getPriceString() -> String {
-    return "⚑  " + StringHelper.getString(for: price!,
-                                          withCharacter: 8)
+    if let price = lastTradePrice,
+       let name = name {
+      return StringHelper.getPriceString(from: price, and: name)
+    }
+    return ""
   }
   
-
+  func getPricePercentageChangeString() -> String {
+    return StringHelper.getPercentageChange(for: price ?? 0, from: lastTradePrice ?? 0)
+  }
   
 }
+

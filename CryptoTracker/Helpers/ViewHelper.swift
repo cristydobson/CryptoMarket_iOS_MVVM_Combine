@@ -29,6 +29,18 @@ extension UIView {
     return widthAnchor.constraint(equalToConstant: constant)
   }
   
+  func addGradientBackground() {
+    let gradient = CAGradientLayer()
+    gradient.frame = bounds
+    gradient.colors = [
+      UIColor.black.cgColor,
+      UIColor.backgroundBlue.cgColor,
+      UIColor.backgroundPurple.cgColor
+    ]
+    gradient.locations = [0.30, 0.70, 0.90, 1]
+    layer.addSublayer(gradient)
+  }
+  
 }
 
 
@@ -43,16 +55,6 @@ struct ViewHelper {
     newLabel.font = font
     newLabel.translatesAutoresizingMaskIntoConstraints = false
     return newLabel
-  }
-  
-  static func createStackView(_ axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution, spacing: CGFloat) -> UIStackView {
-    
-    let stackView = UIStackView()
-    stackView.axis = .horizontal
-    stackView.distribution = distribution
-    stackView.spacing = spacing
-    stackView.translatesAutoresizingMaskIntoConstraints = true
-    return stackView
   }
   
 }

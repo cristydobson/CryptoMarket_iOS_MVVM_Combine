@@ -38,9 +38,45 @@ class CryptoDetailViewModel {
   init() {
     initTimer()
   }
+  
+  
+  // MARK: - Fetch Data For Header
+  
+  var reloadHeader: (() -> Void)?
+  
+  var cryptoTicker: CryptoMarket! {
+    didSet {
+      reloadHeader?()
+    }
+  }
+  
+  // Fetch data from API
+  func fetchHeaderData(with symbol: String) {
+    
+    let queryString = Endpoint.tickers.rawValue + "/" + symbol
+    
+    cryptoDataAPI.fetchCryptoMarkets(from: queryString)
+      .sink { [unowned self] completion in
+        if case let .failure(error) = completion {
+          self.handleError(error)
+        }
+      }
+    receiveValue: { [unowned self] in
+      let market: CryptoMarket = $0
+      self.cryptoTicker = market
+    }
+    .store(in: &self.subscriptions)
+  }
+  
+  func createHeaderViewModel() {
+    headerViewModel = HeaderViewModel(name: cryptoSymbol,
+                                      price: cryptoTicker.price_24h ?? 0,
+                                      lastTradePrice: cryptoTicker.last_trade_price ?? 0)
+  }
+  
 
   
-  // MARK: - Fetch Data
+  // MARK: - Fetch Data For TableViews
   
   var reloadTableViews: (() -> Void)?
   var noStatsAlert: (() -> Void)?
@@ -55,8 +91,8 @@ class CryptoDetailViewModel {
   var bids: [CryptoPrice]?
   
   
-  // Fetch data from API
-  func fetchData(with symbol: String) {
+  // Fetch TableViews data from API
+  func fetchTableViewData(with symbol: String) {
     
     let queryString = Endpoint.l2.rawValue + symbol
     
@@ -86,9 +122,6 @@ class CryptoDetailViewModel {
     {
       asks = asksArray
       bids = bidsArray
-      
-      headerViewModel = HeaderViewModel(name: cryptoSymbol,
-                                        price: asksArray.first?.px)
       
       cryptoMarket = market
       

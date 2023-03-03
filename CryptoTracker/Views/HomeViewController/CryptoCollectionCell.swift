@@ -67,7 +67,7 @@ class CryptoCollectionCell: UICollectionViewCell {
       
       let changePercentage = cellViewModel?.getPricePercentageChangeString()
       changeLabel.text = changePercentage
-      changeLabel.textColor = cellViewModel?.getPercentageLabelColor(for: changePercentage!)
+      changeLabel.textColor = ColorHelper.getPercentageLabelColor(for: changePercentage!)
       
     }
   }

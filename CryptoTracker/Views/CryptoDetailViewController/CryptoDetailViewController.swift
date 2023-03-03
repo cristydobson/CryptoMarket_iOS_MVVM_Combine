@@ -230,7 +230,8 @@ class CryptoDetailViewController: UIViewController {
   // Get CryptoDetailViewModel
   func loadViewModel() {
     
-    viewModel.fetchData(with: cryptoSymbol)
+    // Fetch TableViews Data
+    viewModel.fetchTableViewData(with: cryptoSymbol)
     
     viewModel.reloadTableViews = { [weak self] in
       DispatchQueue.main.async {
@@ -238,8 +239,6 @@ class CryptoDetailViewController: UIViewController {
         let bids = self?.viewModel.bids
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
-
-        self?.headerView.viewModel = self?.viewModel.headerViewModel
 
         self?.graphContainerView.loadViewModel(with: asks!)
       }
@@ -260,6 +259,17 @@ class CryptoDetailViewController: UIViewController {
         self?.present(alert, animated: true)
       }
     }
+    
+    // Fetch Header Data
+    viewModel.fetchHeaderData(with: cryptoSymbol)
+    
+    viewModel.reloadHeader = { [weak self] in
+      DispatchQueue.main.async {
+        self?.viewModel.createHeaderViewModel()
+        self?.headerView.viewModel = self?.viewModel.headerViewModel
+      }
+    }
+    
   }
  
 }

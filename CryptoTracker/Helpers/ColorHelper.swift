@@ -17,21 +17,16 @@ extension UIColor {
 }
 
 
-extension UIView {
+struct ColorHelper {
   
-  func addGradientBackground() {
-    let gradient = CAGradientLayer()
-    gradient.frame = bounds
-    gradient.colors = [
-      UIColor.black.cgColor,
-      UIColor.backgroundBlue.cgColor,
-      UIColor.backgroundPurple.cgColor
-    ]
-    gradient.locations = [0.30, 0.70, 0.90, 1]
-    layer.addSublayer(gradient)
+  static func getPercentageLabelColor(for amount: String) -> UIColor {
+    return amount.contains("-") ? .red : .green
   }
   
 }
+
+
+
 
 
 
