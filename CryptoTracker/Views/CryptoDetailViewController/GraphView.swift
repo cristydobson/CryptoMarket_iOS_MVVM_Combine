@@ -58,7 +58,7 @@ class GraphView: UIView {
   
   // MARK: - Load View Model
   func loadViewModel(with prices: [CryptoPrice]) {
-    viewModel.startViewModel(with: prices, andGraph: frame.size)
+    viewModel.startViewModel(with: prices)
     updateChart()
   }
   

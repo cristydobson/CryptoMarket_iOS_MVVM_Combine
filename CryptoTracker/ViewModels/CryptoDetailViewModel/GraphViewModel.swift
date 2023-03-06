@@ -20,26 +20,25 @@ class GraphViewModel {
   
   // MARK: - Start View Model
   
-  func startViewModel(with prices: [CryptoPrice], andGraph size: CGSize) {
-    var newPrices = prices
-    graphPoints = createGraphPoints(for: newPrices, for: size)
+  func startViewModel(with prices: [CryptoPrice]) {
+    graphPoints = createGraphPoints(for: prices)
   }
   
   
   // MARK: - Create Graph Points
-  
-  private func createGraphPoints(for prices: [CryptoPrice], for graphSize: CGSize) -> [CGPoint] {
     
+  private func createGraphPoints(for prices: [CryptoPrice]) -> [CGPoint] {
+  
     var pointArray: [CGPoint] = []
     
     var xCoordinate = prices.count
 
     for i in 1..<prices.count {
-      
+
       let price1 = prices[i-1].px ?? 0
       let price2 = prices[i].px ?? 0
       let percentage = price1.getPercentageChange(from: price2)
-      
+
       if percentage < 1000 {
         let yCoordinate = percentage
         let point = CGPoint(x: Double(xCoordinate), y: yCoordinate)
@@ -47,6 +46,7 @@ class GraphViewModel {
         xCoordinate -= 1
       }
     }
+    
     pointArray.append(CGPoint(x: 0, y: 5))
     
     return pointArray.reversed()

@@ -54,10 +54,6 @@ class PriceTableViewHeader: UIView {
     return stackView
   }()
   
-  lazy var viewModel = {
-    TableViewHeaderViewModel()
-  }()
-  
   
   // MARK: - init Methods
   override init(frame: CGRect) {

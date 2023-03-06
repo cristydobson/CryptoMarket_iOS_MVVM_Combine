@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct PriceCellViewModel {
+struct PriceCellViewModel: Equatable {
   
   
   // MARK: - Properties
