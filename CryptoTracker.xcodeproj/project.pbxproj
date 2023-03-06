@@ -534,6 +534,13 @@
 		5ED6FDBC29B5EB430063D5E7 /* PriceTableViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDBB29B5EB430063D5E7 /* PriceTableViewModelTests.swift */; };
 		5ED6FDBE29B5FCF40063D5E7 /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E295F8929AE2DE200CBAE0B /* GraphViewModel.swift */; };
 		5ED6FDC029B5FD790063D5E7 /* HeaderViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDBF29B5FD790063D5E7 /* HeaderViewModelTests.swift */; };
+		5ED6FDC429B624880063D5E7 /* CryptoDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EB1684129AB7803005E8FE2 /* CryptoDetailViewModel.swift */; };
+		5ED6FDC829B624A20063D5E7 /* CryptoDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDC729B624A20063D5E7 /* CryptoDetailViewModelTests.swift */; };
+		5ED6FDC929B634C80063D5E7 /* HeaderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDA429AFC2F90063D5E7 /* HeaderViewModel.swift */; };
+		5ED6FDCB29B635390063D5E7 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDA729AFC96B0063D5E7 /* ImageHelper.swift */; };
+		5ED6FDCE29B635630063D5E7 /* CryptoDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319229AA250B00797B5D /* CryptoDataLoader.swift */; };
+		5ED6FDCF29B635860063D5E7 /* CryptoDataAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B318E29AA1E1900797B5D /* CryptoDataAPIError.swift */; };
+		5ED6FDD029B635880063D5E7 /* CryptoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319029AA236400797B5D /* CryptoService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1109,6 +1116,7 @@
 		5ED6FDAC29B497A40063D5E7 /* PriceCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceCellViewModelTests.swift; sourceTree = "<group>"; };
 		5ED6FDBB29B5EB430063D5E7 /* PriceTableViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceTableViewModelTests.swift; sourceTree = "<group>"; };
 		5ED6FDBF29B5FD790063D5E7 /* HeaderViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewModelTests.swift; sourceTree = "<group>"; };
+		5ED6FDC729B624A20063D5E7 /* CryptoDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1689,6 +1697,7 @@
 		5EAF9ABA29A8E50800E19C71 /* CryptoTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
+				5ED6FDC729B624A20063D5E7 /* CryptoDetailViewModelTests.swift */,
 				5ED6FDBF29B5FD790063D5E7 /* HeaderViewModelTests.swift */,
 				5ED6FDBD29B5FCDE0063D5E7 /* TableViewModels */,
 			);
@@ -2519,14 +2528,21 @@
 			files = (
 				5ED6FDB929B5E7210063D5E7 /* CryptoDataModel.swift in Sources */,
 				5ED6FDC029B5FD790063D5E7 /* HeaderViewModelTests.swift in Sources */,
+				5ED6FDCF29B635860063D5E7 /* CryptoDataAPIError.swift in Sources */,
 				5ED6FDB529B5E5F50063D5E7 /* PriceTableViewHeader.swift in Sources */,
+				5ED6FDD029B635880063D5E7 /* CryptoService.swift in Sources */,
 				5ED6FDBE29B5FCF40063D5E7 /* GraphViewModel.swift in Sources */,
 				5ED6FDB429B5E3AD0063D5E7 /* PriceTableViewModel.swift in Sources */,
 				5ED6FDBC29B5EB430063D5E7 /* PriceTableViewModelTests.swift in Sources */,
+				5ED6FDCE29B635630063D5E7 /* CryptoDataLoader.swift in Sources */,
 				5ED6FDB729B5E64F0063D5E7 /* PriceCellViewModelTests.swift in Sources */,
 				5ED6FDBA29B5E7590063D5E7 /* DoubleHelper.swift in Sources */,
+				5ED6FDC829B624A20063D5E7 /* CryptoDetailViewModelTests.swift in Sources */,
+				5ED6FDC429B624880063D5E7 /* CryptoDetailViewModel.swift in Sources */,
+				5ED6FDC929B634C80063D5E7 /* HeaderViewModel.swift in Sources */,
 				5ED6FDB829B5E6F60063D5E7 /* StringHelper.swift in Sources */,
 				5ED6FDAB29B496F40063D5E7 /* PriceCellViewModel.swift in Sources */,
+				5ED6FDCB29B635390063D5E7 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

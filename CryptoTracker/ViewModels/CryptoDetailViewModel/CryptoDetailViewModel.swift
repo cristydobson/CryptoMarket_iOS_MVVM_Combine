@@ -19,12 +19,6 @@ class CryptoDetailViewModel {
   
   // MARK: - Delegates
   weak var delegate: CryptoDetailViewModelDelegate?
-  
-  
-  // MARK: - Header View
-  
-  var headerViewModel: HeaderViewModel?
-  var cryptoSymbol = ""
 
   
   // MARK: - Load Data
@@ -44,7 +38,7 @@ class CryptoDetailViewModel {
   
   var reloadHeader: (() -> Void)?
   
-  var cryptoTicker: CryptoMarket! {
+  var headerViewModel: HeaderViewModel! {
     didSet {
       reloadHeader?()
     }
@@ -63,15 +57,15 @@ class CryptoDetailViewModel {
       }
     receiveValue: { [unowned self] in
       let market: CryptoMarket = $0
-      self.cryptoTicker = market
+      self.headerViewModel = self.createHeaderViewModel(from: market)
     }
     .store(in: &self.subscriptions)
   }
   
-  func createHeaderViewModel() {
-    headerViewModel = HeaderViewModel(name: cryptoSymbol,
-                                      price: cryptoTicker.price_24h ?? 0,
-                                      lastTradePrice: cryptoTicker.last_trade_price ?? 0)
+  func createHeaderViewModel(from market: CryptoMarket) -> HeaderViewModel {
+    return HeaderViewModel(name: market.symbol ?? "",
+                                      price: market.price_24h ?? 0,
+                                      lastTradePrice: market.last_trade_price ?? 0)
   }
   
 
@@ -117,9 +111,14 @@ class CryptoDetailViewModel {
   
   
   func checkForStats(for market: CryptoMarket) {
-    if let asksArray = market.asks, asksArray.count > 0,
-       let bidsArray = market.bids, bidsArray.count > 0
+    
+    let asksArray = market.asks ?? []
+    let bidsArray = market.bids ?? []
+    
+    if asksArray.count > 0 || bidsArray.count > 0
     {
+      fetchHeaderData(with: market.symbol!)
+      
       asks = asksArray
       bids = bidsArray
       
@@ -127,7 +126,7 @@ class CryptoDetailViewModel {
       
     }
     else {
-      cancellable?.cancel()
+      timer?.cancel()
       noStatsAlert?()
     }
   }
@@ -135,10 +134,10 @@ class CryptoDetailViewModel {
   
   // MARK: - Timer
   
-  private var cancellable: AnyCancellable?
+  private var timer: AnyCancellable?
   
   func initTimer() {
-    cancellable = Timer
+    timer = Timer
       .publish(every: 10, on: .main, in: .common)
       .autoconnect()
       .sink { _ in

@@ -67,7 +67,6 @@ class CryptoDetailViewController: UIViewController {
     addViews()
     
     viewModel.delegate = self
-    viewModel.cryptoSymbol = cryptoSymbol
     loadViewModel()
   }
   
@@ -230,6 +229,9 @@ class CryptoDetailViewController: UIViewController {
   // Get CryptoDetailViewModel
   func loadViewModel() {
     
+    // Fetch Header Data
+//    viewModel.fetchHeaderData(with: cryptoSymbol)
+    
     // Fetch TableViews Data
     viewModel.fetchTableViewData(with: cryptoSymbol)
     
@@ -260,17 +262,14 @@ class CryptoDetailViewController: UIViewController {
       }
     }
     
-    // Fetch Header Data
-    viewModel.fetchHeaderData(with: cryptoSymbol)
-    
     viewModel.reloadHeader = { [weak self] in
       DispatchQueue.main.async {
-        self?.viewModel.createHeaderViewModel()
         self?.headerView.viewModel = self?.viewModel.headerViewModel
       }
     }
     
   }
+  
  
 }
 

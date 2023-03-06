@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 
-struct HeaderViewModel {
+struct HeaderViewModel: Equatable {
   
   
   // MARK: - Properties

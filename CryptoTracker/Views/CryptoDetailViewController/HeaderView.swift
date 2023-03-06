@@ -46,7 +46,7 @@ class HeaderView: UIView {
   }()
   
   var changeLabel: UILabel = {
-    let newLabel = ViewHelper.createLabel(with: .white, text: "+0.00%",
+    let newLabel = ViewHelper.createLabel(with: .white, text: "",
                                           alignment: .left,
                                           font: UIFont.systemFont(ofSize: 18, weight: .medium))
     return newLabel
