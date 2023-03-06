@@ -11,7 +11,7 @@ import Foundation
 extension Double {
   
   func getPercentageChange(from latestPrice: Double) -> Double {
-    return ((latestPrice - self) / self) * 100
+    return ((latestPrice - self) / self) * 100 
   }
   
   func rounded(to decimalPlaces: Int) -> Double {

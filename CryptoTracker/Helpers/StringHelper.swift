@@ -33,6 +33,7 @@ struct StringHelper {
   
   // Get 24h Price percentage change
   static func getPercentageChange(for price: Double, from lastPrice: Double) -> String {
+    
     guard price > 0 else { return "0.00%" }
     let priceChange = price.getPercentageChange(from: lastPrice)
     let priceString = priceChange != 0 ? "\(priceChange.rounded(to: 2))%" : "0.00%"
@@ -47,11 +48,21 @@ struct StringHelper {
     return String(string.prefix(count))
   }
   
-  static func getPriceString(from price: Double, and currency: String) -> String {
+  static func getPriceString(from price: Double?, and currency: String?) -> String {
+    
+    guard let currency = currency else {
+      return "0.00"
+    }
+    
     let currencyString = currency.getCurrencyString()
-    return currencyString.isCryptoCurrency ?
-    "\(price) " + currencyString :
-    price.toCurrencyFormat(with: currencyString)
+    
+    if let newPrice = price {
+      return currencyString.isCryptoCurrency ?
+      "\(newPrice) " + currencyString :
+      newPrice.toCurrencyFormat(with: currencyString)
+    }
+    return (0.00).toCurrencyFormat(with: currencyString)
   }
   
 }
+

@@ -21,17 +21,13 @@ struct HeaderViewModel {
   
   // MARK: - Methods
   
-  func getImage() -> UIImage {
+  func getImage() -> UIImage? {
     let coinName = name?.getCryptoNameString()
-    return ImageHelper.getCryptoIcon(for: coinName)!
+    return ImageHelper.getCryptoIcon(for: coinName)
   }
   
   func getPriceString() -> String {
-    if let price = lastTradePrice,
-       let name = name {
-      return StringHelper.getPriceString(from: price, and: name)
-    }
-    return ""
+    return StringHelper.getPriceString(from: lastTradePrice, and: name)
   }
   
   func getPricePercentageChangeString() -> String {
