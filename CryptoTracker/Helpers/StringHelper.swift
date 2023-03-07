@@ -16,7 +16,7 @@ extension String {
   
   func getCurrencyString() -> String {
     guard self.count > 0 else { return "" }
-    guard self.contains("-") else { return self }
+    guard self.contains("-") else { return "" }
     return String(self[
       (self.range(of: "-"))!.upperBound...
     ])
@@ -56,7 +56,9 @@ struct StringHelper {
     
     let currencyString = currency.getCurrencyString()
     
-    if let newPrice = price {
+    if let newPrice = price,
+       currencyString != "" {
+
       return currencyString.isCryptoCurrency ?
       "\(newPrice) " + currencyString :
       newPrice.toCurrencyFormat(with: currencyString)

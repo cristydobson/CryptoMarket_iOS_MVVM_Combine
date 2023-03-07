@@ -21,7 +21,7 @@ extension Double {
   
   // Format a double to a currency format
   func toCurrencyFormat(with code: String) -> String {
-    
+   
     if code != "" {
       let formatter = NumberFormatter()
       formatter.numberStyle = .currency
@@ -29,8 +29,7 @@ extension Double {
       formatter.maximumFractionDigits = 2
       return formatter.string(from: NSNumber(value: self))!
     }
-    
-    return code
+    return "0.00"
   }
   
 }
