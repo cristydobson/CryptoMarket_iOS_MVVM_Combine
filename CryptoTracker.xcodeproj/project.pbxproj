@@ -545,6 +545,7 @@
 		5ED6FDD529B73CEB0063D5E7 /* CryptoCollectionViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDD429B73CEB0063D5E7 /* CryptoCollectionViewModelTests.swift */; };
 		5ED6FDD729B741B10063D5E7 /* CryptoCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE329A9021F00E19C71 /* CryptoCollectionViewModel.swift */; };
 		5ED6FDD829B741B90063D5E7 /* CryptoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */; };
+		5ED6FDDA29B7831F0063D5E7 /* ApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDD929B7831F0063D5E7 /* ApiTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1123,6 +1124,7 @@
 		5ED6FDC729B624A20063D5E7 /* CryptoDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDetailViewModelTests.swift; sourceTree = "<group>"; };
 		5ED6FDD229B644A90063D5E7 /* CryptoCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCellViewModelTests.swift; sourceTree = "<group>"; };
 		5ED6FDD429B73CEB0063D5E7 /* CryptoCollectionViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCollectionViewModelTests.swift; sourceTree = "<group>"; };
+		5ED6FDD929B7831F0063D5E7 /* ApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1705,6 +1707,7 @@
 			children = (
 				5ED6FDD629B73CF80063D5E7 /* HomeViewController */,
 				5ED6FDD129B6448B0063D5E7 /* CryptoDetailViewModel */,
+				5ED6FDD929B7831F0063D5E7 /* ApiTests.swift */,
 			);
 			path = CryptoTrackerTests;
 			sourceTree = "<group>";
@@ -2568,6 +2571,7 @@
 				5ED6FDB829B5E6F60063D5E7 /* StringHelper.swift in Sources */,
 				5ED6FDD729B741B10063D5E7 /* CryptoCollectionViewModel.swift in Sources */,
 				5ED6FDAB29B496F40063D5E7 /* PriceCellViewModel.swift in Sources */,
+				5ED6FDDA29B7831F0063D5E7 /* ApiTests.swift in Sources */,
 				5ED6FDD529B73CEB0063D5E7 /* CryptoCollectionViewModelTests.swift in Sources */,
 				5ED6FDCB29B635390063D5E7 /* ImageHelper.swift in Sources */,
 				5ED6FDD329B644A90063D5E7 /* CryptoCellViewModelTests.swift in Sources */,

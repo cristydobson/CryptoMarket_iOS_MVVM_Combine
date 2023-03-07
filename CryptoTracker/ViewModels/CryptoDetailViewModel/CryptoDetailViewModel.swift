@@ -47,7 +47,7 @@ class CryptoDetailViewModel {
   // Fetch data from API
   func fetchHeaderData(with symbol: String) {
     
-    let queryString = Endpoint.tickers.rawValue + "/" + symbol
+    let queryString = Endpoint.singleTicker.rawValue + symbol
     
     cryptoDataAPI.fetchCryptoMarkets(from: queryString)
       .sink { [unowned self] completion in

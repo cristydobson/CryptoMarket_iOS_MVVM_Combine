@@ -14,5 +14,6 @@ protocol CryptoService {
 
 enum Endpoint: String {
   case tickers
+  case singleTicker = "tickers/"
   case l2 = "l2/"
 }
