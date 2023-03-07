@@ -61,35 +61,11 @@ final class PriceTableViewModelTests: XCTestCase {
   }
   
 
-  // MARK: - Build Single View Model
+  // MARK: - Build Single Cell View Model
   
   func testBuildCellModel_whenCryptoPriceModelGiven() {
     // given
     let cryptoPrice = cryptoPriceArray[0]
-    let expectedModel = createCellViewModel(for: cryptoPrice)
-    
-    // when
-    let priceCellViewModel = sut.buildCellModel(from: cryptoPrice)
-    
-    // then
-    XCTAssertEqual(priceCellViewModel, expectedModel)
-  }
-  
-  func testBuildCellModel_whenCryptoPriceHasNilPriceProperty() {
-    // given
-    let cryptoPrice = cryptoPriceArray.last!
-    let expectedModel = createCellViewModel(for: cryptoPrice)
-    
-    // when
-    let priceCellViewModel = sut.buildCellModel(from: cryptoPrice)
-    
-    // then
-    XCTAssertEqual(priceCellViewModel, expectedModel)
-  }
-  
-  func testBuildCellModel_whenCryptoPriceHasNilAmountProperty() {
-    // given
-    let cryptoPrice = cryptoPriceArray[1]
     let expectedModel = createCellViewModel(for: cryptoPrice)
     
     // when

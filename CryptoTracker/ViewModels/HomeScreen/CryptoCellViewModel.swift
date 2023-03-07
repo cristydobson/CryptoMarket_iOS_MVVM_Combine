@@ -9,7 +9,7 @@
 import UIKit
 
 
-struct CryptoCellViewModel {
+struct CryptoCellViewModel: Equatable {
   
   let symbol: String?
   let price24h: Double?

@@ -51,13 +51,13 @@ class CryptoCollectionViewModel {
       receiveValue: { [unowned self] in
         print("FETCH DATA!!!!!!!")
         let cryptoMarkets: [CryptoMarket] = $0
-        self.createCellViewModels(from: cryptoMarkets)
+        self.cryptoCellViewModels = self.createCellViewModels(from: cryptoMarkets)
       }
       .store(in: &self.subscriptions)
   }
   
   // Get CryptoCellViewModels from the data response
-  func createCellViewModels(from resultsArray: [CryptoMarket]) {
+  func createCellViewModels(from resultsArray: [CryptoMarket]) -> [CryptoCellViewModel] {
     
     var viewModels: [CryptoCellViewModel] = []
     
@@ -70,7 +70,7 @@ class CryptoCollectionViewModel {
       $0.symbol ?? "" < $1.symbol ?? ""
     }
     
-    cryptoCellViewModels = viewModels
+    return viewModels
   }
   
   // Build a CellViewModel
@@ -98,10 +98,10 @@ class CryptoCollectionViewModel {
   
   // MARK: - Timer
   
-  private var cancellable: AnyCancellable?
+  private var timer: AnyCancellable?
   
   func startTimer() {
-    cancellable = Timer
+    timer = Timer
       .publish(every: 10, on: .main, in: .common)
       .autoconnect()
       .sink { _ in
@@ -110,7 +110,7 @@ class CryptoCollectionViewModel {
   }
   
   func cancelTimer() {
-    cancellable?.cancel()
+    timer?.cancel()
   }
   
   

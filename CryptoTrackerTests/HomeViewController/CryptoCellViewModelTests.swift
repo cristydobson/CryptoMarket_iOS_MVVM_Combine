@@ -32,7 +32,7 @@ final class CryptoCellViewModelTests: XCTestCase {
   }
   
   
-  // MARK: - 
+  // MARK: - Get Price Percentage Change String
   
   func testGetPricePercentageChangeString_whenPropertiesNonNil() {
     // given
