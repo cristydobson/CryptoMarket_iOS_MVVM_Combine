@@ -22,8 +22,8 @@ extension String {
     ])
   }
   
-  func getCryptoNameString() -> String {
-    return self.components(separatedBy: "-").first!
+  func getCryptoNameString() -> String? {
+    return self.components(separatedBy: "-").first
   }
   
 }

@@ -22,18 +22,12 @@ struct CryptoCellViewModel {
     return StringHelper.getPercentageChange(for: price24h ?? 0, from: lastTradePrice ?? 0)
   }
   
-  func getCryptoNameString() -> String {
-    return symbol?.getCryptoNameString() ?? ""
+  func getCryptoNameString() -> String? {
+    return symbol?.getCryptoNameString()
   }
   
   func getPriceString() -> String {
-    
-    if let price = lastTradePrice,
-       let currency = symbol
-    {
-      return StringHelper.getPriceString(from: price, and: currency)
-    }
-    return "-"
+    return StringHelper.getPriceString(from: lastTradePrice, and: symbol)
   }
   
 }

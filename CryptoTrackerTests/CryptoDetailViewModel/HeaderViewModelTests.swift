@@ -56,6 +56,18 @@ final class HeaderViewModelTests: XCTestCase {
     XCTAssertEqual(priceString, expectedString)
   }
   
+  func testGetPriceString_whenNamePropertyNil() {
+    // given
+    createHeaderModelWith(name: nil, price: 437.674, lastTradePrice: 587.674)
+    let expectedString = "0.00"
+    
+    // when
+    let priceString = sut.getPriceString()
+    
+    // then
+    XCTAssertEqual(priceString, expectedString)
+  }
+  
   
   // MARK: - Get Price Percentage Change String
   
