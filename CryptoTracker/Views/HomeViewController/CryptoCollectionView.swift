@@ -33,8 +33,8 @@ class CryptoCollectionView: UIView {
   convenience init(frame: CGRect, controller: UIViewController) {
     self.init(frame: frame)
     self.controller = controller
-    backgroundColor = .clear
     
+    setupView()
     setupCollectionView()
     
     viewModel.delegate = self
@@ -42,24 +42,33 @@ class CryptoCollectionView: UIView {
   }
   
   
-  // MARK: - Startup Methods
+  // MARK: - Setup Methods
+  
+  func setupView() {
+    backgroundColor = .clear
+  }
+  
   func setupCollectionView() {
     
-    let sideInsets: CGFloat = 40
-    let cellsPerRow: CGFloat = 3
+    let horizontalInsets: CGFloat = 40
     let viewWidth = frame.width
-    let cellWidth = (viewWidth - (sideInsets + cellsPerRow)) / cellsPerRow
+    
+    // Cell Size
+    let cellsPerRow: CGFloat = 3
+    let cellWidth = (viewWidth - (horizontalInsets + cellsPerRow)) / cellsPerRow
     
     // CollectionView Layout
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-    layout.sectionInset = UIEdgeInsets(top: 34, left: sideInsets/2, bottom: 0, right: sideInsets/2)
+    layout.sectionInset = UIEdgeInsets(
+      top: 34, left: horizontalInsets/2,
+      bottom: 0, right: horizontalInsets/2)
     layout.minimumInteritemSpacing = 1
     layout.minimumLineSpacing = 1
     layout.itemSize = CGSize(width: cellWidth, height: cellWidth*1.3)
     
     // Instantiate CollectionView
-    collectionView = UICollectionView(frame: frame,
-                                      collectionViewLayout: layout)
+    collectionView = UICollectionView(
+      frame: frame, collectionViewLayout: layout)
     collectionView.backgroundColor = .clear
     collectionView.dataSource = self
     collectionView.delegate = self

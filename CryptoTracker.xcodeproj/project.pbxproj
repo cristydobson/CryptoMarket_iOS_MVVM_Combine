@@ -505,8 +505,6 @@
 		5EAF9AA929A8E50600E19C71 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AA829A8E50600E19C71 /* HomeViewController.swift */; };
 		5EAF9AAE29A8E50800E19C71 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EAF9AAD29A8E50800E19C71 /* Assets.xcassets */; };
 		5EAF9AB129A8E50800E19C71 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EAF9AAF29A8E50800E19C71 /* LaunchScreen.storyboard */; };
-		5EAF9AC629A8E50800E19C71 /* CryptoTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AC529A8E50800E19C71 /* CryptoTrackerUITests.swift */; };
-		5EAF9AC829A8E50800E19C71 /* CryptoTrackerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AC729A8E50800E19C71 /* CryptoTrackerUITestsLaunchTests.swift */; };
 		5EAF9ADE29A8FB2D00E19C71 /* CryptoDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9ADD29A8FB2D00E19C71 /* CryptoDataModel.swift */; };
 		5EAF9AE029A8FBEE00E19C71 /* CryptoCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9ADF29A8FBEE00E19C71 /* CryptoCollectionView.swift */; };
 		5EAF9AE229A901A900E19C71 /* CryptoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */; };
@@ -1096,8 +1094,6 @@
 		5EAF9AB229A8E50800E19C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EAF9AB729A8E50800E19C71 /* CryptoTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EAF9AC129A8E50800E19C71 /* CryptoTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EAF9AC529A8E50800E19C71 /* CryptoTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTrackerUITests.swift; sourceTree = "<group>"; };
-		5EAF9AC729A8E50800E19C71 /* CryptoTrackerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoTrackerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		5EAF9ADD29A8FB2D00E19C71 /* CryptoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataModel.swift; sourceTree = "<group>"; };
 		5EAF9ADF29A8FBEE00E19C71 /* CryptoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCollectionView.swift; sourceTree = "<group>"; };
 		5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCellViewModel.swift; sourceTree = "<group>"; };
@@ -1705,9 +1701,9 @@
 		5EAF9ABA29A8E50800E19C71 /* CryptoTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				5ED6FDD629B73CF80063D5E7 /* HomeViewController */,
+				5ED6FDDB29B7A2B50063D5E7 /* API Tests */,
+				5ED6FDD629B73CF80063D5E7 /* HomeControllerViewModels */,
 				5ED6FDD129B6448B0063D5E7 /* CryptoDetailViewModel */,
-				5ED6FDD929B7831F0063D5E7 /* ApiTests.swift */,
 			);
 			path = CryptoTrackerTests;
 			sourceTree = "<group>";
@@ -1715,8 +1711,6 @@
 		5EAF9AC429A8E50800E19C71 /* CryptoTrackerUITests */ = {
 			isa = PBXGroup;
 			children = (
-				5EAF9AC529A8E50800E19C71 /* CryptoTrackerUITests.swift */,
-				5EAF9AC729A8E50800E19C71 /* CryptoTrackerUITestsLaunchTests.swift */,
 			);
 			path = CryptoTrackerUITests;
 			sourceTree = "<group>";
@@ -1870,13 +1864,21 @@
 			path = CryptoDetailViewModel;
 			sourceTree = "<group>";
 		};
-		5ED6FDD629B73CF80063D5E7 /* HomeViewController */ = {
+		5ED6FDD629B73CF80063D5E7 /* HomeControllerViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				5ED6FDD429B73CEB0063D5E7 /* CryptoCollectionViewModelTests.swift */,
 				5ED6FDD229B644A90063D5E7 /* CryptoCellViewModelTests.swift */,
 			);
-			path = HomeViewController;
+			path = HomeControllerViewModels;
+			sourceTree = "<group>";
+		};
+		5ED6FDDB29B7A2B50063D5E7 /* API Tests */ = {
+			isa = PBXGroup;
+			children = (
+				5ED6FDD929B7831F0063D5E7 /* ApiTests.swift */,
+			);
+			path = "API Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2582,8 +2584,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EAF9AC829A8E50800E19C71 /* CryptoTrackerUITestsLaunchTests.swift in Sources */,
-				5EAF9AC629A8E50800E19C71 /* CryptoTrackerUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

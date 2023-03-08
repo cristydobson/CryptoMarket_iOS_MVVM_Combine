@@ -54,7 +54,31 @@ struct ViewHelper {
     newLabel.textAlignment = alignment
     newLabel.font = font
     newLabel.translatesAutoresizingMaskIntoConstraints = false
+    newLabel.adjustsFontSizeToFitWidth = true
     return newLabel
+  }
+  
+  static func createStackView(_ axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution) -> UIStackView {
+    let stackView = UIStackView()
+    stackView.axis = axis
+    stackView.distribution = distribution
+    stackView.alignment = .center
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    return stackView
+  }
+  
+  static func createEmptyView() -> UIView {
+    let newView = UIView()
+    newView.translatesAutoresizingMaskIntoConstraints = false
+    return newView
+  }
+  
+  static func createImageView() -> UIImageView {
+    let newImageView = UIImageView()
+    newImageView.contentMode = .scaleAspectFit
+    newImageView.backgroundColor = .clear
+    newImageView.translatesAutoresizingMaskIntoConstraints = false
+    return newImageView
   }
   
 }

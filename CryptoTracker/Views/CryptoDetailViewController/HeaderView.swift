@@ -14,60 +14,10 @@ class HeaderView: UIView {
   
   // MARK: - Properties
   
-  var imageView: UIImageView = {
-    let newImageView = UIImageView()
-    newImageView.contentMode = .scaleAspectFit
-    newImageView.backgroundColor = .clear
-    newImageView.translatesAutoresizingMaskIntoConstraints = false
-    return newImageView
-  }()
-  
-  var nameLabel: UILabel = {
-    let newLabel = ViewHelper.createLabel(with: .white, text: "",
-                                          alignment: .left,
-                                          font: UIFont.systemFont(ofSize: 22, weight: .semibold))
-    return newLabel
-  }()
-  
-  var priceLabel: UILabel = {
-    let newLabel = ViewHelper.createLabel(with: .white, text: "",
-                                          alignment: .left,
-                                          font: UIFont.systemFont(ofSize: 18, weight: .medium))
-    return newLabel
-  }()
-  
-  var priceTitleLabel: UILabel = {
-    let newLabel = ViewHelper
-      .createLabel(with: .darkGray,
-                   text: NSLocalizedString("Last Trade", comment: ""),
-                   alignment: .left,
-                   font: UIFont.systemFont(ofSize: 14, weight: .medium))
-    return newLabel
-  }()
-  
-  var changeLabel: UILabel = {
-    let newLabel = ViewHelper.createLabel(with: .white, text: "",
-                                          alignment: .left,
-                                          font: UIFont.systemFont(ofSize: 18, weight: .medium))
-    return newLabel
-  }()
-  
-  var changeTitleLabel: UILabel = {
-    let newLabel = ViewHelper.createLabel(with: .darkGray,
-                                          text: NSLocalizedString("24h Price", comment: ""),
-                                          alignment: .left,
-                                          font: UIFont.systemFont(ofSize: 14, weight: .medium))
-    return newLabel
-  }()
-  
-  let priceStack: UIStackView = {
-    let stackView = UIStackView()
-    stackView.axis = .horizontal
-    stackView.distribution = .fillEqually
-    stackView.spacing = 8
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
+  var imageView: UIImageView!
+  var nameLabel: UILabel!
+  var priceLabel: UILabel!
+  var changeLabel: UILabel!
   
   
   // MARK: - View Model
@@ -85,7 +35,8 @@ class HeaderView: UIView {
     
     let changeString = viewModel?.getPricePercentageChangeString()
     changeLabel.text = changeString
-    changeLabel.textColor = ColorHelper.getPercentageLabelColor(for: changeString!)
+    changeLabel.textColor = ColorHelper.getPercentageLabelColor(
+      for: changeString!)
   }
   
   
@@ -94,8 +45,8 @@ class HeaderView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    startViews()
-    backgroundColor = .clear
+    setupView()
+    addViews()
   }
   
   required init?(coder: NSCoder) {
@@ -104,80 +55,118 @@ class HeaderView: UIView {
   
   
   
-  // MARK: - Startup Methods
+  // MARK: - Setup Methods
   
-  func startViews() {
-    addViews()
+  func setupView() {
+    backgroundColor = .clear
   }
   
   func addViews() {
-    
+
     /*
      Icon Image View
      */
+    imageView = getImageView()
     addSubview(imageView)
-    
-    NSLayoutConstraint.activate([
-      imageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 24),
-//      imageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
-      imageView.heightAnchor.constraint(equalToConstant: 40),
-      imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 1),
-      imageView.centerYAnchor.constraint(equalTo: centerYAnchor)
-    ])
     
     
     /*
      Name Label
      */
+    nameLabel = getLabel(
+      color: .white, text: "", fontSize: 20, weight: .semibold)
     addSubview(nameLabel)
     
-    let nameConstraints = [
-      nameLabel.leadingAnchor.constraint(equalTo: imageView.trailingAnchor, constant: 12),
-      nameLabel.bottomAnchor.constraint(equalTo: imageView.lastBaselineAnchor, constant: -4)
-    ]
-    NSLayoutConstraint.activate(nameConstraints)
+    // Name Label + Icon Stack
+    
+    let titleIconStack = getStackView(axis: .horizontal, spacing: 12)
+    addSubview(titleIconStack)
+    titleIconStack.addArrangedSubview(imageView)
+    titleIconStack.addArrangedSubview(nameLabel)
+    
+    NSLayoutConstraint.activate([
+      // ImageView
+      imageView.heightAnchor.constraint(
+        equalToConstant: 40),
+      imageView.heightAnchor.constraint(
+        equalTo: imageView.widthAnchor, multiplier: 1),
+      
+      // titleIconStack
+      titleIconStack.leadingAnchor.constraint(
+        equalTo: leadingAnchor, constant: 24),
+      titleIconStack.centerYAnchor.constraint(
+        equalTo: centerYAnchor)
+    ])
     
     
     /*
      Price Stack
      */
     
-    let priceLabelStack = getVerticalStack()
+    let priceLabelStack = getStackView(axis: .vertical, spacing: 2)
+    
+    priceLabel = getLabel(
+      color: .white, text: "", fontSize: 17, weight: .medium)
+    
+    let priceSubtitleLabel = getLabel(
+      color: .darkGray,
+      text: NSLocalizedString("Last Trade", comment: ""),
+      fontSize: 14, weight: .medium)
     
     addSubview(priceLabel)
-    addSubview(priceTitleLabel)
+    addSubview(priceSubtitleLabel)
     addSubview(priceLabelStack)
     priceLabelStack.addArrangedSubview(priceLabel)
-    priceLabelStack.addArrangedSubview(priceTitleLabel)
+    priceLabelStack.addArrangedSubview(priceSubtitleLabel)
     
-    let changeLabelStack = getVerticalStack()
+    let changeLabelStack = getStackView(axis: .vertical, spacing: 2)
+    
+    changeLabel = getLabel(
+      color: .white, text: "", fontSize: 17, weight: .medium)
+    
+    let changeSubtitleLabel = getLabel(
+      color: .darkGray,
+      text: NSLocalizedString("24h Price", comment: ""),
+      fontSize: 14, weight: .medium)
     
     addSubview(changeLabel)
-    addSubview(changeTitleLabel)
+    addSubview(changeSubtitleLabel)
     addSubview(changeLabelStack)
     changeLabelStack.addArrangedSubview(changeLabel)
-    changeLabelStack.addArrangedSubview(changeTitleLabel)
+    changeLabelStack.addArrangedSubview(changeSubtitleLabel)
     
-    addSubview(priceStack)
-    priceStack.addArrangedSubview(priceLabelStack)
-    priceStack.addArrangedSubview(changeLabelStack)
-    
+    let infoLabelsStack = getStackView(axis: .horizontal, spacing: 12)
+    addSubview(infoLabelsStack)
+    infoLabelsStack.addArrangedSubview(priceLabelStack)
+    infoLabelsStack.addArrangedSubview(changeLabelStack)
+        
     NSLayoutConstraint.activate([
-      // Price Stack
-      priceStack.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -24),
-      priceStack.centerYAnchor.constraint(equalTo: imageView.centerYAnchor)
+      // titleIconStack
+      infoLabelsStack.trailingAnchor.constraint(
+        equalTo: trailingAnchor, constant: -24),
+      infoLabelsStack.centerYAnchor.constraint(
+        equalTo: centerYAnchor)
     ])
-
+    
   }
   
-  func getVerticalStack() -> UIStackView {
-    let stackView = UIStackView()
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    stackView.alignment = .center
-    stackView.spacing = 2
-    stackView.translatesAutoresizingMaskIntoConstraints = false
+  func getStackView(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
+    let stackView = ViewHelper.createStackView(
+      axis, distribution: .fill)
+    stackView.spacing = spacing
     return stackView
+  }
+  
+  func getLabel(color: UIColor, text: String, fontSize: CGFloat, weight: UIFont.Weight) -> UILabel {
+    let newLabel = ViewHelper.createLabel(
+      with: color, text: text, alignment: .left,
+      font: UIFont.systemFont(ofSize: fontSize, weight: weight))
+    return newLabel
+  }
+  
+  func getImageView() -> UIImageView {
+    let newImageView = ViewHelper.createImageView()
+    return newImageView
   }
   
 }

@@ -14,6 +14,10 @@ extension UIColor {
   
   static let backgroundPurple = UIColor(red: 93/255, green: 1/255, blue: 152/255, alpha: 1)
   
+  static let darkestGray = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 1)
+  
+  static let darkestGrayAlpha = UIColor(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.7)
+  
 }
 
 

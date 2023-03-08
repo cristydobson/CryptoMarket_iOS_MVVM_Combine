@@ -13,46 +13,9 @@ class PriceTableViewHeader: UIView {
   
   // MARK: - Properties
   
-  var priceLabel: UILabel = {
-//    let newLabel = ViewHelper.createLabel(with: .white,
-//                                          text: NSLocalizedString("Price", comment: ""),
-//                                          alignment: .center,
-//                                          font: UIFont.systemFont(ofSize: 16, weight: .semibold))
-    
-    let newLabel = UILabel()
-    newLabel.textColor = .white
-    newLabel.text = NSLocalizedString("Price", comment: "")
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
-    return newLabel
-  }()
-  
-  var amountLabel: UILabel = {
-//    let newLabel = ViewHelper.createLabel(with: .white,
-//                                          text: NSLocalizedString("Amount", comment: ""),
-//                                          alignment: .center,
-//                                          font: UIFont.systemFont(ofSize: 16, weight: .semibold))
-    let newLabel = UILabel()
-    newLabel.textColor = .white
-    newLabel.text = NSLocalizedString("Amount", comment: "")
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
-    return newLabel
-  }()
-  
-  let labelStack: UIStackView = {
-//    let stackView = ViewHelper.createStackView(.horizontal,
-//                                               distribution: .fillEqually,
-//                                               spacing: 0)
-    let stackView = UIStackView()
-    stackView.axis = .horizontal
-    stackView.distribution = .fillEqually
-//    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
+  var priceLabel: UILabel!
+  var amountLabel: UILabel!
+  var labelStack: UIStackView!
   
   
   // MARK: - init Methods
@@ -66,28 +29,49 @@ class PriceTableViewHeader: UIView {
   }
   
   
-  // MARK: - Startup Methods
+  // MARK: - Setup Methods
   
   func addViews() {
     
+    priceLabel = getLabel(
+      text: NSLocalizedString("Price", comment: ""))
+    amountLabel = getLabel(
+      text: NSLocalizedString("Amount", comment: ""))
+    
+    labelStack = getStackView()
+    
     addSubview(priceLabel)
     addSubview(amountLabel)
-    
     addSubview(labelStack)
     
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(amountLabel)
     
     NSLayoutConstraint.activate([
-      // Label stack
-      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-      labelStack.topAnchor.constraint(equalTo: topAnchor),
-      labelStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+      labelStack.leadingAnchor.constraint(
+        equalTo: leadingAnchor),
+      labelStack.trailingAnchor.constraint(
+        equalTo: trailingAnchor),
+      labelStack.topAnchor.constraint(
+        equalTo: topAnchor),
+      labelStack.bottomAnchor.constraint(
+        equalTo: bottomAnchor)
     ])
 
   }
   
+  func getLabel(text: String) -> UILabel {
+    let newLabel = ViewHelper.createLabel(
+      with: .white, text: text,
+      alignment: .center,
+      font: UIFont.systemFont(ofSize: 16, weight: .semibold))
+    return newLabel
+  }
   
+  func getStackView() -> UIStackView {
+    let stackView = ViewHelper.createStackView(
+      .horizontal, distribution: .fillEqually)
+    return stackView
+  }
   
 }

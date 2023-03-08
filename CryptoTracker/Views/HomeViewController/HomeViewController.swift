@@ -20,8 +20,7 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    view.addGradientBackground()
-    
+    setupView()
     setupCollectionView()
     setupScreenTitle()
   }
@@ -36,10 +35,15 @@ class HomeViewController: UIViewController {
   }
   
   
-  // MARK: - Startup Methods
+  // MARK: - Setup Methods
+  
+  func setupView() {
+    view.addGradientBackground()
+  }
   
   func setupCollectionView() {
-    collectionView = CryptoCollectionView(frame: view.frame, controller: self)
+    collectionView = CryptoCollectionView(
+      frame: view.frame, controller: self)
     view.addSubview(collectionView)
   }
   
@@ -48,40 +52,51 @@ class HomeViewController: UIViewController {
     let titleContainerHorizontalPadding: CGFloat = 18
     let titleContainerVerticalPadding: CGFloat = 6
     
-    let titleContainerView = UIView()
-    titleContainerView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-    titleContainerView.layer.cornerRadius = 15
-    titleContainerView.layer.masksToBounds = true
-    
-    let titleLabel = ViewHelper.createLabel(with: .white,
-                                            text: NSLocalizedString("Crypto Market Tracker", comment: ""),
-                                            alignment: .center,
-                                            font: UIFont.boldSystemFont(ofSize: 22))
+    let titleContainerView = getTitleContainerView()
+    let titleLabel = getTitleLabel()
     
     titleContainerView.addSubview(titleLabel)
     view.addSubview(titleContainerView)
     view.bringSubviewToFront(titleContainerView)
     
-    [titleContainerView, titleLabel].forEach {
-      $0.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
     NSLayoutConstraint.activate([
-      // Title Container View
-      titleContainerView.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
-      titleContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+      // Title Background View
+      titleContainerView.topAnchor.constraint(
+        equalTo: view.topAnchor, constant: 60),
+      titleContainerView.centerXAnchor.constraint(
+        equalTo: view.centerXAnchor),
       
       // Screen Title Label
-      titleLabel.leadingAnchor.constraint(equalTo: titleContainerView.leadingAnchor,
-                                          constant: titleContainerHorizontalPadding),
-      titleLabel.trailingAnchor.constraint(equalTo: titleContainerView.trailingAnchor,
-                                           constant: -titleContainerHorizontalPadding),
-      titleLabel.topAnchor.constraint(equalTo: titleContainerView.topAnchor,
-                                      constant: titleContainerVerticalPadding),
-      titleLabel.bottomAnchor.constraint(equalTo: titleContainerView.bottomAnchor,
-                                         constant: -titleContainerVerticalPadding)
+      titleLabel.leadingAnchor.constraint(
+        equalTo: titleContainerView.leadingAnchor,
+        constant: titleContainerHorizontalPadding),
+      titleLabel.trailingAnchor.constraint(
+        equalTo: titleContainerView.trailingAnchor,
+        constant: -titleContainerHorizontalPadding),
+      titleLabel.topAnchor.constraint(
+        equalTo: titleContainerView.topAnchor,
+        constant: titleContainerVerticalPadding),
+      titleLabel.bottomAnchor.constraint(
+        equalTo: titleContainerView.bottomAnchor,
+        constant: -titleContainerVerticalPadding)
     ])
     
+  }
+  
+  func getTitleContainerView() -> UIView {
+    let newView = ViewHelper.createEmptyView()
+    newView.backgroundColor = .black
+    newView.layer.cornerRadius = 15
+    newView.layer.masksToBounds = true
+    return newView
+  }
+  
+  func getTitleLabel() -> UILabel {
+    let newLabel = ViewHelper.createLabel(
+      with: .white,
+      text: NSLocalizedString("Crypto Market Tracker", comment: ""),
+      alignment: .center, font: UIFont.boldSystemFont(ofSize: 22))
+    return newLabel
   }
   
 }

@@ -31,7 +31,8 @@ class PricesTableView: UIView {
   }
   
   
-  // MARK: - Startup Methods
+  // MARK: - Setup Methods
+  
   func setupTableView() {
     
     // Instantiate TableView
@@ -67,8 +68,8 @@ class PricesTableView: UIView {
 }
 
 
-
 // MARK: - UITableViewDataSource, UITableViewDelegate
+
 extension PricesTableView: UITableViewDataSource, UITableViewDelegate {
   
   func numberOfSections(in tableView: UITableView) -> Int {
@@ -90,7 +91,6 @@ extension PricesTableView: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 40
   }
-  
   
 }
 

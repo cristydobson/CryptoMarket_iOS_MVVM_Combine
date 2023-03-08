@@ -142,7 +142,7 @@ class CryptoDetailViewModel {
       .autoconnect()
       .sink { _ in
         self.delegate?.reloadTableViewData()
-      }
+    }
   }
   
   

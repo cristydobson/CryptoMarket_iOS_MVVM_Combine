@@ -26,7 +26,7 @@ class GraphView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    backgroundColor = .black
+    setupView()
   }
   
   required init?(coder: NSCoder) {
@@ -35,6 +35,10 @@ class GraphView: UIView {
   
   
   // MARK: - Setup Methods
+  
+  func setupView() {
+    backgroundColor = .black
+  }
   
   func addChartView() {
     let chartRect = CGRect(origin: CGPoint.zero,

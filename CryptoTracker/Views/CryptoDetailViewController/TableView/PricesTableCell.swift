@@ -13,43 +13,9 @@ class PricesTableCell: UITableViewCell {
   
   // MARK: - Properties
   
-  var priceLabel: UILabel = {
-//    let newLabel = ViewHelper.createLabel(with: .white, text: "$0.00",
-//                                          alignment: .center,
-//                                          font: UIFont.systemFont(ofSize: 16))
-    let newLabel = UILabel()
-    newLabel.textColor = .white
-    newLabel.text = "$0.00"
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16)
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
-    return newLabel
-  }()
-  
-  var amountLabel: UILabel = {
-//    let newLabel = ViewHelper.createLabel(with: .white, text: "0.00000",
-//                                          alignment: .center,
-//                                          font: UIFont.systemFont(ofSize: 16))
-    let newLabel = UILabel()
-    newLabel.textColor = .white
-    newLabel.text = "0.00000"
-    newLabel.textAlignment = .center
-    newLabel.font = UIFont.systemFont(ofSize: 16)
-    newLabel.translatesAutoresizingMaskIntoConstraints = false
-    return newLabel
-  }()
-  
-  let labelStack: UIStackView = {
-//    let stackView = ViewHelper.createStackView(.horizontal,
-//                                               distribution: .fillEqually,
-//                                               spacing: 0)
-    let stackView = UIStackView()
-    stackView.axis = .horizontal
-    stackView.distribution = .fillEqually
-    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    return stackView
-  }()
+  var priceLabel: UILabel!
+  var amountLabel: UILabel!
+  var labelStack: UIStackView!
   
   var cellViewModel: PriceCellViewModel? {
     didSet {
@@ -65,8 +31,8 @@ class PricesTableCell: UITableViewCell {
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    selectionStyle = .none
-    backgroundColor = .clear
+    
+    setupCell()
     addViews()
   }
   
@@ -75,9 +41,20 @@ class PricesTableCell: UITableViewCell {
   }
   
   
+  // MARK: - Setup Methods
+  
+  func setupCell() {
+    selectionStyle = .none
+    backgroundColor = .clear
+  }
+  
   func addViews() {
     
     // Label stack
+    priceLabel = getLabel(text: "0.000000")
+    amountLabel = getLabel(text: "0.00000")
+    labelStack = getStackView()
+    
     addSubview(priceLabel)
     addSubview(amountLabel)
     addSubview(labelStack)
@@ -86,12 +63,29 @@ class PricesTableCell: UITableViewCell {
     labelStack.addArrangedSubview(amountLabel)
     
     NSLayoutConstraint.activate([
-      labelStack.leadingAnchor.constraint(equalTo: leadingAnchor),
-      labelStack.trailingAnchor.constraint(equalTo: trailingAnchor),
-      labelStack.topAnchor.constraint(equalTo: topAnchor),
-      labelStack.bottomAnchor.constraint(equalTo: bottomAnchor)
+      labelStack.leadingAnchor.constraint(
+        equalTo: leadingAnchor),
+      labelStack.trailingAnchor.constraint(
+        equalTo: trailingAnchor),
+      labelStack.topAnchor.constraint(
+        equalTo: topAnchor),
+      labelStack.bottomAnchor.constraint(
+        equalTo: bottomAnchor)
     ])
     
+  }
+  
+  func getLabel(text: String) -> UILabel {
+    let newLabel = ViewHelper.createLabel(
+      with: .white, text: text, alignment: .center,
+      font: UIFont.systemFont(ofSize: 16))
+    return newLabel
+  }
+  
+  func getStackView() -> UIStackView {
+    let stackView = ViewHelper.createStackView(
+      .horizontal, distribution: .fillEqually)
+    return stackView
   }
   
 }
