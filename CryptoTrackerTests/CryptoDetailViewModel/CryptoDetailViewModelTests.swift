@@ -111,6 +111,4 @@ final class CryptoDetailViewModelTests: XCTestCase {
     XCTAssertNotNil(sut.cryptoMarket)
   }
   
-  
-
 }

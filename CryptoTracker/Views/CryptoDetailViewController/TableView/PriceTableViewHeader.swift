@@ -11,6 +11,11 @@ import UIKit
 class PriceTableViewHeader: UIView {
   
   
+  // MARK: - Parent Controller
+  
+  private var controller: UIViewController!
+  
+  
   // MARK: - Properties
   
   var priceLabel: UILabel!
@@ -18,20 +23,38 @@ class PriceTableViewHeader: UIView {
   var labelStack: UIStackView!
   
   
+  // MARK: - Info Button
+  
+  var infoButtonPressed: (() -> Void) = {}
+  
+  
   // MARK: - init Methods
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
-    addViews()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
   }
   
+  convenience init(frame: CGRect, controller: UIViewController) {
+    self.init(frame: frame)
+    self.controller = controller
+    
+    addViews()
+  }
+  
   
   // MARK: - Setup Methods
   
   func addViews() {
+    
+    /*
+     Label Stack
+     */
+    
+    let priceLabelContainer = ViewHelper.createEmptyView()
     
     priceLabel = getLabel(
       text: NSLocalizedString("Price", comment: ""))
@@ -40,14 +63,24 @@ class PriceTableViewHeader: UIView {
     
     labelStack = getStackView()
     
-    addSubview(priceLabel)
+    priceLabelContainer.addSubview(priceLabel)
+    addSubview(priceLabelContainer)
     addSubview(amountLabel)
     addSubview(labelStack)
     
-    labelStack.addArrangedSubview(priceLabel)
+    labelStack.addArrangedSubview(priceLabelContainer)
     labelStack.addArrangedSubview(amountLabel)
-    
+
     NSLayoutConstraint.activate([
+      // Price Label
+      priceLabel.topAnchor.constraint(
+        equalTo: priceLabelContainer.topAnchor),
+      priceLabel.bottomAnchor.constraint(
+        equalTo: priceLabelContainer.bottomAnchor),
+      priceLabel.centerXAnchor.constraint(
+        equalTo: priceLabelContainer.centerXAnchor),
+      
+      // Label Stack
       labelStack.leadingAnchor.constraint(
         equalTo: leadingAnchor),
       labelStack.trailingAnchor.constraint(
@@ -55,6 +88,23 @@ class PriceTableViewHeader: UIView {
       labelStack.topAnchor.constraint(
         equalTo: topAnchor),
       labelStack.bottomAnchor.constraint(
+        equalTo: bottomAnchor)
+    ])
+    
+    
+    /*
+     Info Button
+     */
+    
+    let infoButton = getInfoButton()
+    addSubview(infoButton)
+    
+    NSLayoutConstraint.activate([
+      infoButton.leadingAnchor.constraint(
+        equalTo: priceLabel.trailingAnchor, constant: 6),
+      infoButton.topAnchor.constraint(
+        equalTo: topAnchor),
+      infoButton.bottomAnchor.constraint(
         equalTo: bottomAnchor)
     ])
 
@@ -72,6 +122,21 @@ class PriceTableViewHeader: UIView {
     let stackView = ViewHelper.createStackView(
       .horizontal, distribution: .fillEqually)
     return stackView
+  }
+  
+  
+  // MARK: - Info Button Methods
+  
+  func getInfoButton() -> UIButton {
+    let button = ViewHelper.createInfoButton()
+    button.addTarget(self,
+                     action: #selector(buttonInfoAction),
+                     for: .touchUpInside)
+    return button
+  }
+  
+  @objc func buttonInfoAction() {
+    infoButtonPressed()
   }
   
 }

@@ -10,11 +10,15 @@ import UIKit
 class CryptoCollectionView: UIView {
   
   
-  // MARK: - Properties
-  var collectionView: UICollectionView!
-  var cellID = "CollectionCell"
+  // MARK: - Parent Controller
   
   private var controller: UIViewController!
+  
+  
+  // MARK: - Properties
+  
+  var collectionView: UICollectionView!
+  var cellID = "CollectionCell"
   
   lazy var viewModel = {
     CryptoCollectionViewModel()
@@ -22,6 +26,7 @@ class CryptoCollectionView: UIView {
   
   
   // MARK: - Init methods
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -144,6 +149,21 @@ extension CryptoCollectionView: UICollectionViewDelegate {
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     createSegueToDetailViewController(for: indexPath)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+    
+    if let cell = collectionView.cellForItem(at: indexPath) {
+      
+      UIView.animate(withDuration: 0.2, animations: {
+        cell.alpha = 0.5
+      }) { (_) in
+        UIView.animate(withDuration: 0.2) {
+          cell.alpha = 1.0
+        }
+      }
+    }
+    return true
   }
   
 }

@@ -27,6 +27,8 @@ class CryptoDetailViewController: UIViewController {
   
   // MARK: - TableViews Properties
   
+  var asksHeader: PriceTableViewHeader!
+  var bidsHeader: PriceTableViewHeader!
   var asksTableView: PricesTableView!
   var bidsTableView: PricesTableView!
   
@@ -47,6 +49,10 @@ class CryptoDetailViewController: UIViewController {
     
     viewModel.delegate = self
     loadViewModel()
+    
+    asksHeader.infoButtonPressed = { //[weak self] in
+      print("INFO BUTTON!!!!")
+    }
   }
   
   
@@ -115,14 +121,11 @@ class CryptoDetailViewController: UIViewController {
      TableView Header Stack
      */
     
-    let tableHeaderContainerView = getEmptyView()
-    tableHeaderContainerView.backgroundColor = .darkestGray
+    let tableHeaderContainerView = getEmptyView(color: .darkestGray)
     
-    let tableHeaderFrame = getRect(
+    setupTableViewHeaders(
       with: CGSize(width: tableViewWidth,
                    height: tableHeaderHeight))
-    let asksHeader = PriceTableViewHeader(frame: tableHeaderFrame)
-    let bidsHeader = PriceTableViewHeader(frame: tableHeaderFrame)
     
     let tableViewHeaderStack = getStackView()
     
@@ -166,7 +169,7 @@ class CryptoDetailViewController: UIViewController {
      */
     
     // Container View
-    let tableContainerView = getEmptyView()
+    let tableContainerView = getEmptyView(color: .clear)
     
     // Table Views
     setupTableViews(with: CGSize(width: tableViewWidth,
@@ -226,6 +229,15 @@ class CryptoDetailViewController: UIViewController {
     graphContainerView.translatesAutoresizingMaskIntoConstraints = false
   }
   
+  func setupTableViewHeaders(with size: CGSize) {
+    let tableHeaderFrame = getRect(with: size)
+    
+    asksHeader = PriceTableViewHeader(
+      frame: tableHeaderFrame, controller: self)
+    bidsHeader = PriceTableViewHeader(
+      frame: tableHeaderFrame, controller: self)
+  }
+  
   func setupTableViews(with size: CGSize) {
     let tableViewFrame = getRect(with: size)
     asksTableView = PricesTableView(frame: tableViewFrame)
@@ -243,8 +255,9 @@ class CryptoDetailViewController: UIViewController {
     return stackView
   }
   
-  func getEmptyView() -> UIView {
+  func getEmptyView(color: UIColor) -> UIView {
     let newView = ViewHelper.createEmptyView()
+    newView.backgroundColor = color
     return newView
   }
   
@@ -252,6 +265,11 @@ class CryptoDetailViewController: UIViewController {
     return CGRect(origin: CGPoint.zero,
                   size: size)
   }
+  
+  
+  // MARK: - Info View
+  
+  
   
   
   // MARK: - Load View Model
@@ -270,11 +288,15 @@ class CryptoDetailViewController: UIViewController {
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
 
         self?.graphContainerView.loadViewModel(with: asks!)
+        
       }
     }
     
     viewModel.noStatsAlert = { [weak self] in
       DispatchQueue.main.async {
+        
+        self?.navigationController?.navigationBar.topItem?.hidesBackButton = true
+        
         let alert = UIAlertController(title: NSLocalizedString("No Stats Available", comment: ""),
                                       message: "",
                                       preferredStyle: .alert)
@@ -286,6 +308,7 @@ class CryptoDetailViewController: UIViewController {
         }
         alert.addAction(okAction)
         self?.present(alert, animated: true)
+        
       }
     }
     

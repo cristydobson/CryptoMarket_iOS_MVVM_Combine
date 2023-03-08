@@ -81,5 +81,14 @@ struct ViewHelper {
     return newImageView
   }
   
+  static func createInfoButton() -> UIButton {
+    let button = UIButton()
+    button.setImage(UIImage(systemName: "info.circle.fill"),
+                    for: .normal)
+    button.tintColor = .infoButtonWhite
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+  }
+  
 }
 
