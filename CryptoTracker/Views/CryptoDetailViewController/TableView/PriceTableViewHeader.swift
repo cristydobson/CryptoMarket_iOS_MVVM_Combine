@@ -1,9 +1,8 @@
-//
-//  PriceTableViewHeader.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/27/23.
-//
+/*
+ PriceTableViewHeader.swift
+ 
+ Created by Cristina Dobson
+ */
 
 import UIKit
 
@@ -18,12 +17,12 @@ class PriceTableViewHeader: UIView {
   var labelStack: UIStackView!
   
   
-  // MARK: - Info Button
+  // MARK: - Info Button Callback
   
   var infoButtonPressed: (() -> Void) = {}
   
   
-  // MARK: - init Methods
+  // MARK: - Init Methods
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -41,23 +40,25 @@ class PriceTableViewHeader: UIView {
   func addViews() {
     
     /*
-     Label Stack
+     LabelStack
      */
     
     let priceLabelContainer = ViewHelper.createEmptyView()
-    
     priceLabel = getLabel(
       text: NSLocalizedString("Price", comment: ""))
+    
     amountLabel = getLabel(
       text: NSLocalizedString("Amount", comment: ""))
     
     labelStack = getStackView()
     
+    // Add the labels and stack to the current view.
     priceLabelContainer.addSubview(priceLabel)
     addSubview(priceLabelContainer)
     addSubview(amountLabel)
     addSubview(labelStack)
     
+    // Arrange the labels on the LabelStack.
     labelStack.addArrangedSubview(priceLabelContainer)
     labelStack.addArrangedSubview(amountLabel)
 
@@ -86,6 +87,7 @@ class PriceTableViewHeader: UIView {
      Info Button
      */
     
+    // Add an Info Button on top of the LabelStack
     let infoButton = getInfoButton()
     addSubview(infoButton)
     
@@ -99,6 +101,9 @@ class PriceTableViewHeader: UIView {
     ])
 
   }
+  
+  
+  // MARK: - UI Helper Methods
   
   func getLabel(text: String) -> UILabel {
     let newLabel = ViewHelper.createLabel(
@@ -125,6 +130,10 @@ class PriceTableViewHeader: UIView {
     return button
   }
   
+  /*
+   Send a callback to CryptoDetailViewController
+   that the Info Button has been tapped.
+   */
   @objc func buttonInfoAction() {
     infoButtonPressed()
   }

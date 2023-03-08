@@ -1,9 +1,8 @@
-//
-//  SceneDelegate.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ SceneDelegate.swift
+ 
+ Created by Cristina Dobson
+ */
 
 import UIKit
 
@@ -30,6 +29,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.windowScene = windowScene
     window?.makeKeyAndVisible()
     
+    // Customize the NavigationBar for the whole app
     navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
     navigationController.navigationBar.shadowImage = UIImage()
     navigationController.navigationBar.isTranslucent = true

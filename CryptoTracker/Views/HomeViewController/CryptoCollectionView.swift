@@ -1,17 +1,25 @@
-//
-//  CryptoCollectionView.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ CryptoCollectionView.swift
+ 
+ The collection view to display all the
+ crypto currencies returned by the API.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
+
 
 class CryptoCollectionView: UIView {
   
   
   // MARK: - Parent Controller
   
+  /*
+   To trigger the segue to CryptoDetailViewController
+   when a cell is tapped on.
+   */
   private var controller: UIViewController!
   
   
@@ -19,6 +27,9 @@ class CryptoCollectionView: UIView {
   
   var collectionView: UICollectionView!
   var cellID = "CollectionCell"
+  
+  
+  // MARK: - View Model
   
   lazy var viewModel = {
     CryptoCollectionViewModel()
@@ -53,6 +64,7 @@ class CryptoCollectionView: UIView {
     backgroundColor = .clear
   }
   
+  // Setup the collection view
   func setupCollectionView() {
     
     let horizontalInsets: CGFloat = 40
@@ -60,7 +72,8 @@ class CryptoCollectionView: UIView {
     
     // Cell Size
     let cellsPerRow: CGFloat = 3
-    let cellWidth = (viewWidth - (horizontalInsets + cellsPerRow)) / cellsPerRow
+    let totalHorizontalInsets = horizontalInsets + cellsPerRow
+    let cellWidth = (viewWidth - totalHorizontalInsets) / cellsPerRow
     
     // CollectionView Layout
     let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -87,7 +100,10 @@ class CryptoCollectionView: UIView {
     
   }
   
-  // Initialize CollectionViewModel
+  /*
+   Setup the callback to reload the collection view
+   from the ViewModel
+   */
   func loadViewModel() {
     
     viewModel.fetchData()
@@ -100,6 +116,14 @@ class CryptoCollectionView: UIView {
     }
   }
   
+  
+  // MARK: - Timer
+  
+  /*
+   Manage the timer in the ViewModel to
+   refresh the data.
+   */
+  
   func startTimer() {
     viewModel.startTimer()
   }
@@ -111,6 +135,10 @@ class CryptoCollectionView: UIView {
   
   // MARK: - Segue to Details View
   
+  /*
+   Trigger the segue to CryptoDetailViewController on
+   the parent ViewController
+   */
   func createSegueToDetailViewController(for indexPath: IndexPath) {
     let detailViewController = CryptoDetailViewController()
     detailViewController.cryptoSymbol = viewModel.cryptoCellViewModels[indexPath.row].symbol ?? ""
@@ -151,6 +179,7 @@ extension CryptoCollectionView: UICollectionViewDelegate {
     createSegueToDetailViewController(for: indexPath)
   }
   
+  // Animate the highlighting of the cell when tapped on.
   func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
     
     if let cell = collectionView.cellForItem(at: indexPath) {
@@ -171,6 +200,7 @@ extension CryptoCollectionView: UICollectionViewDelegate {
 
 // MARK: - CryptoCollectionViewModelDelegate
 
+// The timer has triggered a refresh of the data.
 extension CryptoCollectionView: CryptoCollectionViewModelDelegate {
   
   func reloadCollectionData() {

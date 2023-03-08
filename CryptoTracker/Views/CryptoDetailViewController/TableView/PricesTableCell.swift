@@ -1,9 +1,9 @@
-//
-//  PricesTableCell.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/26/23.
-//
+/*
+ PricesTableCell.swift
+ 
+ Created by Cristina Dobson
+*/
+
 
 import UIKit
 
@@ -16,6 +16,9 @@ class PricesTableCell: UITableViewCell {
   var priceLabel: UILabel!
   var amountLabel: UILabel!
   var labelStack: UIStackView!
+  
+  
+  // MARK: - View Model
   
   var cellViewModel: PriceCellViewModel? {
     didSet {
@@ -50,7 +53,7 @@ class PricesTableCell: UITableViewCell {
   
   func addViews() {
     
-    // Label stack
+    // LabelStack
     priceLabel = getLabel(text: "0.000000")
     amountLabel = getLabel(text: "0.00000")
     labelStack = getStackView()
@@ -59,9 +62,11 @@ class PricesTableCell: UITableViewCell {
     addSubview(amountLabel)
     addSubview(labelStack)
     
+    // Arrange labels on the LabelStack
     labelStack.addArrangedSubview(priceLabel)
     labelStack.addArrangedSubview(amountLabel)
     
+    // LabelStack constraints
     NSLayoutConstraint.activate([
       labelStack.leadingAnchor.constraint(
         equalTo: leadingAnchor),
@@ -74,6 +79,9 @@ class PricesTableCell: UITableViewCell {
     ])
     
   }
+  
+  
+  // MARK: - UI Helper Methods
   
   func getLabel(text: String) -> UILabel {
     let newLabel = ViewHelper.createLabel(

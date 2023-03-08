@@ -1,9 +1,12 @@
-//
-//  GraphViewModel.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/28/23.
-//
+/*
+ GraphViewModel.swift
+ 
+ The ViewModel for GraphView.
+ 
+ Setup the chart to display given data points.
+ 
+ Created by Cristina Dobson
+ */
 
 
 import UIKit
@@ -16,17 +19,15 @@ class GraphViewModel {
   // MARK: - Properties
   
   var graphPoints: [CGPoint] = []
+
   
-  
-  // MARK: - Start View Model
+  // MARK: - Setup the Chart
   
   func startViewModel(with prices: [CryptoPrice]) {
     graphPoints = createGraphPoints(for: prices)
   }
-  
-  
-  // MARK: - Create Graph Points
     
+  // Calculate the data points to display on the chart.
   private func createGraphPoints(for prices: [CryptoPrice]) -> [CGPoint] {
   
     var pointArray: [CGPoint] = []
@@ -47,11 +48,16 @@ class GraphViewModel {
       }
     }
     
+    // Starting point
     pointArray.append(CGPoint(x: 0, y: 5))
     
     return pointArray.reversed()
   }
   
+  
+  // MARK: - Setup the Line Chart
+  
+  // Tell the chart how to draw the lines
   func getChartData() -> LineChartData {
     
     var chartEntries: [ChartDataEntry] = []
@@ -62,24 +68,15 @@ class GraphViewModel {
       chartEntries.append(dataEntry)
     }
     
-    let line = LineChartDataSet(entries: chartEntries,
-                                label: "Asks % Change")
+    let line = LineChartDataSet(
+      entries: chartEntries, label: "Asks % Change")
     line.colors = [UIColor.red]
     line.drawCirclesEnabled = false
     
     line.drawValuesEnabled = false
-    
-    setup(line)
+    line.lineWidth = 3
     
     return LineChartData(dataSet: line)
   }
-  
-  private func setup(_ dataSet: LineChartDataSet) {
-    dataSet.setCircleColor(.green)
-    dataSet.gradientPositions = [0, 40, 100]
-    dataSet.lineWidth = 3
-    dataSet.valueFont = .systemFont(ofSize: 12)
-  }
-
   
 }

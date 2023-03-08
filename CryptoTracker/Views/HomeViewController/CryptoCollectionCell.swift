@@ -1,11 +1,12 @@
-//
-//  CryptoCollectionCell.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ CryptoCollectionCell.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
+
 
 class CryptoCollectionCell: UICollectionViewCell {
   
@@ -19,6 +20,9 @@ class CryptoCollectionCell: UICollectionViewCell {
   var labelStack: UIStackView!
   
   
+  // MARK: - View Model
+  
+  // Populate the UI
   var cellViewModel: CryptoCellViewModel? {
     didSet {
       
@@ -60,6 +64,9 @@ class CryptoCollectionCell: UICollectionViewCell {
   
   func addViews() {
     
+    /*
+     Crypto Currency icon ImageView
+     */
     imageView = getImageView()
     addSubview(imageView)
     
@@ -74,7 +81,10 @@ class CryptoCollectionCell: UICollectionViewCell {
         equalTo: centerXAnchor)
     ])
     
-    // Stack View
+    
+    /*
+     Label Stack
+     */
     nameLabel = getLabel(fontSize: 20, weigth: .bold)
     priceLabel = getLabel(fontSize: 16, weigth: .regular)
     changeLabel = getLabel(fontSize: 16, weigth: .regular)
@@ -101,6 +111,9 @@ class CryptoCollectionCell: UICollectionViewCell {
     ])
 
   }
+  
+  
+  // MARK: - UI Helper Methods
   
   func getLabel(fontSize: CGFloat, weigth: UIFont.Weight) -> UILabel {
     let newLabel = ViewHelper.createLabel(

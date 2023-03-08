@@ -1,9 +1,8 @@
-//
-//  CryptoDataAPIError.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/25/23.
-//
+/*
+ CryptoDataAPIError.swift
+ 
+ Created by Cristina Dobson
+ */
 
 import Foundation
 

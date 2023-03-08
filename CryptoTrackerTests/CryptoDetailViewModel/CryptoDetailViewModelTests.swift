@@ -1,9 +1,9 @@
-//
-//  CryptoDetailViewModelTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/6/23.
-//
+/*
+ CryptoDetailViewModelTests.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 @testable import CryptoTracker
@@ -14,6 +14,8 @@ final class CryptoDetailViewModelTests: XCTestCase {
   var cryptoTicker: CryptoMarket!
   let cryptoSymbol = "BTC-USD"
   
+  
+  // MARK: - Setup Methods
   
   override func setUpWithError() throws {
     try super.setUpWithError()
@@ -29,14 +31,14 @@ final class CryptoDetailViewModelTests: XCTestCase {
     try super.tearDownWithError()
   }
   
-  
-  // MARK: - Helper Methods
-  
   func createCryptoTicker() {
     cryptoTicker = CryptoMarket(
       symbol: cryptoSymbol, price_24h: 4998, volume_24h: 0.3015,
       last_trade_price: 5000, bids: nil, asks: nil)
   }
+  
+  
+  // MARK: - Helper Methods
   
   func createHeaderViewModel() -> HeaderViewModel {
     return HeaderViewModel(

@@ -1,9 +1,9 @@
-//
-//  CryptoCellViewModelTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/6/23.
-//
+/*
+ CryptoCellViewModelTests.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 @testable import CryptoTracker
@@ -13,6 +13,8 @@ final class CryptoCellViewModelTests: XCTestCase {
 
   var sut: CryptoCellViewModel!
   
+  
+  // MARK: - Setup Methods
   
   override func setUpWithError() throws {
     try super.setUpWithError()
@@ -25,7 +27,7 @@ final class CryptoCellViewModelTests: XCTestCase {
   }
   
   
-  // MARK: - Setup
+  // MARK: - Init SUT
   
   func createCellViewModel(name: String?, price: Double?, lastTradePrice: Double?) {
     sut = CryptoCellViewModel(symbol: name, price24h: price, volume24h: 1, lastTradePrice: lastTradePrice)

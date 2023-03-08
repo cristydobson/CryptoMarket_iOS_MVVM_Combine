@@ -1,26 +1,19 @@
-//
-//  ViewHelper.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/28/23.
-//
+/*
+ ViewHelper.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import Foundation
 import UIKit
 
+
+// MARK: - UIView Extension
+
 extension UIView {
   
-  // MARK: - Constraining Methods
-    
-  func setConstraintsToBounds(ofSuperview view: UIView) -> [NSLayoutConstraint] {
-    return [
-      topAnchor.constraint(equalTo: view.topAnchor),
-      leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      view.bottomAnchor.constraint(equalTo: bottomAnchor),
-      view.trailingAnchor.constraint(equalTo: trailingAnchor)
-    ]
-  }
-  
+  // Constraining Methods
   func setHeightContraint(by constant: CGFloat) -> NSLayoutConstraint {
     return heightAnchor.constraint(equalToConstant: constant)
   }
@@ -29,6 +22,7 @@ extension UIView {
     return widthAnchor.constraint(equalToConstant: constant)
   }
   
+  // Add a gradient color to the background view
   func addGradientBackground() {
     let gradient = CAGradientLayer()
     gradient.frame = bounds
@@ -44,8 +38,11 @@ extension UIView {
 }
 
 
+// MARK: - View Helper
+
 struct ViewHelper {
   
+  // Create a Label
   static func createLabel(with color: UIColor, text: String, alignment: NSTextAlignment, font: UIFont) -> UILabel {
     
     let newLabel = UILabel()
@@ -58,6 +55,7 @@ struct ViewHelper {
     return newLabel
   }
   
+  // Create a Stack View
   static func createStackView(_ axis: NSLayoutConstraint.Axis, distribution: UIStackView.Distribution) -> UIStackView {
     let stackView = UIStackView()
     stackView.axis = axis
@@ -67,12 +65,14 @@ struct ViewHelper {
     return stackView
   }
   
+  // Create an empty UIView
   static func createEmptyView() -> UIView {
     let newView = UIView()
     newView.translatesAutoresizingMaskIntoConstraints = false
     return newView
   }
   
+  // Create an ImageView
   static func createImageView() -> UIImageView {
     let newImageView = UIImageView()
     newImageView.contentMode = .scaleAspectFit
@@ -81,6 +81,7 @@ struct ViewHelper {
     return newImageView
   }
   
+  // Create an Info Button
   static func createInfoButton() -> UIButton {
     let button = UIButton()
     button.setImage(UIImage(systemName: "info.circle.fill"),

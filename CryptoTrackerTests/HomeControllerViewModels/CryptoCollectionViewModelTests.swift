@@ -1,9 +1,9 @@
-//
-//  CryptoCollectionViewTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/7/23.
-//
+/*
+ CryptoCollectionViewTests.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 @testable import CryptoTracker
@@ -15,6 +15,8 @@ final class CryptoCollectionViewModelTests: XCTestCase {
   var cryptoMarkets: [CryptoMarket]!
   let cryptoSymbol = "BTC-USD"
   
+  
+  // MARK: - Setup Methods
   
   override func setUpWithError() throws {
     try super.setUpWithError()
@@ -29,9 +31,6 @@ final class CryptoCollectionViewModelTests: XCTestCase {
     
     try super.tearDownWithError()
   }
-  
-  
-  // MARK: - Setup
   
   func createCryptoMarketArray() {
     cryptoMarkets = [

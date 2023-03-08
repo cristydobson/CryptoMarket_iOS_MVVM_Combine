@@ -1,9 +1,11 @@
-//
-//  GraphView.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/28/23.
-//
+/*
+ GraphView.swift
+ 
+ Display the given data points in the graph.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
 import Charts
@@ -15,6 +17,9 @@ class GraphView: UIView {
   // MARK: - Properties
   
   var chartView: LineChartView!
+  
+  
+  // MARK: - View Model
   
   lazy var viewModel = {
     GraphViewModel()
@@ -38,8 +43,10 @@ class GraphView: UIView {
   
   func setupView() {
     backgroundColor = .black
+    isUserInteractionEnabled = false
   }
   
+  // Initialiaze the Graph / Chart
   func addChartView() {
     let chartRect = CGRect(origin: CGPoint.zero,
                            size: frame.size)
@@ -61,6 +68,7 @@ class GraphView: UIView {
 
   
   // MARK: - Load View Model
+  
   func loadViewModel(with prices: [CryptoPrice]) {
     viewModel.startViewModel(with: prices)
     updateChart()
@@ -69,7 +77,7 @@ class GraphView: UIView {
 }
 
 
-// MARK: - Chart View
+// MARK: - Update Chart View
 
 extension GraphView {
   

@@ -1,15 +1,18 @@
-//
-//  ImageHelper.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 3/1/23.
-//
+/*
+ ImageHelper.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
 
 
+// MARK: - Image Helper 
+
 struct ImageHelper {
   
+  // Get an image from the Bundle
   static func getCryptoIcon(for coin: String?) -> UIImage? {
     
     if let coinName = coin,

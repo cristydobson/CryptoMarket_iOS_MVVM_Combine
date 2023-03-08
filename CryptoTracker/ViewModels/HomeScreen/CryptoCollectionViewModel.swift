@@ -1,14 +1,23 @@
-//
-//  CryptoCollectionViewModel.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ CryptoCollectionViewModel.swift
+ 
+ The ViewModel for CryptoCollectionView.
+ 
+ Fetch the data of crypto currencies
+ to display on the HomeScreen.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import Foundation
 import Combine
 
 
+/*
+ Tell CryptoCollectionView to reload the collection view
+ when the timer is up.
+ */
 protocol CryptoCollectionViewModelDelegate: AnyObject {
   func reloadCollectionData()
 }
@@ -17,18 +26,12 @@ protocol CryptoCollectionViewModelDelegate: AnyObject {
 class CryptoCollectionViewModel {
   
   
-  // MARK: - Delegate
+  // MARK: - Properties
   
   weak var delegate: CryptoCollectionViewModelDelegate?
-    
-  
-  // MARK: - Load Data
   
   private var subscriptions = Set<AnyCancellable>()
   var cryptoDataAPI = CryptoDataLoader.shared
-  
-  
-  // MARK: - Fetch Data
     
   var reloadCollectionView: (() -> Void)?
   
@@ -39,7 +42,9 @@ class CryptoCollectionViewModel {
   }
   
   
-  // Fetch data from API
+  // MARK: - Fetch Data
+  
+  // Fetch data through the API
   func fetchData() {
 
     cryptoDataAPI.fetchCryptoMarkets(from: Endpoint.tickers.rawValue)
@@ -49,14 +54,13 @@ class CryptoCollectionViewModel {
         }
       }
       receiveValue: { [unowned self] in
-        print("FETCH DATA!!!!!!!")
         let cryptoMarkets: [CryptoMarket] = $0
         self.cryptoCellViewModels = self.createCellViewModels(from: cryptoMarkets)
       }
       .store(in: &self.subscriptions)
   }
   
-  // Get CryptoCellViewModels from the data response
+  // Create CellViewModels from the data response
   func createCellViewModels(from resultsArray: [CryptoMarket]) -> [CryptoCellViewModel] {
     
     var viewModels: [CryptoCellViewModel] = []
@@ -73,7 +77,7 @@ class CryptoCollectionViewModel {
     return viewModels
   }
   
-  // Build a CellViewModel
+  // Build a single CellViewModel
   func buildCellModel(from market: CryptoMarket) -> CryptoCellViewModel {
     return CryptoCellViewModel(symbol: market.symbol,
                                price24h: market.price_24h,
@@ -81,22 +85,22 @@ class CryptoCollectionViewModel {
                                lastTradePrice: market.last_trade_price)
   }
   
-  /*
-   Create and return a CryptoCellViewModel
-   for the current IndexPath
-   */
+  // Return a CellViewModel for the current IndexPath
   func getCellViewModel(at indexPath: IndexPath) -> CryptoCellViewModel {
     return cryptoCellViewModels[indexPath.row]
   }
   
   
   // MARK: - Handle errors
+  
   func handleError(_ apiError: CryptoDataAPIError) {
     print("ERROR: \(apiError.localizedDescription)!!!!!")
   }
   
   
   // MARK: - Timer
+  
+  // Timer to refresh the data every 10 seconds
   
   private var timer: AnyCancellable?
   

@@ -1,9 +1,9 @@
-//
-//  PriceCellViewModelTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/5/23.
-//
+/*
+ PriceCellViewModelTests.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 @testable import CryptoTracker
@@ -12,9 +12,11 @@ final class PriceCellViewModelTests: XCTestCase {
   
   var sut: PriceCellViewModel!
   
+  
+  // MARK: - Setup Methods
+  
   override func setUpWithError() throws {
     try super.setUpWithError()
-    
   }
   
   override func tearDownWithError() throws {
@@ -23,11 +25,12 @@ final class PriceCellViewModelTests: XCTestCase {
     try super.tearDownWithError()
   }
   
-  // MARK: - Create SUT
+  
+  // MARK: - Init SUT
+  
   func createSutWith(price: Double, amount: Double, priceType: PriceType) {
-    sut = PriceCellViewModel(price: price,
-                             amount: amount,
-                             priceType: priceType)
+    sut = PriceCellViewModel(
+      price: price, amount: amount, priceType: priceType)
   }
   
   
@@ -132,8 +135,6 @@ final class PriceCellViewModelTests: XCTestCase {
     // then
     XCTAssertEqual(labelColor, UIColor.green)
   }
-  
-  
   
 }
 

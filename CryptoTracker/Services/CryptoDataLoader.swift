@@ -1,9 +1,12 @@
-//
-//  CryptoDataLoader.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/25/23.
-//
+/*
+ CryptoDataLoader.swift
+ 
+ A Singleton used to fetch the data
+ through the API and decode it.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import Foundation
 import Combine
@@ -42,22 +45,23 @@ class CryptoDataLoader: CryptoService {
         return promise(.failure(.urlError(URLError(.unsupportedURL))))
       }
       
-      // Fetch data
+      // Start fetching the data
       self.urlSession.dataTaskPublisher(for: url)
       /*
-       Check that the http
-       response status code is between 200 and 300.
+       Check that the http response status code
+       is between 200 and 300.
        */
         .tryMap { (data, response) -> Data in
           guard let httpResponse = response as? HTTPURLResponse,
                 200...299 ~= httpResponse.statusCode
           else {
-            throw CryptoDataAPIError.responseError((response as? HTTPURLResponse)?.statusCode ?? 500)
+            throw CryptoDataAPIError.responseError(
+              (response as? HTTPURLResponse)?.statusCode ?? 500)
           }
           return data
         }
       /*
-       Decode the published JSON data into CryptoDataModel
+       Decode the published JSON data into the CryptoMarket model
        */
         .decode(type: T.self,
                 decoder: self.jsonDecoder)
@@ -82,9 +86,9 @@ class CryptoDataLoader: CryptoService {
             }
           }
         }
-    receiveValue: {
-      promise(.success($0))
-    }
+      receiveValue: {
+        promise(.success($0))
+      }
       /*
        Make sure the subscription still works after
        the execution is finished.

@@ -1,9 +1,12 @@
-//
-//  ApiTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/7/23.
-//
+/*
+ ApiTests.swift
+ 
+ Test that the API endpoints get an
+ HTTP Status Code 200.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 import Network
@@ -24,6 +27,8 @@ final class ApiTests: XCTestCase {
   var endpointBidsAsks: String!
   
   
+  // MARK: - Setup Methods
+  
   override func setUpWithError() throws {
     try super.setUpWithError()
     
@@ -38,9 +43,6 @@ final class ApiTests: XCTestCase {
     
     try super.tearDownWithError()
   }
-  
-  
-  // MARK: - Setup
   
   func createEndpoints() {
     let cryptoSymbol = "BTC-USD"

@@ -1,11 +1,14 @@
-//
-//  CryptoDetailViewController.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ CryptoDetailViewController.swift
+ 
+ Display the data from a single Crypto Currency.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
+
 
 class CryptoDetailViewController: UIViewController {
   
@@ -14,13 +17,7 @@ class CryptoDetailViewController: UIViewController {
   
   var cryptoSymbol = ""
   
-  
-  // MARK: - Header View
-  
   var headerView: HeaderView!
-  
-  
-  // MARK: - Graph Properties
   
   var graphContainerView: GraphView!
   
@@ -33,14 +30,15 @@ class CryptoDetailViewController: UIViewController {
   var bidsTableView: PricesTableView!
   
   
-  // MARK: - View Model Property
+  // MARK: - View Model
   
   lazy var viewModel = {
     CryptoDetailViewModel()
   }()
   
   
-  // MARK: - View Controller Life Cycle
+  // MARK: - View Controller's Life Cycle
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -55,7 +53,7 @@ class CryptoDetailViewController: UIViewController {
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    
+    // Stop the timer to refresh data on the ViewModel.
     viewModel.cancelTimer()
   }
   
@@ -63,13 +61,15 @@ class CryptoDetailViewController: UIViewController {
   // MARK: - Setup Methods
   
   func setupView() {
-    navigationController?.navigationBar.topItem?.backButtonTitle = NSLocalizedString("Back", comment: "")
+    navigationController?.navigationBar.topItem?
+      .backButtonTitle = NSLocalizedString("Back", comment: "")
     
     view.backgroundColor = .black
   }
   
   func addViews() {
 
+    // View Sizes
     let safeArea = view.safeAreaLayoutGuide
     let horizontalPadding: CGFloat = 48
     
@@ -88,7 +88,7 @@ class CryptoDetailViewController: UIViewController {
     
     
     /*
-     Header View
+     1.- Header View
      */
     setupHeaderView()
     view.addSubview(headerView)
@@ -105,7 +105,7 @@ class CryptoDetailViewController: UIViewController {
     
     
     /*
-     Graph Container View
+     2.- Graph Container View
      */
     setupGraphView()
     view.addSubview(graphContainerView)
@@ -122,7 +122,7 @@ class CryptoDetailViewController: UIViewController {
     
 
     /*
-     TableView Header Stack
+     3.- TableView Headers
      */
     
     let tableHeaderContainerView = getEmptyView(color: .darkestGray)
@@ -133,16 +133,18 @@ class CryptoDetailViewController: UIViewController {
     
     let tableViewHeaderStack = getStackView()
     
+    // Add views to the container view
     tableHeaderContainerView.addSubview(asksHeader)
     tableHeaderContainerView.addSubview(bidsHeader)
     tableHeaderContainerView.addSubview(tableViewHeaderStack)
     view.addSubview(tableHeaderContainerView)
 
+    // Arrange the TableView Headers in their container stack
     tableViewHeaderStack.addArrangedSubview(asksHeader)
     tableViewHeaderStack.addArrangedSubview(bidsHeader)
     
     NSLayoutConstraint.activate([
-      // tableHeaderContainerView
+      // TableHeaderContainerView
       tableHeaderContainerView.leadingAnchor.constraint(
         equalTo: safeArea.leadingAnchor),
       tableHeaderContainerView.trailingAnchor.constraint(
@@ -152,13 +154,13 @@ class CryptoDetailViewController: UIViewController {
       tableHeaderContainerView.setHeightContraint(
         by: tableHeaderHeight),
       
-      // TableView headers
+      // TableView Headers
       asksHeader.setWidthContraint(by: tableViewWidth),
       asksHeader.setHeightContraint(by: tableHeaderHeight),
       bidsHeader.setWidthContraint(by: tableViewWidth),
       bidsHeader.setHeightContraint(by: tableHeaderHeight),
       
-      // TableView Header Container Stack
+      // TableView Headers Stack
       tableViewHeaderStack.topAnchor.constraint(
         equalTo: tableHeaderContainerView.topAnchor),
       tableViewHeaderStack.bottomAnchor.constraint(
@@ -169,29 +171,30 @@ class CryptoDetailViewController: UIViewController {
 
 
     /*
-     Price TableViews
+     4.- TableViews
      */
     
     // Container View
     let tableContainerView = getEmptyView(color: .clear)
     
-    // Table Views
+    // Create the TableViews
     setupTableViews(with: CGSize(width: tableViewWidth,
                                  height: tableViewHeight))
     
     let tableViewStack = getStackView()
     
+    // Add the TableViews to their container view.
     tableContainerView.addSubview(asksTableView)
     tableContainerView.addSubview(bidsTableView)
     tableContainerView.addSubview(tableViewStack)
     view.addSubview(tableContainerView)
     
-    // Table View Container Stack
+    // Arrange the TableViews in their container stack.
     tableViewStack.addArrangedSubview(asksTableView)
     tableViewStack.addArrangedSubview(bidsTableView)
     
     NSLayoutConstraint.activate([
-      // tableContainerView
+      // TableContainerView
       tableContainerView.leadingAnchor.constraint(
         equalTo: safeArea.leadingAnchor),
       tableContainerView.trailingAnchor.constraint(
@@ -201,7 +204,7 @@ class CryptoDetailViewController: UIViewController {
       tableContainerView.bottomAnchor.constraint(
         equalTo: view.bottomAnchor),
       
-      // tableViews
+      // TableViews
       asksTableView.widthAnchor.constraint(
         equalToConstant: tableViewWidth),
       asksTableView.heightAnchor.constraint(
@@ -211,7 +214,7 @@ class CryptoDetailViewController: UIViewController {
       bidsTableView.heightAnchor.constraint(
         equalToConstant: tableViewHeight),
       
-      // tableViewStack
+      // TableViewStack
       tableViewStack.topAnchor.constraint(
         equalTo: tableContainerView.topAnchor),
       tableViewStack.bottomAnchor.constraint(
@@ -222,6 +225,9 @@ class CryptoDetailViewController: UIViewController {
     ])
     
   }
+  
+  
+  // MARK: - UI Helper Methods
   
   func setupHeaderView() {
     headerView = HeaderView()
@@ -268,13 +274,16 @@ class CryptoDetailViewController: UIViewController {
                   size: size)
   }
   
+}
+
+
+// MARK: - Load View Model
+
+extension CryptoDetailViewController {
   
-  // MARK: - Load View Model
-  
-  // Get CryptoDetailViewModel
   func loadViewModel() {
     
-    // Fetch TableViews Data
+    // Fetch the TableViews Data
     viewModel.fetchTableViewData(with: cryptoSymbol)
     
     viewModel.reloadTableViews = { [weak self] in
@@ -283,22 +292,27 @@ class CryptoDetailViewController: UIViewController {
         let bids = self?.viewModel.bids
         self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
         self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
-
+        
         self?.graphContainerView.loadViewModel(with: asks!)
         
       }
     }
     
+    /*
+     The data returned is missing the ASK and BID arrays.
+     Alert the user before popping the ViewController.
+     */
     viewModel.noStatsAlert = { [weak self] in
       DispatchQueue.main.async {
         
         self?.navigationController?.navigationBar.topItem?.hidesBackButton = true
         
-        let alert = UIAlertController(title: NSLocalizedString("No Stats Available", comment: ""),
-                                      message: "",
-                                      preferredStyle: .alert)
-        let okAction = UIAlertAction(title: NSLocalizedString("OK", comment: ""),
-                                     style: .default) { action in
+        let alert = UIAlertController(
+          title: NSLocalizedString("No Stats Available", comment: ""),
+          message: "", preferredStyle: .alert)
+        let okAction = UIAlertAction(
+          title: NSLocalizedString("OK", comment: ""), style: .default) { action in
+            
           DispatchQueue.main.async {
             self?.navigationController?.popViewController(animated: true)
           }
@@ -309,20 +323,22 @@ class CryptoDetailViewController: UIViewController {
       }
     }
     
+    // Load the HeaderView after the data was successfully returned.
     viewModel.reloadHeader = { [weak self] in
       DispatchQueue.main.async {
         self?.headerView.viewModel = self?.viewModel.headerViewModel
       }
     }
-    
   }
   
 }
 
 
 // MARK: - CryptoDetailViewModelDelegate
+
 extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
   
+  // The timer has triggered a refresh of the data.
   func reloadTableViewData() {
     loadViewModel()
   }
@@ -334,6 +350,7 @@ extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
 
 extension CryptoDetailViewController: UIPopoverPresentationControllerDelegate {
   
+  // Setup the callbacks from the info button popover views.
   func setPopoverCalls() {
     asksHeader.infoButtonPressed = { [weak self] in
       DispatchQueue.main.async {
@@ -352,45 +369,28 @@ extension CryptoDetailViewController: UIPopoverPresentationControllerDelegate {
     }
   }
   
+  /*
+   Create a popover view when the info button on
+   the TableViewHeaders is tapped on.
+   */
   func createPopover(from sourceType: PriceType, withText text: String) {
-    let popoverVc = UIViewController()
-    popoverVc.view.backgroundColor = .darkestGray
+    
+    let popoverVc = PopoverController()
     popoverVc.modalPresentationStyle = .popover
     popoverVc.popoverPresentationController?.delegate = self
     popoverVc.preferredContentSize = CGSize(width: 200, height: 80)
-    
-    let label = UILabel()
-    label.text = text
-    label.translatesAutoresizingMaskIntoConstraints = false
-    label.textColor = .lighterGray
-    label.numberOfLines = .max
-    label.textAlignment = .center
-    label.adjustsFontSizeToFitWidth = true
-    popoverVc.view.addSubview(label)
-    
-    NSLayoutConstraint.activate([
-      label.leadingAnchor.constraint(
-        equalTo: popoverVc.view.leadingAnchor, constant: 16),
-      label.trailingAnchor.constraint(
-        equalTo: popoverVc.view.trailingAnchor, constant: -16),
-      label.topAnchor.constraint(
-        equalTo: popoverVc.view.topAnchor, constant: 4),
-      label.bottomAnchor.constraint(
-        equalTo: popoverVc.view.bottomAnchor, constant: -18)
-    ])
+    popoverVc.labelText = text
     
     let sourceView: PriceTableViewHeader = sourceType == .ask ?
     asksHeader : bidsHeader
+    popoverVc.sourceView = sourceView
     
-    let presentationController = popoverVc.popoverPresentationController!
-    presentationController.sourceView = sourceView
-    presentationController.sourceRect = sourceView.bounds
-    presentationController.backgroundColor = .darkestGray
-    presentationController.permittedArrowDirections = .down
     present(popoverVc, animated: true)
   }
   
+  // UIPopoverPresentationControllerDelegate
   func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
     return .none
   }
+  
 }

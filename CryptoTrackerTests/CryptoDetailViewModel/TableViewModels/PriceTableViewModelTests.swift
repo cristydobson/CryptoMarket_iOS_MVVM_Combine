@@ -1,9 +1,9 @@
-//
-//  PriceTableViewModelTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/6/23.
-//
+/*
+ PriceTableViewModelTests.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 @testable import CryptoTracker
@@ -13,6 +13,8 @@ final class PriceTableViewModelTests: XCTestCase {
   var sut: PriceTableViewModel!
   var cryptoPriceArray: [CryptoPrice]!
   
+  
+  // MARK: - Setup Methods
   
   override func setUpWithError() throws {
     try super.setUpWithError()
@@ -27,9 +29,6 @@ final class PriceTableViewModelTests: XCTestCase {
     
     try super.tearDownWithError()
   }
-  
-  
-  // MARK: Setup
   
   func createCryptoPriceArray() {
     cryptoPriceArray = [
@@ -117,6 +116,5 @@ final class PriceTableViewModelTests: XCTestCase {
     // then
     XCTAssertEqual(viewModel, expectedViewModel)
   }
-  
   
 }

@@ -1,9 +1,9 @@
-//
-//  HeaderViewModelTests.swift
-//  CryptoTrackerTests
-//
-//  Created by Cristina Dobson on 3/6/23.
-//
+/*
+ HeaderViewModelTests.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import XCTest
 @testable import CryptoTracker
@@ -12,6 +12,9 @@ import XCTest
 final class HeaderViewModelTests: XCTestCase {
 
   var sut: HeaderViewModel!
+  
+  
+  // MARK: - Setup Methods
   
   override func setUpWithError() throws {
     try super.setUpWithError()
@@ -24,7 +27,8 @@ final class HeaderViewModelTests: XCTestCase {
   }
   
   
-  // MARK: - Helper Methods
+  // MARK: - Init SUT
+  
   func createHeaderModelWith(name: String?, price: Double?, lastTradePrice: Double?) {
     sut = HeaderViewModel(name: name, price: price, lastTradePrice: lastTradePrice)
   }

@@ -1,9 +1,8 @@
-//
-//  AppDelegate.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ AppDelegate.swift
+ 
+ Created by Cristina Dobson
+ */
 
 import UIKit
 

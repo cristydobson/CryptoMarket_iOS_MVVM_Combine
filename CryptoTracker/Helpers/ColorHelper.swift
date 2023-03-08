@@ -1,12 +1,14 @@
-//
-//  ColorHelper.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/25/23.
-//
+/*
+ ColorHelper.swift
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
 
+
+// MARK: - UIColor Extension
 
 extension UIColor {
   
@@ -25,8 +27,14 @@ extension UIColor {
 }
 
 
+// MARK: - Color Helper
+
 struct ColorHelper {
   
+  /*
+   Get the color of the label based on the negative
+   or positive value of the amount
+   */
   static func getPercentageLabelColor(for amount: String) -> UIColor {
     return amount.contains("-") ? .red : .green
   }

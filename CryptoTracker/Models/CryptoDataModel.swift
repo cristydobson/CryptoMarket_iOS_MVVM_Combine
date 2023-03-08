@@ -1,9 +1,11 @@
-//
-//  CryptoDataModel.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ CryptoDataModel.swift
+ 
+ Models for decoding the JSON data returned
+ by the Blockchain API.
+ 
+ Created by Cristina Dobson
+ */
 
 
 // MARK: - Crypto Markets

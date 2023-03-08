@@ -1,11 +1,15 @@
-//
-//  ViewController.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/24/23.
-//
+/*
+ HomeViewController.swift
+ 
+ Display the HomeScreen with a collectionView
+ of crypto currencies.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
+
 
 class HomeViewController: UIViewController {
   
@@ -26,27 +30,34 @@ class HomeViewController: UIViewController {
   }
   
   override func viewWillAppear(_ animated: Bool) {
+    // Start the timer to refresh the data.
     collectionView.startTimer()
   }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
+    // Stop the timer that refreshes the data.
     collectionView.stopTimer()
   }
   
   
-  // MARK: - Setup Methods
+  // MARK: - Setup UI Methods
   
   func setupView() {
     view.addGradientBackground()
   }
   
+  // Setup the main collection view
   func setupCollectionView() {
     collectionView = CryptoCollectionView(
       frame: view.frame, controller: self)
     view.addSubview(collectionView)
   }
   
+  /*
+   Add the HomeScreen title with a background view
+   to the NavigationBar.
+   */
   func setupScreenTitle() {
     
     let titleContainerHorizontalPadding: CGFloat = 18
@@ -56,15 +67,12 @@ class HomeViewController: UIViewController {
     let titleLabel = getTitleLabel()
     
     titleContainerView.addSubview(titleLabel)
-    view.addSubview(titleContainerView)
-    view.bringSubviewToFront(titleContainerView)
+    
+    navigationController?.navigationBar.addSubview(titleContainerView)
     
     NSLayoutConstraint.activate([
       // Title Background View
-      titleContainerView.topAnchor.constraint(
-        equalTo: view.topAnchor, constant: 60),
-      titleContainerView.centerXAnchor.constraint(
-        equalTo: view.centerXAnchor),
+      titleContainerView.centerXAnchor.constraint(equalTo: (navigationController?.navigationBar.centerXAnchor)!),
       
       // Screen Title Label
       titleLabel.leadingAnchor.constraint(
@@ -82,6 +90,9 @@ class HomeViewController: UIViewController {
     ])
     
   }
+  
+  
+  // MARK: - UI Helper Methods
   
   func getTitleContainerView() -> UIView {
     let newView = ViewHelper.createEmptyView()

@@ -1,9 +1,11 @@
-//
-//  HeaderView.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 3/1/23.
-//
+/*
+ HeaderView.swift
+ 
+ Displays the data from a single Ticker.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import Foundation
 import UIKit
@@ -54,7 +56,6 @@ class HeaderView: UIView {
   }
   
   
-  
   // MARK: - Setup Methods
   
   func setupView() {
@@ -78,7 +79,6 @@ class HeaderView: UIView {
     addSubview(nameLabel)
     
     // Name Label + Icon Stack
-    
     let titleIconStack = getStackView(axis: .horizontal, spacing: 12)
     addSubview(titleIconStack)
     titleIconStack.addArrangedSubview(imageView)
@@ -100,9 +100,10 @@ class HeaderView: UIView {
     
     
     /*
-     Price Stack
+     Data Labels Stack
      */
     
+    // PriceLabelStack
     let priceLabelStack = getStackView(axis: .vertical, spacing: 2)
     
     priceLabel = getLabel(
@@ -113,12 +114,14 @@ class HeaderView: UIView {
       text: NSLocalizedString("Last Trade", comment: ""),
       fontSize: 14, weight: .medium)
     
+    // Arrange Price labels on PriceLabelStack
     addSubview(priceLabel)
     addSubview(priceSubtitleLabel)
     addSubview(priceLabelStack)
     priceLabelStack.addArrangedSubview(priceLabel)
     priceLabelStack.addArrangedSubview(priceSubtitleLabel)
     
+    // ChangeLabelStack
     let changeLabelStack = getStackView(axis: .vertical, spacing: 2)
     
     changeLabel = getLabel(
@@ -129,26 +132,31 @@ class HeaderView: UIView {
       text: NSLocalizedString("24h Price", comment: ""),
       fontSize: 14, weight: .medium)
     
+    // Arrange Percentage Change labels on ChangeLabelStack
     addSubview(changeLabel)
     addSubview(changeSubtitleLabel)
     addSubview(changeLabelStack)
     changeLabelStack.addArrangedSubview(changeLabel)
     changeLabelStack.addArrangedSubview(changeSubtitleLabel)
     
-    let infoLabelsStack = getStackView(axis: .horizontal, spacing: 12)
-    addSubview(infoLabelsStack)
-    infoLabelsStack.addArrangedSubview(priceLabelStack)
-    infoLabelsStack.addArrangedSubview(changeLabelStack)
+    // Arrange Price and Change label stacks into DataLabelsStack
+    let dataLabelsStack = getStackView(axis: .horizontal, spacing: 12)
+    addSubview(dataLabelsStack)
+    dataLabelsStack.addArrangedSubview(priceLabelStack)
+    dataLabelsStack.addArrangedSubview(changeLabelStack)
         
     NSLayoutConstraint.activate([
       // titleIconStack
-      infoLabelsStack.trailingAnchor.constraint(
+      dataLabelsStack.trailingAnchor.constraint(
         equalTo: trailingAnchor, constant: -24),
-      infoLabelsStack.centerYAnchor.constraint(
+      dataLabelsStack.centerYAnchor.constraint(
         equalTo: centerYAnchor)
     ])
     
   }
+  
+  
+  // MARK: - UI Helper Methods
   
   func getStackView(axis: NSLayoutConstraint.Axis, spacing: CGFloat) -> UIStackView {
     let stackView = ViewHelper.createStackView(

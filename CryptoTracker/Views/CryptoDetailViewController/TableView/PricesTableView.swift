@@ -1,11 +1,15 @@
-//
-//  PricesTableView.swift
-//  CryptoTracker
-//
-//  Created by Cristina Dobson on 2/26/23.
-//
+/*
+ PricesTableView.swift
+ 
+ Displays the ASK and BID arrays.
+ One array per PricesTableView instance.
+ 
+ Created by Cristina Dobson
+ */
+
 
 import UIKit
+
 
 class PricesTableView: UIView {
   
@@ -15,12 +19,16 @@ class PricesTableView: UIView {
   let cellID = "TableCell"
   let headerID = "TableHeader"
   
+  
+  // MARK: - View Model
+  
   lazy var viewModel = {
     PriceTableViewModel()
   }()
   
   
   // MARK: - Init methods
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     setupTableView()
@@ -33,12 +41,13 @@ class PricesTableView: UIView {
   
   // MARK: - Setup Methods
   
+  // Initialize the TableView
   func setupTableView() {
     
-    // Instantiate TableView
     tableView = UITableView(frame: frame, style: .plain)
     tableView.backgroundColor = .black
     
+    // Delegates
     tableView.delegate = self
     tableView.dataSource = self
     
