@@ -126,7 +126,6 @@ class CryptoDetailViewModel {
       
     }
     else {
-      timer?.cancel()
       noStatsAlert?()
     }
   }
@@ -143,6 +142,10 @@ class CryptoDetailViewModel {
       .sink { _ in
         self.delegate?.reloadTableViewData()
     }
+  }
+  
+  func cancelTimer() {
+    timer?.cancel()
   }
   
 }

@@ -11,11 +11,6 @@ import UIKit
 class PriceTableViewHeader: UIView {
   
   
-  // MARK: - Parent Controller
-  
-  private var controller: UIViewController!
-  
-  
   // MARK: - Properties
   
   var priceLabel: UILabel!
@@ -32,17 +27,12 @@ class PriceTableViewHeader: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    addViews()
   }
   
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-  }
-  
-  convenience init(frame: CGRect, controller: UIViewController) {
-    self.init(frame: frame)
-    self.controller = controller
-    
-    addViews()
   }
   
   

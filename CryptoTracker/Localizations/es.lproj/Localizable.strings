@@ -14,3 +14,5 @@
 "Back" = "Atrás";
 "Last Trade" = "Última Op.";
 "24h Price" = "24h Precio";
+"ASK PRICE: lowest price from the sellers" = "ASK: el precio más bajo del vendedor";
+"BID PRICE: highest price from the buyers" = "BID: el precio más alto del comprador";

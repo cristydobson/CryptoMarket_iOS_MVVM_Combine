@@ -14,3 +14,5 @@
 "Back" = "Back";
 "Last Trade" = "Last Trade";
 "24h Price" = "24h Price";
+"ASK PRICE: lowest price from the sellers" = "ASK: lowest price from the sellers";
+"BID PRICE: highest price from the buyers" = "BID: highest price from the buyers";

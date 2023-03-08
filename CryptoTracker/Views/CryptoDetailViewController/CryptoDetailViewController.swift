@@ -50,9 +50,13 @@ class CryptoDetailViewController: UIViewController {
     viewModel.delegate = self
     loadViewModel()
     
-    asksHeader.infoButtonPressed = { //[weak self] in
-      print("INFO BUTTON!!!!")
-    }
+    setPopoverCalls()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    
+    viewModel.cancelTimer()
   }
   
   
@@ -232,10 +236,8 @@ class CryptoDetailViewController: UIViewController {
   func setupTableViewHeaders(with size: CGSize) {
     let tableHeaderFrame = getRect(with: size)
     
-    asksHeader = PriceTableViewHeader(
-      frame: tableHeaderFrame, controller: self)
-    bidsHeader = PriceTableViewHeader(
-      frame: tableHeaderFrame, controller: self)
+    asksHeader = PriceTableViewHeader(frame: tableHeaderFrame)
+    bidsHeader = PriceTableViewHeader(frame: tableHeaderFrame)
   }
   
   func setupTableViews(with size: CGSize) {
@@ -265,11 +267,6 @@ class CryptoDetailViewController: UIViewController {
     return CGRect(origin: CGPoint.zero,
                   size: size)
   }
-  
-  
-  // MARK: - Info View
-  
-  
   
   
   // MARK: - Load View Model
@@ -333,4 +330,67 @@ extension CryptoDetailViewController: CryptoDetailViewModelDelegate {
 }
 
 
+// MARK: - Info Popover
 
+extension CryptoDetailViewController: UIPopoverPresentationControllerDelegate {
+  
+  func setPopoverCalls() {
+    asksHeader.infoButtonPressed = { [weak self] in
+      DispatchQueue.main.async {
+        self?.createPopover(
+          from: .ask,
+          withText: NSLocalizedString("ASK PRICE: lowest price from the sellers", comment: ""))
+      }
+    }
+    
+    bidsHeader.infoButtonPressed = { [weak self] in
+      DispatchQueue.main.async {
+        self?.createPopover(
+          from: .bid,
+          withText: NSLocalizedString("BID PRICE: highest price from the buyers", comment: ""))
+      }
+    }
+  }
+  
+  func createPopover(from sourceType: PriceType, withText text: String) {
+    let popoverVc = UIViewController()
+    popoverVc.view.backgroundColor = .darkestGray
+    popoverVc.modalPresentationStyle = .popover
+    popoverVc.popoverPresentationController?.delegate = self
+    popoverVc.preferredContentSize = CGSize(width: 200, height: 80)
+    
+    let label = UILabel()
+    label.text = text
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.textColor = .lighterGray
+    label.numberOfLines = .max
+    label.textAlignment = .center
+    label.adjustsFontSizeToFitWidth = true
+    popoverVc.view.addSubview(label)
+    
+    NSLayoutConstraint.activate([
+      label.leadingAnchor.constraint(
+        equalTo: popoverVc.view.leadingAnchor, constant: 16),
+      label.trailingAnchor.constraint(
+        equalTo: popoverVc.view.trailingAnchor, constant: -16),
+      label.topAnchor.constraint(
+        equalTo: popoverVc.view.topAnchor, constant: 4),
+      label.bottomAnchor.constraint(
+        equalTo: popoverVc.view.bottomAnchor, constant: -18)
+    ])
+    
+    let sourceView: PriceTableViewHeader = sourceType == .ask ?
+    asksHeader : bidsHeader
+    
+    let presentationController = popoverVc.popoverPresentationController!
+    presentationController.sourceView = sourceView
+    presentationController.sourceRect = sourceView.bounds
+    presentationController.backgroundColor = .darkestGray
+    presentationController.permittedArrowDirections = .down
+    present(popoverVc, animated: true)
+  }
+  
+  func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+    return .none
+  }
+}

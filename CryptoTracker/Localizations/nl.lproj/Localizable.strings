@@ -14,3 +14,5 @@
 "Back" = "Terug";
 "Last Trade" = "Laatste Handel";
 "24h Price" = "24u Prijs";
+"ASK PRICE: lowest price from the sellers" = "ASK: de laagste prijs van de verkopers";
+"BID PRICE: highest price from the buyers" = "BID: de hoogste prijs van de kopers";
