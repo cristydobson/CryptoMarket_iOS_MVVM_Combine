@@ -545,17 +545,12 @@
 		5ED6FDD829B741B90063D5E7 /* CryptoCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */; };
 		5ED6FDDA29B7831F0063D5E7 /* ApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDD929B7831F0063D5E7 /* ApiTests.swift */; };
 		5ED6FDE129B8EFB50063D5E7 /* PopoverController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ED6FDE029B8EFB50063D5E7 /* PopoverController.swift */; };
+		5ED6FDE229B92D650063D5E7 /* ViewHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E295F7C29AE04B500CBAE0B /* ViewHelper.swift */; };
+		5ED6FDE329B92D6C0063D5E7 /* ColorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E7B319929AA921900797B5D /* ColorHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		5EAF9AB829A8E50800E19C71 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 5EAF9A9929A8E50600E19C71 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5EAF9AA029A8E50600E19C71;
-			remoteInfo = CryptoTracker;
-		};
-		5EAF9AC229A8E50800E19C71 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5EAF9A9929A8E50600E19C71 /* Project object */;
 			proxyType = 1;
@@ -1094,7 +1089,6 @@
 		5EAF9AB029A8E50800E19C71 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EAF9AB229A8E50800E19C71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EAF9AB729A8E50800E19C71 /* CryptoTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EAF9AC129A8E50800E19C71 /* CryptoTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CryptoTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EAF9ADD29A8FB2D00E19C71 /* CryptoDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoDataModel.swift; sourceTree = "<group>"; };
 		5EAF9ADF29A8FBEE00E19C71 /* CryptoCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCollectionView.swift; sourceTree = "<group>"; };
 		5EAF9AE129A901A900E19C71 /* CryptoCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoCellViewModel.swift; sourceTree = "<group>"; };
@@ -1135,13 +1129,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		5EAF9AB429A8E50800E19C71 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EAF9ABE29A8E50800E19C71 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1668,7 +1655,6 @@
 			children = (
 				5EAF9AA329A8E50600E19C71 /* CryptoTracker */,
 				5EAF9ABA29A8E50800E19C71 /* CryptoTrackerTests */,
-				5EAF9AC429A8E50800E19C71 /* CryptoTrackerUITests */,
 				5EAF9AA229A8E50600E19C71 /* Products */,
 				5ED6FD9D29AF6E800063D5E7 /* Frameworks */,
 			);
@@ -1679,7 +1665,6 @@
 			children = (
 				5EAF9AA129A8E50600E19C71 /* CryptoTracker.app */,
 				5EAF9AB729A8E50800E19C71 /* CryptoTrackerTests.xctest */,
-				5EAF9AC129A8E50800E19C71 /* CryptoTrackerUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1708,13 +1693,6 @@
 				5ED6FDD129B6448B0063D5E7 /* CryptoDetailViewModel */,
 			);
 			path = CryptoTrackerTests;
-			sourceTree = "<group>";
-		};
-		5EAF9AC429A8E50800E19C71 /* CryptoTrackerUITests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CryptoTrackerUITests;
 			sourceTree = "<group>";
 		};
 		5EAF9AD629A8F78800E19C71 /* Models */ = {
@@ -1923,24 +1901,6 @@
 			productReference = 5EAF9AB729A8E50800E19C71 /* CryptoTrackerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		5EAF9AC029A8E50800E19C71 /* CryptoTrackerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 5EAF9AD129A8E50800E19C71 /* Build configuration list for PBXNativeTarget "CryptoTrackerUITests" */;
-			buildPhases = (
-				5EAF9ABD29A8E50800E19C71 /* Sources */,
-				5EAF9ABE29A8E50800E19C71 /* Frameworks */,
-				5EAF9ABF29A8E50800E19C71 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				5EAF9AC329A8E50800E19C71 /* PBXTargetDependency */,
-			);
-			name = CryptoTrackerUITests;
-			productName = CryptoTrackerUITests;
-			productReference = 5EAF9AC129A8E50800E19C71 /* CryptoTrackerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1955,10 +1915,6 @@
 						CreatedOnToolsVersion = 14.2;
 					};
 					5EAF9AB629A8E50800E19C71 = {
-						CreatedOnToolsVersion = 14.2;
-						TestTargetID = 5EAF9AA029A8E50600E19C71;
-					};
-					5EAF9AC029A8E50800E19C71 = {
 						CreatedOnToolsVersion = 14.2;
 						TestTargetID = 5EAF9AA029A8E50600E19C71;
 					};
@@ -1987,7 +1943,6 @@
 			targets = (
 				5EAF9AA029A8E50600E19C71 /* CryptoTracker */,
 				5EAF9AB629A8E50800E19C71 /* CryptoTrackerTests */,
-				5EAF9AC029A8E50800E19C71 /* CryptoTrackerUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -2510,13 +2465,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5EAF9ABF29A8E50800E19C71 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -2562,6 +2510,7 @@
 				5ED6FDB929B5E7210063D5E7 /* CryptoDataModel.swift in Sources */,
 				5ED6FDC029B5FD790063D5E7 /* HeaderViewModelTests.swift in Sources */,
 				5ED6FDCF29B635860063D5E7 /* CryptoDataAPIError.swift in Sources */,
+				5ED6FDE229B92D650063D5E7 /* ViewHelper.swift in Sources */,
 				5ED6FDB529B5E5F50063D5E7 /* PriceTableViewHeader.swift in Sources */,
 				5ED6FDD029B635880063D5E7 /* CryptoService.swift in Sources */,
 				5ED6FDBE29B5FCF40063D5E7 /* GraphViewModel.swift in Sources */,
@@ -2577,17 +2526,11 @@
 				5ED6FDB829B5E6F60063D5E7 /* StringHelper.swift in Sources */,
 				5ED6FDD729B741B10063D5E7 /* CryptoCollectionViewModel.swift in Sources */,
 				5ED6FDAB29B496F40063D5E7 /* PriceCellViewModel.swift in Sources */,
+				5ED6FDE329B92D6C0063D5E7 /* ColorHelper.swift in Sources */,
 				5ED6FDDA29B7831F0063D5E7 /* ApiTests.swift in Sources */,
 				5ED6FDD529B73CEB0063D5E7 /* CryptoCollectionViewModelTests.swift in Sources */,
 				5ED6FDCB29B635390063D5E7 /* ImageHelper.swift in Sources */,
 				5ED6FDD329B644A90063D5E7 /* CryptoCellViewModelTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5EAF9ABD29A8E50800E19C71 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2598,11 +2541,6 @@
 			isa = PBXTargetDependency;
 			target = 5EAF9AA029A8E50600E19C71 /* CryptoTracker */;
 			targetProxy = 5EAF9AB829A8E50800E19C71 /* PBXContainerItemProxy */;
-		};
-		5EAF9AC329A8E50800E19C71 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 5EAF9AA029A8E50600E19C71 /* CryptoTracker */;
-			targetProxy = 5EAF9AC229A8E50800E19C71 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2842,42 +2780,6 @@
 			};
 			name = Release;
 		};
-		5EAF9AD229A8E50800E19C71 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AJXD28RX58;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.animatious.CryptoTrackerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CryptoTracker;
-			};
-			name = Debug;
-		};
-		5EAF9AD329A8E50800E19C71 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = AJXD28RX58;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.animatious.CryptoTrackerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = CryptoTracker;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2904,15 +2806,6 @@
 			buildConfigurations = (
 				5EAF9ACF29A8E50800E19C71 /* Debug */,
 				5EAF9AD029A8E50800E19C71 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		5EAF9AD129A8E50800E19C71 /* Build configuration list for PBXNativeTarget "CryptoTrackerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				5EAF9AD229A8E50800E19C71 /* Debug */,
-				5EAF9AD329A8E50800E19C71 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

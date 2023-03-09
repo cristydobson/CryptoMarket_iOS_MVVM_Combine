@@ -23,7 +23,7 @@ protocol CryptoCollectionViewModelDelegate: AnyObject {
 }
 
 
-class CryptoCollectionViewModel {
+class CryptoCollectionViewModel: ObservableObject {
   
   
   // MARK: - Properties
@@ -32,14 +32,8 @@ class CryptoCollectionViewModel {
   
   private var subscriptions = Set<AnyCancellable>()
   var cryptoDataAPI = CryptoDataLoader.shared
-    
-  var reloadCollectionView: (() -> Void)?
   
-  var cryptoCellViewModels: [CryptoCellViewModel] = [] {
-    didSet {
-      reloadCollectionView?()
-    }
-  }
+  @Published var cryptoCellViewModels: [CryptoCellViewModel] = []
   
   
   // MARK: - Fetch Data

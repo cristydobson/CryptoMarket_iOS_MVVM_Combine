@@ -9,10 +9,11 @@
 
 
 import UIKit
+import Combine
 
 
 class CryptoCollectionView: UIView {
-  
+
   
   // MARK: - Parent Controller
   
@@ -27,6 +28,7 @@ class CryptoCollectionView: UIView {
   
   var collectionView: UICollectionView!
   var cellID = "CollectionCell"
+  private var subscriptions = Set<AnyCancellable>()
   
   
   // MARK: - View Model
@@ -54,6 +56,8 @@ class CryptoCollectionView: UIView {
     setupCollectionView()
     
     viewModel.delegate = self
+    
+    setupBindings()
     loadViewModel()
   }
   
@@ -105,15 +109,17 @@ class CryptoCollectionView: UIView {
    from the ViewModel
    */
   func loadViewModel() {
-    
     viewModel.fetchData()
+  }
+  
+  func setupBindings() {
     
-    viewModel.reloadCollectionView = { [weak self] in
+    viewModel.$cryptoCellViewModels.sink { [weak self] _ in
       // Update the UI on the main thread
       DispatchQueue.main.async {
         self?.collectionView.reloadData()
       }
-    }
+    }.store(in: &subscriptions)
   }
   
   

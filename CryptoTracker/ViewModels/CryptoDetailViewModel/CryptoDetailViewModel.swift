@@ -23,7 +23,7 @@ protocol CryptoDetailViewModelDelegate: AnyObject {
 }
 
 
-class CryptoDetailViewModel {
+class CryptoDetailViewModel: ObservableObject {
   
   
   // MARK: - Properties
@@ -44,13 +44,7 @@ class CryptoDetailViewModel {
   
   // Fetch a single ticker displayed on the HeaderView
   
-  var reloadHeader: (() -> Void)?
-  
-  var headerViewModel: HeaderViewModel! {
-    didSet {
-      reloadHeader?()
-    }
-  }
+  @Published var headerViewModel: HeaderViewModel!
   
   // Fetch data through the API
   func fetchHeaderData(with symbol: String) {
@@ -88,17 +82,9 @@ class CryptoDetailViewModel {
   
   // Fetch the ASKS and BIDS for a single crypto currency.
   
-  var reloadTableViews: (() -> Void)?
-  var noStatsAlert: (() -> Void)?
-  
-  var cryptoMarket: CryptoMarket! {
-    didSet {
-      reloadTableViews?()
-    }
-  }
-  
-  var asks: [CryptoPrice]?
-  var bids: [CryptoPrice]?
+  @Published var presentStatsAlert: Bool = false
+  @Published var asks: [CryptoPrice] = []
+  @Published var bids: [CryptoPrice] = []
   
   
   // Fetch data through the API
@@ -135,18 +121,16 @@ class CryptoDetailViewModel {
     if asksArray.count > 0 || bidsArray.count > 0
     {
       fetchHeaderData(with: market.symbol!)
-      
+     
       asks = asksArray
       bids = bidsArray
-      
-      cryptoMarket = market
     }
     else {
       /*
        Tell the view to alert the user that
        this crypto currency doesn't contain data
        */
-      noStatsAlert?()
+      presentStatsAlert = true
     }
   }
   

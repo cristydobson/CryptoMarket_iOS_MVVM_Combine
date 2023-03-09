@@ -8,11 +8,12 @@
 
 
 import UIKit
+import Combine
 
 
 class CryptoDetailViewController: UIViewController {
   
-  
+
   // MARK: - Properties
   
   var cryptoSymbol = ""
@@ -20,6 +21,8 @@ class CryptoDetailViewController: UIViewController {
   var headerView: HeaderView!
   
   var graphContainerView: GraphView!
+  
+  private var subscriptions = Set<AnyCancellable>()
   
   
   // MARK: - TableViews Properties
@@ -46,9 +49,13 @@ class CryptoDetailViewController: UIViewController {
     addViews()
     
     viewModel.delegate = self
+    
+    setupBindings()
     loadViewModel()
     
     setPopoverCalls()
+    
+    
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -286,49 +293,62 @@ extension CryptoDetailViewController {
     // Fetch the TableViews Data
     viewModel.fetchTableViewData(with: cryptoSymbol)
     
-    viewModel.reloadTableViews = { [weak self] in
+  }
+  
+  func setupBindings() {
+    
+    viewModel.$asks.sink { [weak self] asksArray in
       DispatchQueue.main.async {
-        let asks = self?.viewModel.asks
-        let bids = self?.viewModel.bids
-        self?.asksTableView.reloadViewModel(with: asks!, for: .ask)
-        self?.bidsTableView.reloadViewModel(with: bids!, for: .bid)
+        self?.asksTableView.reloadViewModel(with: asksArray, for: .ask)
         
-        self?.graphContainerView.loadViewModel(with: asks!)
+        if asksArray.count > 0 {
+          self?.graphContainerView.loadViewModel(with: asksArray)
+        }
         
       }
-    }
+    }.store(in: &subscriptions)
+    
+    viewModel.$bids.sink { [weak self] bidsArray in
+      DispatchQueue.main.async {
+        self?.bidsTableView.reloadViewModel(with: bidsArray, for: .bid)
+      }
+    }.store(in: &subscriptions)
+    
+    // Load the HeaderView after the data was successfully returned.
+    viewModel.$headerViewModel.sink { [weak self] headerVM in
+      DispatchQueue.main.async {
+        if let headerVm = headerVM {
+          self?.headerView.viewModel = headerVm
+        }
+      }
+    }.store(in: &subscriptions)
     
     /*
      The data returned is missing the ASK and BID arrays.
      Alert the user before popping the ViewController.
      */
-    viewModel.noStatsAlert = { [weak self] in
+    viewModel.$presentStatsAlert.sink { [weak self] shouldPresent in
       DispatchQueue.main.async {
         
-        self?.navigationController?.navigationBar.topItem?.hidesBackButton = true
-        
-        let alert = UIAlertController(
-          title: NSLocalizedString("No Stats Available", comment: ""),
-          message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(
-          title: NSLocalizedString("OK", comment: ""), style: .default) { action in
-            
-          DispatchQueue.main.async {
-            self?.navigationController?.popViewController(animated: true)
-          }
+        if shouldPresent {
+          self?.navigationController?.navigationBar.topItem?.hidesBackButton = true
+          
+          let alert = UIAlertController(
+            title: NSLocalizedString("No Stats Available", comment: ""),
+            message: "", preferredStyle: .alert)
+          let okAction = UIAlertAction(
+            title: NSLocalizedString("OK", comment: ""), style: .default) { action in
+              
+              DispatchQueue.main.async {
+                self?.navigationController?.popViewController(animated: true)
+              }
+            }
+          alert.addAction(okAction)
+          self?.present(alert, animated: true)
         }
-        alert.addAction(okAction)
-        self?.present(alert, animated: true)
         
       }
-    }
-    
-    // Load the HeaderView after the data was successfully returned.
-    viewModel.reloadHeader = { [weak self] in
-      DispatchQueue.main.async {
-        self?.headerView.viewModel = self?.viewModel.headerViewModel
-      }
-    }
+    }.store(in: &subscriptions)
   }
   
 }
