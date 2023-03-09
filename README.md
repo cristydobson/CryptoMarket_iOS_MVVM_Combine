@@ -42,12 +42,15 @@ Unlike MVC, where the `ViewController` is in charge of presenting the UI as well
 
 * My **Models** are structs that conform to `Codable`, where the JSON data returned through the API gets decoded into, to be later used by the `ViewModel`.
 
-![My_Models]()<br>
+![My_Models](Assets/MVVM/MVVM-My_Models.png)<br>
 
 * My **ViewModels** are in charge of fetching data through the API using a service, and transforming it into ready-to-display data. It then communicates through callbacks with its `View` when the transformed data is ready to be handed over.
 
+![My_ViewModels](Assets/MVVM/MVVM-My_ViewModels.png)<br>
+
 * My **Views** only concern is to setup the UI and layouts programmatically, and request for ready-to-display data from its `ViewModel`.
 
+![My_Views](Assets/MVVM/MVVM-My_Views.png)<br>
 
 ## <a name="combine"></a>Functional Reactive Programming with Combine
 
@@ -63,23 +66,37 @@ The Combine framework allows you to write functional reactive code to handle asy
 **1.** Created a service protocol to fetch data through an API. The data fetching method returns a `Future`, which is the promise of a single element published asynchronously. This `Future` can be a generic object of type T or an API error.
 
   - I made the published element of a generic type, so it can successfully return any kind of JSON format.
+  
+  ![Combine 01](Assets/Combine/Combine_01.png)<br>
 
 
 **2.** Created a Singleton class that conforms to the service protocol, and implements the data-fetching method.
 
   - After starting the data task publisher, we must make sure that the http response status code is between 200 and 299, so we can get our expected data.
+  
+  ![Combine 2.1](Assets/Combine/Combine_02-2_1.png)<br>
 
   - If our data was fetched successfully, we then decode it into one of our models that conforms to `Codable`.
+  
+  ![Combine 2.2](Assets/Combine/Combine_02-2_2.png)<br>
 
   - We then subscribe to be alerted if any error occurred that will keep us from successfully fetching our expected data.
+  
+  ![Combine 2.3](Assets/Combine/Combine_02-2_3.png)<br>
 
   - If everything went well, we then publish our models containing the decoded data.
+  
+  ![Combine 2.4](Assets/Combine/Combine_02-2_4.png)<br>
 
 
 **3.** Created Publishers in the `ViewModel` that will alert the `ViewController` if the data was successfully fetched or not.
 
+  ![Combine 03](Assets/Combine/Combine_03.png)<br>
+
 
 **4.** We then setup the `ViewController` as the `Subscriber` to the previous `Publisher`, which will listen for any changes and update its UI accordingly.
+
+  ![Combine 04](Assets/Combine/Combine_04.png)<br>
 
 
 #### Example:
