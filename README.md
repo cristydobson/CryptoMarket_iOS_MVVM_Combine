@@ -42,6 +42,8 @@ Unlike MVC, where the `ViewController` is in charge of presenting the UI as well
 
 * My **Models** are structs that conform to `Codable`, where the JSON data returned through the API gets decoded into, to be later used by the `ViewModel`.
 
+![My_Models]()<br>
+
 * My **ViewModels** are in charge of fetching data through the API using a service, and transforming it into ready-to-display data. It then communicates through callbacks with its `View` when the transformed data is ready to be handed over.
 
 * My **Views** only concern is to setup the UI and layouts programmatically, and request for ready-to-display data from its `ViewModel`.
