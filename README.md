@@ -109,7 +109,11 @@ When tapping on a Crypto currency `CollectionViewCell`, the `ViewModel` in charg
 
 * if successful, it will store the data in the Publishers `asks` and `bids`, and the `Subscriber` `ViewController` will then receive the published elements and display them,
 
+<img src="Assets/GIFs/Tap_Crypto_Cell.gif" width="350">
+
 * if not successful, then the `ViewModel` will let the `ViewController` know through the `presentStatsAlert` `Publisher`, that it must show an alert to the user before popping the `ViewController` from the `NavigationController`.
+
+<img src="Assets/GIFs/No_Stats_Alert.gif" width="350">
 
 
 #### Refreshing Data
@@ -118,7 +122,7 @@ Created a `Timer` to trigger a call to refresh the data every 10 seconds, by ref
 
 ![Timer_Code](Assets/Timer/Timer-01.png)<br>
 
-
+<img src="Assets/GIFs/Refresh_Data.gif" width="350">
 
 
 
