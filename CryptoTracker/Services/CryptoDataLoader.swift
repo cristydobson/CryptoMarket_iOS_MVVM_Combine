@@ -18,7 +18,7 @@ class CryptoDataLoader: CryptoService {
   
   static let shared = CryptoDataLoader()
   private let apiKeyName = "X-API-Token"
-  private let apiKey = "8bed177a-5d93-42fe-bfcd-909375142121"
+  private let apiKey = "YOUR-API-KEY"
   private let baseApiURL = "https://api.blockchain.com/v3/exchange/"
   private let urlSession = URLSession.shared
   private var subscriptions = Set<AnyCancellable>()
