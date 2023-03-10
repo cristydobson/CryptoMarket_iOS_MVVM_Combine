@@ -75,7 +75,7 @@ final class HeaderViewModelTests: XCTestCase {
   func testGetPriceString_whenNamePropertyContainsNoCurrencyString() {
     // given
     createHeaderModelWith(name: "BTC", price: 437.674, lastTradePrice: 587.674)
-    let expectedString = "0.00"
+    let expectedString = "587.674"
     
     // when
     let priceString = sut.getPriceString()

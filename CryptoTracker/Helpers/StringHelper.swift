@@ -17,7 +17,7 @@ extension String {
    the list of common currencies
    */
   var isCryptoCurrency: Bool {
-    return !Locale.commonISOCurrencyCodes.contains(self)
+    return self != "" ? !Locale.commonISOCurrencyCodes.contains(self) : false
   }
   
   // Get the currency substring
@@ -68,9 +68,7 @@ struct StringHelper {
     
     let currencyString = currency.getCurrencyString()
     
-    if let newPrice = price,
-       currencyString != "" {
-
+    if let newPrice = price {
       return currencyString.isCryptoCurrency ?
       "\(newPrice) " + currencyString :
       newPrice.toCurrencyFormat(with: currencyString)

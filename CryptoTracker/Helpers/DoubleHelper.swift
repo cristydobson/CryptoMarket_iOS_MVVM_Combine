@@ -33,7 +33,7 @@ extension Double {
       formatter.maximumFractionDigits = 2
       return formatter.string(from: NSNumber(value: self))!
     }
-    return "0.00"
+    return "\(self)"
   }
   
 }
