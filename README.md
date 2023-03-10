@@ -19,7 +19,7 @@ Unlike MVC, where the `ViewController` is in charge of presenting the UI as well
 
 ### The MVVM pattern has 3 components:
 
-![MVVM_Architechture](Assets/MVVM/MVVM-Architecture.png)</br>
+![MVVM_Architechture](Assets/MVVM/MVVM-Graphic.png)</br>
 
 * **Model:** It is owned by the `ViewModel` and holds the app’s data. Models are usually structs, and are used and updated by a `ViewModel`.
 
