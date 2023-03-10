@@ -179,7 +179,7 @@ Here are some of the tests:
 
 * `testGetPricePercentageChangeString_whenPricePropertyNil()`: Get the percentage change between two Doubles when the divisor is nil.
 
-![divisor_is_nil](Assets/UnitTests/004.png)<br>
+![divisor_is_nil](Assets/UnitTests/04.png)<br>
 
 
 #### ViewModel Test Coverage
