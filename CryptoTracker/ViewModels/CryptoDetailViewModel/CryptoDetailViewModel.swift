@@ -120,8 +120,6 @@ class CryptoDetailViewModel: ObservableObject {
     
     if asksArray.count > 0 || bidsArray.count > 0
     {
-      fetchHeaderData(with: market.symbol!)
-     
       asks = asksArray
       bids = bidsArray
     }

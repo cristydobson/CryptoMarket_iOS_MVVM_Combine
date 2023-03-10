@@ -35,26 +35,23 @@ class CryptoDetailViewController: UIViewController {
   
   // MARK: - View Model
   
-  lazy var viewModel = {
-    CryptoDetailViewModel()
-  }()
+  private var viewModel = CryptoDetailViewModel()
   
   
   // MARK: - View Controller's Life Cycle
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    viewModel.delegate = self
     
     setupView()
     addViews()
-    
-    viewModel.delegate = self
     
     setupBindings()
     loadViewModel()
     
     setPopoverCalls()
-    
     
   }
   
@@ -293,6 +290,8 @@ extension CryptoDetailViewController {
     // Fetch the TableViews Data
     viewModel.fetchTableViewData(with: cryptoSymbol)
     
+    // Fetch the Header Data
+    viewModel.fetchHeaderData(with: cryptoSymbol)
   }
   
   func setupBindings() {

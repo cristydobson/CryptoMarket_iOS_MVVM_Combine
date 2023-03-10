@@ -33,9 +33,7 @@ class CryptoCollectionView: UIView {
   
   // MARK: - View Model
   
-  lazy var viewModel = {
-    CryptoCollectionViewModel()
-  }()
+  private var viewModel = CryptoCollectionViewModel()
   
   
   // MARK: - Init methods
