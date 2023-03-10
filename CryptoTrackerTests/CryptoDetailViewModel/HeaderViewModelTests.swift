@@ -102,7 +102,7 @@ final class HeaderViewModelTests: XCTestCase {
   func testGetPricePercentageChangeString_whenPricePropertyNil() {
     // given
     createHeaderModelWith(name: "BTC-USD", price: nil, lastTradePrice: 447.674)
-    let expectedString = StringHelper.getPercentageChange(for: 0, from: sut.lastTradePrice!)
+    let expectedString = "+0.00%"
     
     // when
     let percentageString = sut.getPricePercentageChangeString()
