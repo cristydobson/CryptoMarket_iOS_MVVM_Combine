@@ -8,6 +8,10 @@ All in combination with **UIKit** and programmatically created views and layouts
 
 <br>
 
+![App_logo](Assets/Logo/CryptoMarketApp_Logo-Rounded.png)<br>
+
+<br>
+
 ## Table of contents
 * [MVVM Architectural Pattern](#mvvm)
 * [Functional Reactive Programming with Combine](#combine)
