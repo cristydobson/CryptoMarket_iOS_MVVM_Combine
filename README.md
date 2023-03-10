@@ -21,7 +21,7 @@ Unlike MVC, where the `ViewController` is in charge of presenting the UI as well
 
 * **Model:** It is owned by the `ViewModel` and holds the app’s data. Models are usually structs, and are used and updated by a `ViewModel`.
 
-* **View:** It is any subclass of `UIView`, such as, view controllers, buttons, views, etc. Its only responsibility is to setup its UI and layout, and bind to its `ViewModel` to later request ready-to-display data.
+* **View:** It is a `UIViewController` or any subclass of `UIView`, such as, buttons, views, etc. Its only responsibility is to setup its UI and layout, and bind to its `ViewModel` to later request ready-to-display data.
 
 * **ViewModel:** It is owned by the `View` and it’s responsible for handling all the Business logic. It processes the Model’s data and transforms it into values that can be displayed by the `View`.
 
