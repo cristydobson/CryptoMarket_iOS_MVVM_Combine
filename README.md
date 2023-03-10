@@ -11,7 +11,9 @@ All in combination with **UIKit** and _programmatically created_ views and layou
 * [Functional Reactive Programming with Combine](#combine)
 * [Unit Tests with XCTest](#unit_tests)
 
+<br>
 <hr>
+<br>
 
 ## <a name="mvvm"></a>MVVM Architectural Pattern
 
@@ -64,7 +66,6 @@ The Combine framework allows you to write functional reactive code to handle asy
 
 > A very important rule of a subscription is that a `Subscriber` can only have one subscription.
 
-<hr>
 
 ### This Project and Combine:
 
@@ -127,7 +128,9 @@ Created a `Timer` to trigger a call to refresh the data every 10 seconds, by ref
 
 <img src="Assets/GIFs/Refresh_Data.gif" width="350">
 
+<br>
 <hr>
+<br>
 
 ## <a name="unit_tests"></a>Unit Tests with XCTest
 
@@ -189,10 +192,13 @@ Here are some of the tests:
 ![test_coverage](Assets/UnitTests/test-coverage.png)<br>
 
 
+<br>
+<hr>
+<br>
 
-
-
-
+### Attributions:
+* Blockchain.com REST API
+* <a href="https://github.com/danielgindi/Charts"></a>Charts
 
 
 
