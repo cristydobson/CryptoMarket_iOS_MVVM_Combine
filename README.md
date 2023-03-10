@@ -116,7 +116,7 @@ When tapping on a Crypto currency `CollectionViewCell`, the `ViewModel` in charg
 
 Created a `Timer` to trigger a call to refresh the data every 10 seconds, by refetching new data through the API.
 
-
+![Timer_Code](Assets/Timer/Timer-01.png)<br>
 
 
 
