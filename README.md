@@ -19,15 +19,19 @@ Unlike MVC, where the `ViewController` is in charge of presenting the UI as well
 
 ### The MVVM pattern has 3 components:
 
+![MVVM_Architechture](Assets/MVVM/MVVM-Architecture.png)</br>
+
 * **Model:** It is owned by the `ViewModel` and holds the app’s data. Models are usually structs, and are used and updated by a `ViewModel`.
 
 * **View:** It is a `UIViewController` or any subclass of `UIView`, such as, buttons, views, etc. Its only responsibility is to setup its UI and layout, and bind to its `ViewModel` to later request ready-to-display data.
 
 * **ViewModel:** It is owned by the `View` and it’s responsible for handling all the Business logic. It processes the Model’s data and transforms it into values that can be displayed by the `View`.
 
-  - A `ViewModel` is usually a class, so it can be passed around as a reference.
+  - The `ViewModel` is usually a class, so it can be passed around as a reference.
 
-  - A `ViewModel` uses data bindings to communicate with the `View`, which are ways of alerting each other that something has changed.
+  - The `ViewModel` uses data and user action bindings to communicate with the `View`, which are ways of alerting each other that something has changed.
+
+  ![Data_Bindings](Assets/MVVM/DataBindings.png)<br>
 
 
 ### Examples of Data Bindings:
