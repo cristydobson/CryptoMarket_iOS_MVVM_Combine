@@ -31,7 +31,7 @@ Unlike MVC, where the `ViewController` is in charge of presenting the UI as well
 
   - The `ViewModel` uses data and user action bindings to communicate with the `View`, which are ways of alerting each other that something has changed.
 
-  ![Data_Bindings](Assets/MVVM/DataBindings.png)<br>
+  ![Data_Bindings](Assets/MVVM/Data_Bindings.png)<br>
 
 
 ### Examples of Data Bindings:
@@ -93,12 +93,12 @@ The Combine framework allows you to write functional reactive code to handle asy
   ![Combine 2.4](Assets/Combine/Combine_02-2_4.png)<br>
 
 
-**3.** Created Publishers in the `ViewModel` that will alert the `ViewController` if the data was successfully fetched or not.
+**3.** Created Publishers in the `ViewModel` that will alert the `ViewController` of the newly created data.
 
   ![Combine 03](Assets/Combine/Combine_03.png)<br>
 
 
-**4.** We then setup the `ViewController` as the `Subscriber` to the previous `Publisher`, which will listen for any changes and update its UI accordingly.
+**4.** We then setup the `ViewController` as the `Subscriber` to the previous `Publisher` through binding, which will listen for any changes and update its UI accordingly.
 
   ![Combine 04](Assets/Combine/Combine_04.png)<br>
 
