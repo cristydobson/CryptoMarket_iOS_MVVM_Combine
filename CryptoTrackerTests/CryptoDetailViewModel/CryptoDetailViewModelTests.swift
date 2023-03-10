@@ -84,9 +84,12 @@ final class CryptoDetailViewModelTests: XCTestCase {
     
     // when
     sut.checkForStats(for: market)
+    let asks = sut.asks
+    let bids = sut.bids
     
     // then
-    XCTAssertNil(sut.cryptoMarket)
+    XCTAssertTrue(asks.count == 0)
+    XCTAssertTrue(bids.count == 0)
   }
   
   func testCheckForStats_whenAsksBidsArraysNonNil_thenCryptoMarketIsNotNil() {
@@ -96,9 +99,12 @@ final class CryptoDetailViewModelTests: XCTestCase {
     
     // when
     sut.checkForStats(for: market)
+    let asks = sut.asks
+    let bids = sut.bids
     
     // then
-    XCTAssertNotNil(sut.cryptoMarket)
+    XCTAssertTrue(asks.count == 2)
+    XCTAssertTrue(bids.count == 2)
   }
   
   func testCheckForStats_whenAsksArrayNil_thenCryptoMarketIsNotNil() {
@@ -108,9 +114,12 @@ final class CryptoDetailViewModelTests: XCTestCase {
     
     // when
     sut.checkForStats(for: market)
+    let asks = sut.asks
+    let bids = sut.bids
     
     // then
-    XCTAssertNotNil(sut.cryptoMarket)
+    XCTAssertTrue(asks.count == 0)
+    XCTAssertTrue(bids.count == 2)
   }
   
 }

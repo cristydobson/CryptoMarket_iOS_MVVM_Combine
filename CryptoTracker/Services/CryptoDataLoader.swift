@@ -49,7 +49,7 @@ class CryptoDataLoader: CryptoService {
       self.urlSession.dataTaskPublisher(for: url)
       /*
        Check that the http response status code
-       is between 200 and 300.
+       is between 200 and 299.
        */
         .tryMap { (data, response) -> Data in
           guard let httpResponse = response as? HTTPURLResponse,

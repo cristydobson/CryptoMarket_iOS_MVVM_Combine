@@ -26,3 +26,6 @@ struct CryptoPrice: Codable {
   let num: Int?
 }
 
+
+
+

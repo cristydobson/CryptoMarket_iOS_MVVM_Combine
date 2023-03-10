@@ -11,9 +11,13 @@
 import Foundation
 import Combine
 
+
 protocol CryptoService {
+  
   func fetchCryptoMarkets<T: Codable>(from endpoint: String) -> Future<T, CryptoDataAPIError>
+  
 }
+
 
 /*
  Endpoints used:
