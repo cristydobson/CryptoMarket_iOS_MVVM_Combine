@@ -9,7 +9,9 @@ All in combination with **UIKit** and _programmatically created_ views and layou
 ## Table of contents
 * [MVVM Architectural Pattern](#mvvm)
 * [Functional Reactive Programming with Combine](#combine)
+* [Unit Tests with XCTest](#unit_tests)
 
+<hr>
 
 ## <a name="mvvm"></a>MVVM Architectural Pattern
 
@@ -62,6 +64,7 @@ The Combine framework allows you to write functional reactive code to handle asy
 
 > A very important rule of a subscription is that a `Subscriber` can only have one subscription.
 
+<hr>
 
 ### This Project and Combine:
 
@@ -123,6 +126,76 @@ Created a `Timer` to trigger a call to refresh the data every 10 seconds, by ref
 ![Timer_Code](Assets/Timer/Timer-01.png)<br>
 
 <img src="Assets/GIFs/Refresh_Data.gif" width="350">
+
+<hr>
+
+## <a name="unit_tests"></a>Unit Tests with XCTest
+
+Unit tests are essential to verify that the application works as expected. Writing unit tests save time in the long run since as a developer, you will spend less time fixing bugs in the future.
+
+Apple provides the `XCTest` framework to run these tests. Every subclass of `XCTestCase` must declare a SUT (System Under Test), and write tests that run quickly, that are independent from each other, that get the same result after every run, and ideally, that are written in TDD fashion. 
+
+
+### This Project and Unit Tests:
+
+#### Testing API Endpoints
+
+When fetching data using a REST API, we must test that the endpoints being used will return an HTTP response status code 200 so we can successfully get our expected data.
+
+**Example:**
+
+![API_Endpoint_test](Assets/UnitTests/005.png)<br>
+
+**1.** We first check that the network is available for testing, otherwise skip the test.
+
+**2.** Create an XCTestExpectation describing what you expect to happen after the test has been run.
+
+**3.** Start running the service method to fetch the data.
+
+**4.** Subscribe to receive an API error if any, and if you get one, then fail the test with `XCTFail( )`.
+
+**5.** If no API errors are encountered, then fulfill the expectation of passing the test by calling `promise.fulfill( )`.
+
+
+#### Testing ViewModels
+
+One of my goals was to reach greater than 85% test coverage for every ViewModel. I tested that data would still be published even if some values in the model were nil.
+
+**Example:** `HeaderViewModelTests`
+
+* The SUT can be initialized with a nil value at any time.
+
+![init_sut](Assets/UnitTests/001.png)<br>
+
+Here are some of the tests:
+
+* `testGetPriceString_whenLastTradePricePropertyNil()`: If `lastTradePrice` is nil, then a default "$0.00" string must be returned. This string is formatted with the proper currency.
+
+![last_trade_price_nil](Assets/UnitTests/002.png)<br>
+
+* `testGetPriceString_whenNamePropertyContainsNoCurrencyString()`: If the Crypto symbol string does not contain a currency substring, then return the price without a currency format.
+
+![no_currency_string](Assets/UnitTests/003.png)<br>
+
+* `testGetPricePercentageChangeString_whenPricePropertyNil()`: Get the percentage change between two Doubles when the divisor is nil.
+
+![divisor_is_nil](Assets/UnitTests/004.png)<br>
+
+
+#### ViewModel Test Coverage
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
