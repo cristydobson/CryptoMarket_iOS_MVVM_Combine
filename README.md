@@ -184,7 +184,7 @@ Here are some of the tests:
 
 #### ViewModel Test Coverage
 
-
+![test_coverage](Assets/UnitTests/test-coverage.png)<br>
 
 
 
