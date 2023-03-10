@@ -135,6 +135,8 @@ Unit tests are essential to verify that the application works as expected. Writi
 
 Apple provides the `XCTest` framework to run these tests. Every subclass of `XCTestCase` must declare a SUT (System Under Test), and write tests that run quickly, that are independent from each other, that get the same result after every run, and ideally, that are written in TDD fashion. 
 
+![TDD_cycle](Assets/UnitTests/TDD.png)<br>
+
 
 ### This Project and Unit Tests:
 
