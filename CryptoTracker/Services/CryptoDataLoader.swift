@@ -17,8 +17,6 @@ class CryptoDataLoader: CryptoService {
   // MARK: - Properties
   
   static let shared = CryptoDataLoader()
-  private let apiKeyName = "X-API-Token"
-  private let apiKey = "YOUR-API-KEY"
   private let baseApiURL = "https://api.blockchain.com/v3/exchange/"
   private let urlSession = URLSession.shared
   private var subscriptions = Set<AnyCancellable>()
@@ -103,12 +101,9 @@ class CryptoDataLoader: CryptoService {
   
   private func createURL(with endpoint: String) -> URL? {
     
-    guard var urlComponents = URLComponents(string: "\(baseApiURL)/\(endpoint)")
+    guard let urlComponents = URLComponents(string: "\(baseApiURL)/\(endpoint)")
     else { return nil }
     
-    let queryItems = [URLQueryItem(name: apiKeyName,
-                                   value: apiKey)]
-    urlComponents.queryItems = queryItems
     return urlComponents.url
   }
   
