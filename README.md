@@ -2,7 +2,7 @@
 
 The **MVVM** design pattern is the most used architecture in professional **iOS development**, along with functional reactive programming, such as **Combine**, to produce clean, easy-to-read, more maintainable, and testable source code. 
 
-In this project, I used the **Combine** framework (a **Swift API**) to fetch data through an **API** and for data binding between the **Views** and the **ViewModels**, as well as, to setup a Timer that refreshes the data every 10 seconds.
+In this project, I used the **Combine** framework to fetch data through an **API** and for data binding between the **Views** and the **ViewModels**, as well as, to setup a Timer that refreshes the data every 10 seconds.
 
 All in combination with **UIKit** and programmatically created views and layouts.
 
