@@ -162,7 +162,7 @@ Apple provides the **XCTest** framework to run these tests. Every subclass of `X
 
 #### Testing API Endpoints
 
-When fetching data using a **REST API**, we must test that the endpoints being used will return an **HTTP** response status code 200, so we can successfully get our expected data.
+When fetching data using a **REST API**, we must test that the endpoints being used will successfully return our expected data, instead of an **API** error.
 
 **Example:**
 
@@ -174,9 +174,9 @@ When fetching data using a **REST API**, we must test that the endpoints being u
 
 **3.** Start running the service method to fetch the data.
 
-**4.** Subscribe to receive an **API** error if any, and if you get one, then fail the test with `XCTFail( )`.
+**4.** Subscribe to receive an **API** error if any, and if you get one, then fail the test with `XCTFail()`.
 
-**5.** If no **API** errors are encountered, then fulfill the expectation of passing the test by calling `promise.fulfill( )`.
+**5.** If no **API** errors are encountered, then fulfill the expectation of passing the test by calling `promise.fulfill()`.
 
 <br>
 
