@@ -162,7 +162,7 @@ Apple provides the **XCTest** framework to run these tests. Every subclass of `X
 
 #### Testing API Endpoints
 
-When fetching data using a **REST API**, we must test that the endpoints being used will successfully return our expected data, instead of an **API** error.
+When fetching data using a **REST API**, we must test that the endpoints being used will successfully return the expected data, instead of an **API** error.
 
 **Example:**
 
@@ -215,7 +215,7 @@ Here are some of the tests:
 <hr>
 <br>
 
-### Attributions:
+### Credits:
 * Blockchain.com [REST API](https://api.blockchain.com/v3/)
 * [Charts](https://github.com/danielgindi/Charts)
 * [Cryptocurrency Icons](https://github.com/spothq/cryptocurrency-icons)
