@@ -67,14 +67,15 @@ final class ApiTests: XCTestCase {
   }
   
   
-  // MARK: - Get HTTP Status Code 200
-  
-  func testGetHTTPStatusCode200_whenAllTickersEndpointApiCall() throws {
+  // MARK: - Successfully fetch data from all enpoints
+    
+  // let endpoint = Endpoint.tickers
+  func testGivenTickersEndpoint_whenMakingApiCall_thenReceiveData() throws {
 
     try XCTSkipUnless(status == .satisfied, "No network available for testing!!")
 
     // given
-    let promise = expectation(description: "Status code: 200")
+    let promise = expectation(description: "Data was received!!")
     
     // when
     sut.fetchCryptoMarkets(from: endpointAllTickers)
@@ -93,12 +94,13 @@ final class ApiTests: XCTestCase {
     
   }
   
-  func testGetHTTPStatusCode200_whenSingleTickerEndpointApiCall() throws {
+  // let endpoint = Endpoint.singleTicker
+  func testGivenSingleTickerEndpoint_whenMakingApiCall_thenReceiveData() throws {
     
     try XCTSkipUnless(status == .satisfied, "No network available for testing!!")
     
     // given
-    let promise = expectation(description: "Status code: 200")
+    let promise = expectation(description: "Data was received!!")
     
     // when
     sut.fetchCryptoMarkets(from: endpointSingleTicker)
@@ -117,12 +119,13 @@ final class ApiTests: XCTestCase {
     
   }
   
-  func testGetHTTPStatusCode200_whenAsksBidsEndpointApiCall() throws {
+  // let endpoint = Endpoint.l2 + "\(ticker)"
+  func testGivenL2PlusTickerEndpoint_whenMakingApiCall_thenReceiveData() throws {
     
     try XCTSkipUnless(status == .satisfied, "No network available for testing!!")
     
     // given
-    let promise = expectation(description: "Status code: 200")
+    let promise = expectation(description: "Data was received!!")
     
     // when
     sut.fetchCryptoMarkets(from: endpointBidsAsks)
