@@ -2,7 +2,7 @@
 
 The **MVVM** design pattern is the most used architecture in professional **iOS development**, along with functional reactive programming, such as **Combine**, to produce clean, easy-to-read, more maintainable, and testable source code. 
 
-In this project, I used the **Combine** framework to fetch data through an **API** and for data binding between the **Views** and the **ViewModels**, as well as, to setup a Timer that refreshes the data every 10 seconds.
+In this project, I used the **Combine** framework to fetch data via a **REST API** and for data binding between the **Views** and the **ViewModels**, as well as, to setup a Timer that refreshes the data every 10 seconds.
 
 All in combination with **UIKit** and programmatically created views and layouts.
 
@@ -57,7 +57,7 @@ Unlike **MVC**, where the `ViewController` is in charge of presenting the **UI**
 
 ### This Project and MVVM:
 
-* My **Models** are structs that conform to **Codable**, where the **JSON** data returned through the **API** gets decoded into, to be later used by the `ViewModel`.
+* My **Models** are structs that conform to **Codable**, where the **JSON** data returned by the **REST API** gets decoded into, to be later used by the `ViewModel`.
 
 ![My_Models](Assets/MVVM/MVVM-My_Models.png)<br>
 
@@ -65,7 +65,7 @@ Unlike **MVC**, where the `ViewController` is in charge of presenting the **UI**
 
 ![My_ViewModels](Assets/MVVM/MVVM-My_ViewModels.png)<br>
 
-* The **Views** only concern is to setup the **UI** and layouts programmatically, and request for ready-to-display data from its `ViewModel`.
+* The **Views'** only concern is to setup the **UI** and layouts programmatically, and request for ready-to-display data from its `ViewModel`.
 
 ![My_Views](Assets/MVVM/MVVM-My_Views.png)<br>
 
