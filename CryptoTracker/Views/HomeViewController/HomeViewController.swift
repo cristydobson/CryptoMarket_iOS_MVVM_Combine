@@ -17,6 +17,7 @@ class HomeViewController: UIViewController {
   // MARK: - Properties
   
   var collectionView: CryptoCollectionView!
+  var loadingView: LoadingScreenView!
   
 
   // MARK: - View Controller's Life Cycle
@@ -25,8 +26,6 @@ class HomeViewController: UIViewController {
     super.viewDidLoad()
     
     setupView()
-    setupCollectionView()
-    setupScreenTitle()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +44,11 @@ class HomeViewController: UIViewController {
   
   func setupView() {
     view.addGradientBackground()
+    
+    setupCollectionView()
+    setupScreenTitle()
+    
+    setupLoadingView()
   }
   
   // Setup the main collection view
@@ -108,6 +112,54 @@ class HomeViewController: UIViewController {
       text: NSLocalizedString("Crypto Market Tracker", comment: ""),
       alignment: .center, font: UIFont.boldSystemFont(ofSize: 22))
     return newLabel
+  }
+  
+  
+  // MARK: - Loading View
+  
+  /*
+   Display a Loading View while
+   the app fully loads
+   */
+  func setupLoadingView() {
+    
+    loadingView = getLoadingView()
+    view.addSubview(loadingView)
+    
+    NSLayoutConstraint.activate([
+      loadingView.leadingAnchor.constraint(
+        equalTo: view.leadingAnchor),
+      loadingView.trailingAnchor.constraint(
+        equalTo: view.trailingAnchor),
+      loadingView.topAnchor.constraint(
+        equalTo: view.topAnchor),
+      loadingView.bottomAnchor.constraint(
+        equalTo: view.bottomAnchor)
+    ])
+    
+    // Remove it after a given waiting time
+    Timer.scheduledTimer(
+      timeInterval: 4,
+      target: self,
+      selector: #selector(dismissLoadingView),
+      userInfo: nil,
+      repeats: false)
+    
+  }
+  
+  // Create the Loading View
+  func getLoadingView() -> LoadingScreenView {
+    let loadView = UINib(nibName: "LoadingScreenView", bundle: nil)
+      .instantiate(withOwner: nil)[0] as! LoadingScreenView
+    
+    loadView.translatesAutoresizingMaskIntoConstraints = false
+    return loadView
+  }
+  
+  // Action to remove the Loading View
+  @objc func dismissLoadingView() {
+    loadingView.removeFromSuperview()
+    loadingView = nil
   }
   
 }
