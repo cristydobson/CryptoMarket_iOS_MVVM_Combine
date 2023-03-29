@@ -160,6 +160,8 @@ Apple provides the **XCTest** framework to run these tests. Every subclass of `X
 
 ### This Project and Unit Tests:
 
+<br>
+
 #### Testing API Endpoints
 
 When fetching data using a **REST API**, we must test that the endpoints being used will successfully return the expected data, instead of an **API** error.
